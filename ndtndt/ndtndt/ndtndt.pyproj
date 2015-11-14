@@ -20,6 +20,7 @@
     <RootNamespace>ndtndt</RootNamespace>
     <InterpreterId>{1b84f6c5-e89c-4aca-8725-198344969669}</InterpreterId>
     <InterpreterVersion>3.4</InterpreterVersion>
+    <NameOfLastUsedPublishProfile>api.ndtndt(default-storage-southcentralus)</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,9 +36,14 @@
     <Compile Include="ndtndt\api.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Metadata\" />
+    <Folder Include="Metadata\deploymentTemplates\" />
     <Folder Include="ndtndt\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="api.ndtndt%28default-storage-southcentralus%29.pubxml" />
+    <Content Include="apiapp.json" />
+    <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
