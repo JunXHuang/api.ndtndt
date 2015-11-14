@@ -1,4 +1,4 @@
-"""
+﻿"""
 Routes for the flask application.
 """
 
@@ -20,7 +20,7 @@ def default():
         print(e)
 
 # there is no post on this
-# get returns top sellerr category
+# get returns top seller category
 class TopSellerCategory(Resource):
     def get(self):
         try:
@@ -29,13 +29,14 @@ class TopSellerCategory(Resource):
                           'from auction a, item i '
                           'where a.itemid=i.itemid and sold=1 '
                           'group by i.itemid,i.itemtype,i.yearmanufactured '
-                          'order by itemsold desc')
+                          'order by itemsold desc for xml path')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"
             dbconnection.close()
-            return (json.dumps(xmltodict.parse(row),indent=4))
+            r=xmltodict.parse(row)
+            return(r['root']['row'])
         except Exception as e:
             print(e)
     def post(self, id):
@@ -55,12 +56,13 @@ class Item(Resource):
                          'a.sellerid, i.itemname,i.itemtype, i.yearmanufactured, p.postdate, '
                          'p.expiredates from auction a,item i,post p '
                          'where i.itemid=a.itemid and p.itemid=i.itemid and a.auctionid=? for xml path')
-            myCursor.execute (SQLInsertCommand,list(id))
-            rows=myCursor.fetchall()
+            dbcursor.execute (sqlcommand,list(id))
+            rows=dbcursor.fetchall()
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"
             dbconnection.close()
-            return(json.dumps(xmltodict.parse(row),indent=4))
+            r=xmltodict.parse(row)
+            return(r['root']['row'])
         except Exception as e:
             print(e)
 
