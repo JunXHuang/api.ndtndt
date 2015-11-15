@@ -65,7 +65,30 @@ class Item(Resource):
             return(r['root']['row'])
         except Exception as e:
             print(e)
+class Auction(Resource):
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('select a.auctionid,i.itemid,a.openbid,a.bidincrement, a.currentbid, '
+                         'a.sellerid, i.itemname,i.itemtype, i.yearmanufactured, p.postdate, '
+                         'p.expiredates from auction a,item i,post p '
+                         'where i.itemid=a.itemid and p.itemid=i.itemid and a.sold=0 '
+                         'group by a.auctionid,i.itemid,a.openbid,a.bidincrement, a.currentbid, '
+                         'a.sellerid, i.itemname,i.itemtype, i.yearmanufactured, p.postdate, '
+                         'p.expiredates '
+                         'order by a.currentBid desc for xml path')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            row=str(rows)
+            row="<root>"+row[3:-4]+"</root>"
+            dbconnection.close()
+            r=xmltodict.parse(row)
+            return(r['root']['row'])
+        except Exception as e:
+            print(e)
+          
 
 
 api.add_resource(TopSellerCategory, '/topcategory')
 api.add_resource(Item, '/item/<string:id>')
+api.add_resource(Auction,'/auction/lowest')
