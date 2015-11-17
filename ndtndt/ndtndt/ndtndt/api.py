@@ -130,8 +130,34 @@ class StaffPicks(Resource):
         except Exception as e:
             print(e)
 
+class Insert(Resource):
+    def get(self):
+        try:
+            val1=''
+            val2=''
+            val3=''
+            val4=''
+            val5=''
+            val6=''
+            val7=''
+            val8=''
+            val9=''
+            val10=''
+            dbcursor = dbconnection.cursor()
+            sqlcommand1 =('INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,?)')
+            dbcursor.execute (sqlcommand1,(val1,val2,val3,val4))
+            sqlcommand2 =('INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID) VALUES (?,?,?,?,?)')
+            dbcursor.execute (sqlcommand2,(val5,val6,val7,val1,val8))
+            sqlcommand3 =('INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName) VALUES (?,GETDATE(),?,?)')
+            dbcursor.execute (sqlcommand3,(val9,val10,val1))
+            dbcursor.commit()
+            dbconnection.close()
+        except Exception as e:
+            print(e)
+
 
 api.add_resource(TopSellerCategory, '/topcategory')
 api.add_resource(Item, '/item/<string:id>')
 api.add_resource(Auction,'/auction/lowest')
 api.add_resource(StaffPicks,'/staffpicks')
+
