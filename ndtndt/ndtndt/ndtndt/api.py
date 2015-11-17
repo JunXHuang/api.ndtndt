@@ -87,8 +87,51 @@ class Auction(Resource):
         except Exception as e:
             print(e)
           
+class StaffPicks(Resource):
+    def __init__(self):
+        pass
+    def delete(self,id):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('delete from staffpicks where auctionid=?')
+            dbcursor.execute (sqlcommand,(id,))
+            dbcursor.commit()
+            dbconnection.close()
+        except Exception as e:
+            print(e)
+
+    def post(self,id):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('insert into staffpicks (auctionid) values (?)')
+            dbcursor.execute (sqlcommand,(id,))
+            dbcursor.commit()
+            dbconnection.close()
+        except Exception as e:
+            print(e)
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('select a.auctionid,a.openbid,a.bidincrement, '
+                         'a.currentbid,a.itemid,a.sellerid,i.itemname, '
+                         'i.itemtype,i.yearmanufactured,p.postdate, '
+                         'p.expiredates from staffpicks s inner join '
+                         'auction a on s.auctionid=a.auctionid '
+                         'inner join item i on a.itemid=i.itemid '
+                         'inner join post p on i.itemid=p.itemid '
+                         'for xml path')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            row=str(rows)
+            row="<root>"+row[3:-4]+"</root>"
+            dbconnection.close()
+            r=xmltodict.parse(row)
+            return(r['root']['row'])
+        except Exception as e:
+            print(e)
 
 
 api.add_resource(TopSellerCategory, '/topcategory')
 api.add_resource(Item, '/item/<string:id>')
 api.add_resource(Auction,'/auction/lowest')
+api.add_resource(StaffPicks,'/staffpicks')
