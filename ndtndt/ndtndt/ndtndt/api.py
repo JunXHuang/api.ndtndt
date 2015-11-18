@@ -1,7 +1,7 @@
 ﻿"""
 Routes for the flask application.
 """
-
+import logging
 from flask import Flask, jsonify, abort, make_response
 from flask_restful import Api, Resource, reqparse, fields, marshal
 from flask_httpauth import HTTPBasicAuth
@@ -48,27 +48,26 @@ class TopSellerCategory(Resource):
 class CreateAuction(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('sellerid', type = str, required=True, help='no SellerID provided')
-        self.reqparse.add_argument('itemname', type = str, required=True, help='no item name provided.')
-        self.reqparse.add_argument('category', type = str, required=True, help='no category type provided.')
-        self.reqparse.add_argument('year', type = str, required=True, help='no YearManufactured provided')
-        self.reqparse.add_argument('instock', type = str, required=True, help='no AmountInStock provided')
-        self.reqparse.add_argument('openbid', type = str, required=True, help='no OpenBid amount provided')
-        self.reqparse.add_argument('bidincrement', type = str, required=True, help='no BidIncrement provided')
-        self.reqparse.add_argument('reservePrice', type = str, required=True, help='no ReservePrice provided')
-        self.reqparse.add_argument('expiredate', type = str, required=True, help='no ExpireDates provided')
-        super(Auction, self).__init__()
+        self.reqparse.add_argument('sellerid', type = str, required=True, help='no SellerID provided', location='json')
+        self.reqparse.add_argument('itemname', type = str, required=True, help='no item name provided.', location='json')
+        self.reqparse.add_argument('category', type = str, required=True, help='no category type provided.', location='json')
+        self.reqparse.add_argument('year', type = str, required=True, help='no YearManufactured pro,vided', location='json')
+        self.reqparse.add_argument('instock', type = str, required=True, help='no AmountInStock provided',location='json')
+        self.reqparse.add_argument('openbid', type = str, required=True, help='no OpenBid amount provided',location='json')
+        self.reqparse.add_argument('bidincrement', type = str, required=True, help='no BidIncrement provided',location='json')
+        self.reqparse.add_argument('reservePrice', type = str, required=True, help='no ReservePrice provided',location='json')
+        self.reqparse.add_argument('expiredate', type = str, required=True, help='no ExpireDates provided',location='json')
+        super(CreateAuction, self).__init__()
     def post(self):
         try:
             inputData = self.reqparse.parse_args()
-            print("shitworks?")
             dbcursor = dbconnection.cursor()
             sqlcommand1 =('INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,?)')
             dbcursor.execute (sqlcommand1,(inputData['itemname'],inputData['category'],inputData['year'],inputData['instock']))
             sqlcommand2 =('INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID) VALUES (?,?,?,?,?)')
             dbcursor.execute (sqlcommand2,(inputData['openbid'],inputData['bidincrement'],inputData['reservePrice'],inputData['itemname'],inputData['sellerid']))
             sqlcommand3 =('INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName) VALUES (?,GETDATE(),?,?)')
-            dbcursor.execute (sqlcommand3,(inputData['expiredate'],inputData['sellerid'],val1))
+            dbcursor.execute (sqlcommand3,(inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
             dbcursor.commit()
         except Exception as e:
             return jsonify({'error': e})
