@@ -1,4 +1,4 @@
-﻿"""
+"""
 Routes for the flask application.
 """
 
@@ -42,13 +42,36 @@ class TopSellerCategory(Resource):
     def post(self, id):
         pass
 
-#the post request on this item will be called when we need to post an item.
-#get with id will return the item associated with the auction[id]
-class Item(Resource):
+# the post request on this item will be called when we need to post an item.
+# get with id will return the item associated with the auction[id]
+
+class Auction(Resource):
     def __init__(self):
-        pass
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('sellerid', type = str, required=True, help='no SellerID provided')
+        self.reqparse.add_argument('itemname', type = str, required=True, help='no item name provided.')
+        self.reqparse.add_argument('category', type = str, required=True, help='no category type provided.')
+        self.reqparse.add_argument('year', type = str, required=True, help='no YearManufactured provided')
+        self.reqparse.add_argument('instock', type = str, required=True, help='no AmountInStock provided')
+        self.reqparse.add_argument('openbid', type = str, required=True, help='no OpenBid amount provided')
+        self.reqparse.add_argument('bidincrement', type = str, required=True, help='no BidIncrement provided')
+        self.reqparse.add_argument('reservePrice', type = str, required=True, help='no ReservePrice provided')
+        self.reqparse.add_argument('expiredate', type = str, required=True, help='no ExpireDates provided')
+        super(Auction, self).__init__()
     def post(self):
-        pass
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand1 =('INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,?)')
+            dbcursor.execute (sqlcommand1,(inputData['itemname'],inputData['category'],inputData['year'],inputData['instock']))
+            sqlcommand2 =('INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID) VALUES (?,?,?,?,?)')
+            dbcursor.execute (sqlcommand2,(inputData['openbid'],inputData['bidincrement'],inputData['reservePrice'],inputData['itemname'],inputData['sellerid']))
+            sqlcommand3 =('INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName) VALUES (?,GETDATE(),?,?)')
+            dbcursor.execute (sqlcommand3,(inputData['expiredate'],inputData['sellerid'],val1))
+            dbcursor.commit()
+            dbconnection.close()
+        except Exception as e:
+            return jsonify{'error': e}
     def get(self, id):
         try:
             dbcursor = dbconnection.cursor()
@@ -65,6 +88,9 @@ class Item(Resource):
             return(r['root']['row'])
         except Exception as e:
             print(e)
+
+"""
+returns all the auction
 class Auction(Resource):
     def get(self):
         try:
@@ -86,10 +112,10 @@ class Auction(Resource):
             return(r['root']['row'])
         except Exception as e:
             print(e)
-          
+"""
 class StaffPicks(Resource):
     def __init__(self):
-        pass
+        self.
     def delete(self,id):
         try:
             dbcursor = dbconnection.cursor()
@@ -100,7 +126,7 @@ class StaffPicks(Resource):
         except Exception as e:
             print(e)
 
-    def post(self,id):
+    def post(self):
         try:
             dbcursor = dbconnection.cursor()
             sqlcommand =('insert into staffpicks (auctionid) values (?)')
@@ -130,34 +156,6 @@ class StaffPicks(Resource):
         except Exception as e:
             print(e)
 
-class Insert(Resource):
-    def get(self):
-        try:
-            val1=''
-            val2=''
-            val3=''
-            val4=''
-            val5=''
-            val6=''
-            val7=''
-            val8=''
-            val9=''
-            val10=''
-            dbcursor = dbconnection.cursor()
-            sqlcommand1 =('INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,?)')
-            dbcursor.execute (sqlcommand1,(val1,val2,val3,val4))
-            sqlcommand2 =('INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID) VALUES (?,?,?,?,?)')
-            dbcursor.execute (sqlcommand2,(val5,val6,val7,val1,val8))
-            sqlcommand3 =('INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName) VALUES (?,GETDATE(),?,?)')
-            dbcursor.execute (sqlcommand3,(val9,val10,val1))
-            dbcursor.commit()
-            dbconnection.close()
-        except Exception as e:
-            print(e)
-
-
 api.add_resource(TopSellerCategory, '/topcategory')
-api.add_resource(Item, '/item/<string:id>')
-api.add_resource(Auction,'/auction/lowest')
+api.add_resource(Auction, '/getItem/<string:id>')
 api.add_resource(StaffPicks,'/staffpicks')
-
