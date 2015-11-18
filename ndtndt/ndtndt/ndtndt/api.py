@@ -1,4 +1,4 @@
-"""
+﻿"""
 Routes for the flask application.
 """
 
@@ -25,16 +25,16 @@ class TopSellerCategory(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand = ('select top 10 i.itemid,i.itemtype,i.yearmanufactured,count(*) as itemsold '
+            sqlcommand = ('select top 10 i.itemname,i.itemtype,i.yearmanufactured,count(*) as itemsold '
                           'from auction a, item i '
-                          'where a.itemid=i.itemid and sold=1 '
-                          'group by i.itemid,i.itemtype,i.yearmanufactured '
+                          'where a.itemname=i.itemname and sold=1 '
+                          'group by i.itemname,i.itemtype,i.yearmanufactured '
                           'order by itemsold desc for xml path')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"
-            dbconnection.close()
+            
             r=xmltodict.parse(row)
             return(r['root']['row'])
         except Exception as e:
@@ -45,7 +45,7 @@ class TopSellerCategory(Resource):
 # the post request on this item will be called when we need to post an item.
 # get with id will return the item associated with the auction[id]
 
-class Auction(Resource):
+class CreateAuction(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('sellerid', type = str, required=True, help='no SellerID provided')
@@ -61,6 +61,7 @@ class Auction(Resource):
     def post(self):
         try:
             inputData = self.reqparse.parse_args()
+            print("shitworks?")
             dbcursor = dbconnection.cursor()
             sqlcommand1 =('INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,?)')
             dbcursor.execute (sqlcommand1,(inputData['itemname'],inputData['category'],inputData['year'],inputData['instock']))
@@ -69,37 +70,63 @@ class Auction(Resource):
             sqlcommand3 =('INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName) VALUES (?,GETDATE(),?,?)')
             dbcursor.execute (sqlcommand3,(inputData['expiredate'],inputData['sellerid'],val1))
             dbcursor.commit()
-            dbconnection.close()
         except Exception as e:
-            return jsonify{'error': e}
+            return jsonify({'error': e})
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
+                         'a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, '
+                         'p.expiredates from auction a,item i,post p '
+                         'where i.itemname=a.itemname and p.itemname=i.itemname and a.auctionid=1 for xml path')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            print(rows)
+            if(rows):
+                row=str(rows)
+                row="<root>"+row[3:-4]+"</root>"
+                r=xmltodict.parse(row)
+                return(r['root']['row'])
+            else:
+                return jsonify({'id': id + ' - is not found'})
+        except Exception as e:
+            print(e)
+            return jsonify({'error': e})
+
+class Auction(Resource):
+    def post():
+        pass
     def get(self, id):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('select a.auctionid,i.itemid,a.openbid,a.bidincrement, a.currentbid, '
-                         'a.sellerid, i.itemname,i.itemtype, i.yearmanufactured, p.postdate, '
+            sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
+                         'a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, '
                          'p.expiredates from auction a,item i,post p '
-                         'where i.itemid=a.itemid and p.itemid=i.itemid and a.auctionid=? for xml path')
-            dbcursor.execute (sqlcommand,list(id))
+                         'where i.itemname=a.itemname and p.itemname=i.itemname and a.auctionid=? for xml path')
+            dbcursor.execute (sqlcommand,(str(id),))
             rows=dbcursor.fetchall()
-            row=str(rows)
-            row="<root>"+row[3:-4]+"</root>"
-            dbconnection.close()
-            r=xmltodict.parse(row)
-            return(r['root']['row'])
+            print(rows)
+            if(rows):
+                row=str(rows)
+                row="<root>"+row[3:-4]+"</root>"
+                r=xmltodict.parse(row)
+                return(r['root']['row'])
+            else:
+                return jsonify({'id': id + ' - is not found'})
         except Exception as e:
             print(e)
-
+            return jsonify({'error': e})
 """
 returns all the auction
 class Auction(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('select a.auctionid,i.itemid,a.openbid,a.bidincrement, a.currentbid, '
+            sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
                          'a.sellerid, i.itemname,i.itemtype, i.yearmanufactured, p.postdate, '
                          'p.expiredates from auction a,item i,post p '
-                         'where i.itemid=a.itemid and p.itemid=i.itemid and a.sold=0 '
-                         'group by a.auctionid,i.itemid,a.openbid,a.bidincrement, a.currentbid, '
+                         'where i.itemname=a.itemname and p.itemname=i.itemname and a.sold=0 '
+                         'group by a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
                          'a.sellerid, i.itemname,i.itemtype, i.yearmanufactured, p.postdate, '
                          'p.expiredates '
                          'order by a.currentBid desc for xml path')
@@ -107,7 +134,7 @@ class Auction(Resource):
             rows=dbcursor.fetchall()
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"
-            dbconnection.close()
+            
             r=xmltodict.parse(row)
             return(r['root']['row'])
         except Exception as e:
@@ -115,14 +142,14 @@ class Auction(Resource):
 """
 class StaffPicks(Resource):
     def __init__(self):
-        self.
+        pass
     def delete(self,id):
         try:
             dbcursor = dbconnection.cursor()
             sqlcommand =('delete from staffpicks where auctionid=?')
             dbcursor.execute (sqlcommand,(id,))
             dbcursor.commit()
-            dbconnection.close()
+            
         except Exception as e:
             print(e)
 
@@ -132,30 +159,31 @@ class StaffPicks(Resource):
             sqlcommand =('insert into staffpicks (auctionid) values (?)')
             dbcursor.execute (sqlcommand,(id,))
             dbcursor.commit()
-            dbconnection.close()
+            
         except Exception as e:
             print(e)
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
             sqlcommand =('select a.auctionid,a.openbid,a.bidincrement, '
-                         'a.currentbid,a.itemid,a.sellerid,i.itemname, '
+                         'a.currentbid,a.itemname,a.sellerid,i.itemname, '
                          'i.itemtype,i.yearmanufactured,p.postdate, '
                          'p.expiredates from staffpicks s inner join '
                          'auction a on s.auctionid=a.auctionid '
-                         'inner join item i on a.itemid=i.itemid '
-                         'inner join post p on i.itemid=p.itemid '
+                         'inner join item i on a.itemname=i.itemname '
+                         'inner join post p on i.itemname=p.itemname '
                          'for xml path')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"
-            dbconnection.close()
+            
             r=xmltodict.parse(row)
             return(r['root']['row'])
         except Exception as e:
             print(e)
 
 api.add_resource(TopSellerCategory, '/topcategory')
-api.add_resource(Auction, '/getItem/<string:id>')
+api.add_resource(Auction, '/getitem/<string:id>')
+api.add_resource(CreateAuction, '/createitem')
 api.add_resource(StaffPicks,'/staffpicks')
