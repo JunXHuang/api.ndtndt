@@ -115,6 +115,32 @@ class Auction(Resource):
         except Exception as e:
             print(e)
             return jsonify({'error': e})
+
+class AuctionAll(Resource):
+    def post():
+        pass
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
+                         'a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, '
+                         'p.expiredates from auction a,item i,post p '
+                         'where i.itemname=a.itemname and p.itemname=i.itemname and a.auctionid=p.auctionid for xml path')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            print(rows)
+            if(rows):
+                row=str(rows)
+                row="<root>"+row[3:-4]+"</root>"
+                r=xmltodict.parse(row)
+                return(r['root']['row'])
+            else:
+                return jsonify({'id': id + ' - is not found'})
+        except Exception as e:
+            print(e)
+            return jsonify({'error': e})
+
+
 """
 returns all the auction
 class Auction(Resource):
@@ -183,6 +209,7 @@ class StaffPicks(Resource):
             print(e)
 
 api.add_resource(TopSellerCategory, '/topcategory')
-api.add_resource(Auction, '/getitem/<string:id>')
+api.add_resource(Auction, '/getitem/<string:id>', endpoint="auction")
+api.add_resource(AuctionAll, '/getitem', endpoint="auctionAll")
 api.add_resource(CreateAuction, '/createitem')
 api.add_resource(StaffPicks,'/staffpicks')
