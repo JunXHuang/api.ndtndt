@@ -91,7 +91,7 @@ class CreateAuction(Resource):
         except Exception as e:
             print(e)
             return jsonify({'error': e})
-
+# Returns information for one item given auctionID
 class Auction(Resource):
     def post():
         pass
@@ -99,9 +99,15 @@ class Auction(Resource):
         try:
             dbcursor = dbconnection.cursor()
             sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
-                         'a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, '
-                         'p.expiredates from auction a,item i,post p '
-                         'where i.itemname=a.itemname and p.itemname=i.itemname and a.auctionid=? for xml path')
+                        'a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, '
+                        'p.expiredates,pp.firstname,pp.lastname,i.itemimg, count(b.auctionid) as TotalBidders '
+                        'from auction a inner join item i on i.itemname=a.itemname '
+                        'inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid '
+                        'inner join bid b on b.auctionid=a.auctionid '
+                        'where a.auctionid=? '
+                        'group by a.auctionid,i.itemname,a.openbid,a.bidincrement, '
+                        'a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, '
+                        'p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg for xml path')
             dbcursor.execute (sqlcommand,(str(id),))
             rows=dbcursor.fetchall()
             print(rows)
