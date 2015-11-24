@@ -6,7 +6,7 @@ from flask import Flask, jsonify, abort, make_response
 from flask_restful import Api, Resource, reqparse, fields, marshal
 from flask_httpauth import HTTPBasicAuth
 import json, xmltodict
-
+from binascii import *
 from ndtndt import app, dbconnection
 api = Api(app)
 auth = HTTPBasicAuth()
@@ -110,11 +110,16 @@ class Auction(Resource):
                         'p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg for xml path')
             dbcursor.execute (sqlcommand,(str(id),))
             rows=dbcursor.fetchall()
-            print(rows)
+            #print(rows)
             if(rows):
                 row=str(rows)
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
+                #print(r['root']['row']['itemimg'])
+                f = open('ndtndt/temp.jpg','wb')
+                f.write(a2b_base64(r['root']['row']['itemimg']))
+                r['root']['row']['itemimg']='temp.jpg'
+
                 return(r['root']['row'])
             else:
                 return jsonify({'id': id + ' - is not found'})
