@@ -51,7 +51,7 @@ class CreateAuction(Resource):
         self.reqparse.add_argument('sellerid', type = str, required=True, help='no SellerID provided', location='json')
         self.reqparse.add_argument('itemname', type = str, required=True, help='no item name provided.', location='json')
         self.reqparse.add_argument('category', type = str, required=True, help='no category type provided.', location='json')
-        self.reqparse.add_argument('year', type = str, required=True, help='no YearManufactured pro,vided', location='json')
+        self.reqparse.add_argument('year', type = str, required=True, help='no YearManufactured provided', location='json')
         self.reqparse.add_argument('instock', type = str, required=True, help='no AmountInStock provided',location='json')
         self.reqparse.add_argument('openbid', type = str, required=True, help='no OpenBid amount provided',location='json')
         self.reqparse.add_argument('bidincrement', type = str, required=True, help='no BidIncrement provided',location='json')
@@ -417,6 +417,62 @@ class StaffRevenue(Resource):
         except Exception as e:
             print(e)
 
+# Creating a new user
+class CreateUser(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('ssn', type = str, required=True, help='no CustomerID provided', location='json')
+        self.reqparse.add_argument('lastname', type = str, required=True, help='no Last name provided.', location='json')
+        self.reqparse.add_argument('firstname', type = str, required=True, help='no First name provided.', location='json')
+        self.reqparse.add_argument('address', type = str, required=True, help='no Address provided', location='json')
+        self.reqparse.add_argument('city', type = str, required=True, help='no City provided',location='json')
+        self.reqparse.add_argument('state', type = str, required=True, help='no State provided',location='json')
+        self.reqparse.add_argument('zipcode', type = str, required=True, help='no Zip Code provided',location='json')
+        self.reqparse.add_argument('telephone', type = str, required=True, help='no Telephone number provided',location='json')
+        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided',location='json')
+        self.reqparse.add_argument('creditcardnum', type = str, required=True, help='no Credit Card Number provided',location='json')
+        super(CreateUser, self).__init__()
+    def post(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand1 =('INSERT INTO Person (SSN,LastName,FirstName,Address,City,State,ZipCode,Telephone,UserPassword) VALUES(?,?,?,?,?,?,?,?,?)')
+            dbcursor.execute (sqlcommand1,(inputData['ssn'],inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['userpassword']))
+            sqlcommand2 =('INSERT INTO Customer (Rating,CreditCardNum,CustomerID) VALUES(1,?,?)')
+            dbcursor.execute (sqlcommand2,(inputData['creditcardnum'],inputData['ssn']))
+            dbcursor.commit()
+            return jsonify({'sucess'})
+        except Exception as e:
+            return jsonify({'failed - error': e})
+
+class Login(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('ssn', type = str, required=True, help='no ID provided', location='json')
+        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided.', location='json')
+        super(Login, self).__init__()
+    def post(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('select * from person where ssn=? and userpassword=?')
+            dbcursor.execute(sqlcommand,(inputData['ssn'],inputData['userpassword']))
+            if dbcursor.rowcount == 0:
+                return jsonify({'failed'})
+            # checking if the user login is an employee
+            sqlcommand=('select MagLevel from Employee where EmployeeID=?')
+            dbcursor.execute(sqlcommand,(inputData['ssn'],))
+            # return success if the user is not employee
+            if dbcursor.rowcount == 0:
+                return jsonify({'success'})
+            rows=dbcursor.fetchall()
+            row=str(rows)
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            # returning employee base on maglevel. 1 = manager and 2 = customer rep
+            return(r['root']['row'])
+        except Exception as e:
+            return jsonify({'failed - error': e})
 
 api.add_resource(TopSellerCategory, '/topcategory')
 api.add_resource(Auction, '/getitem/<string:id>', endpoint="auction")
@@ -432,3 +488,5 @@ api.add_resource(RevenueBySellerID,'/revenuebysellerid/<string:id>')
 api.add_resource(CustomerAuctionHistory,'/customerauctionhistory/<string:id>')
 api.add_resource(ItemSuggestions,'/itemsuggestions/<string:id>')
 api.add_resource(StaffRevenue,'/staffrevenue')
+api.add_resource(CreateUser,'/createuser')
+api.add_resource(Login,'/login')
