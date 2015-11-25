@@ -458,13 +458,13 @@ class Login(Resource):
             sqlcommand =('select * from person where ssn=? and userpassword=?')
             dbcursor.execute(sqlcommand,(inputData['ssn'],inputData['userpassword']))
             if dbcursor.rowcount == 0:
-                return jsonify({'failed'})
+                return jsonify({'failed': 'failed'})
             # checking if the user login is an employee
             sqlcommand=('select MagLevel from Employee where EmployeeID=?')
             dbcursor.execute(sqlcommand,(inputData['ssn'],))
             # return success if the user is not employee
             if dbcursor.rowcount == 0:
-                return jsonify({'success'})
+                return jsonify({'success': 'ok'})
             rows=dbcursor.fetchall()
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"

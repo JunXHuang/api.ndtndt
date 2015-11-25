@@ -3558,3 +3558,917 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Micro
 2015-11-22T00:16:41: Saving group "C:\Users\Jun\Desktop\database project\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\_markerlib"
 2015-11-22T00:16:41: End of group "C:\Users\Jun\Desktop\database project\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\_markerlib"
 2015-11-22T00:16:41: Deleting 0 files
+
+2015-11-25T18:27:30: Start analysis
+2015-11-25T18:27:30: [WARNING] Library was set explicitly - skipping path detection
+2015-11-25T18:27:30: IncludeModulesFromModulePath = win32com
+2015-11-25T18:27:30: Deleting 437 files
+2015-11-25T18:27:31: Scraping builtin modules
+2015-11-25T18:27:31: Command: C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Scripts\python.exe "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\PythonScraper.py" C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\.ptvs\ "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\\"
+2015-11-25T18:27:32: Output
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_codecs.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_collections.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_functools.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_heapq.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_io.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_locale.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_md5.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_random.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_sha256.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_sha512.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_sre.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_struct.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_warnings.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\_weakref.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\array.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\binascii.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\cmath.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\errno.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\gc.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\itertools.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\marshal.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\math.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\mmap.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\msvcrt.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\nt.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\signal.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\sys.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\time.idb
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\CompletionDB\xxsubtype.idb
+2015-11-25T18:27:32: Scraped builtin modules
+2015-11-25T18:27:32: Scraped 0 files
+2015-11-25T18:27:32: astropy.CallDepth = 0
+2015-11-25T18:27:32: matplotlib.CallDepth = 3
+2015-11-25T18:27:32: pandas.CallDepth = 0
+2015-11-25T18:27:32: sympy.CallDepth = 0
+2015-11-25T18:27:32: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages" with 6 files
+2015-11-25T18:27:32: Parsing "easy_install" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\easy_install.py")
+2015-11-25T18:27:32: Parsing "flask_httpauth" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_httpauth.py")
+2015-11-25T18:27:32: Parsing "itsdangerous" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\itsdangerous.py")
+2015-11-25T18:27:33: Parsing "pypyodbc" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pypyodbc.py")
+2015-11-25T18:27:33: Parsing "six" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\six.py")
+2015-11-25T18:27:33: Parsing "xmltodict" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\xmltodict.py")
+2015-11-25T18:27:33: Parsing complete
+2015-11-25T18:27:33: Analyzing "easy_install"
+2015-11-25T18:27:33: Analyzing "flask_httpauth"
+2015-11-25T18:27:33: Analyzing "itsdangerous"
+2015-11-25T18:27:33: Analyzing "pypyodbc"
+2015-11-25T18:27:33: Analyzing "six"
+2015-11-25T18:27:33: Analyzing "xmltodict"
+2015-11-25T18:27:33: Starting analysis of 6 modules
+2015-11-25T18:27:35: Analysis complete
+2015-11-25T18:27:35: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages"
+2015-11-25T18:27:35: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages"
+2015-11-25T18:27:35: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601" with 8 files
+2015-11-25T18:27:35: Parsing "aniso8601.compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601\compat.py")
+2015-11-25T18:27:35: Parsing "aniso8601.date" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601\date.py")
+2015-11-25T18:27:35: Parsing "aniso8601.duration" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601\duration.py")
+2015-11-25T18:27:35: Parsing "aniso8601.interval" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601\interval.py")
+2015-11-25T18:27:35: Parsing "aniso8601.resolution" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601\resolution.py")
+2015-11-25T18:27:35: Parsing "aniso8601.time" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601\time.py")
+2015-11-25T18:27:35: Parsing "aniso8601.timezone" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601\timezone.py")
+2015-11-25T18:27:35: Parsing "aniso8601" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601\__init__.py")
+2015-11-25T18:27:35: Parsing complete
+2015-11-25T18:27:35: Analyzing "aniso8601.compat"
+2015-11-25T18:27:35: Analyzing "aniso8601.date"
+2015-11-25T18:27:35: Analyzing "aniso8601.duration"
+2015-11-25T18:27:35: Analyzing "aniso8601.interval"
+2015-11-25T18:27:35: Analyzing "aniso8601.resolution"
+2015-11-25T18:27:35: Analyzing "aniso8601.time"
+2015-11-25T18:27:35: Analyzing "aniso8601.timezone"
+2015-11-25T18:27:35: Analyzing "aniso8601"
+2015-11-25T18:27:35: Starting analysis of 8 modules
+2015-11-25T18:27:37: Analysis complete
+2015-11-25T18:27:37: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601"
+2015-11-25T18:27:37: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\aniso8601"
+2015-11-25T18:27:37: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil" with 8 files
+2015-11-25T18:27:37: Parsing "dateutil.easter" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil\easter.py")
+2015-11-25T18:27:37: Parsing "dateutil.parser" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil\parser.py")
+2015-11-25T18:27:37: Parsing "dateutil.relativedelta" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil\relativedelta.py")
+2015-11-25T18:27:37: Parsing "dateutil.rrule" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil\rrule.py")
+2015-11-25T18:27:37: Parsing "dateutil.tz" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil\tz.py")
+2015-11-25T18:27:37: Parsing "dateutil.tzwin" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil\tzwin.py")
+2015-11-25T18:27:37: Parsing "dateutil" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil\__init__.py")
+2015-11-25T18:27:37: Parsing "dateutil.zoneinfo" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil\zoneinfo\__init__.py")
+2015-11-25T18:27:37: Parsing complete
+2015-11-25T18:27:37: Analyzing "dateutil.easter"
+2015-11-25T18:27:37: Analyzing "dateutil.parser"
+2015-11-25T18:27:37: Analyzing "dateutil.relativedelta"
+2015-11-25T18:27:37: Analyzing "dateutil.rrule"
+2015-11-25T18:27:37: Analyzing "dateutil.tz"
+2015-11-25T18:27:37: Analyzing "dateutil.tzwin"
+2015-11-25T18:27:37: Analyzing "dateutil"
+2015-11-25T18:27:37: Analyzing "dateutil.zoneinfo"
+2015-11-25T18:27:37: Starting analysis of 8 modules
+2015-11-25T18:27:39: Analysis complete
+2015-11-25T18:27:39: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil"
+2015-11-25T18:27:39: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\dateutil"
+2015-11-25T18:27:39: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask" with 59 files
+2015-11-25T18:27:39: Parsing "flask.app" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\app.py")
+2015-11-25T18:27:39: Parsing "flask.blueprints" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\blueprints.py")
+2015-11-25T18:27:39: Parsing "flask.config" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\config.py")
+2015-11-25T18:27:39: Parsing "flask.ctx" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\ctx.py")
+2015-11-25T18:27:39: Parsing "flask.debughelpers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\debughelpers.py")
+2015-11-25T18:27:39: Parsing "flask.exthook" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\exthook.py")
+2015-11-25T18:27:39: Parsing "flask.globals" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\globals.py")
+2015-11-25T18:27:39: Parsing "flask.helpers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\helpers.py")
+2015-11-25T18:27:39: Parsing "flask.json" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\json.py")
+2015-11-25T18:27:39: Parsing "flask.logging" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\logging.py")
+2015-11-25T18:27:39: Parsing "flask.module" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\module.py")
+2015-11-25T18:27:39: Parsing "flask.sessions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\sessions.py")
+2015-11-25T18:27:39: Parsing "flask.signals" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\signals.py")
+2015-11-25T18:27:39: Parsing "flask.templating" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\templating.py")
+2015-11-25T18:27:39: Parsing "flask.testing" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testing.py")
+2015-11-25T18:27:39: Parsing "flask.views" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\views.py")
+2015-11-25T18:27:39: Parsing "flask.wrappers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\wrappers.py")
+2015-11-25T18:27:39: Parsing "flask._compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\_compat.py")
+2015-11-25T18:27:39: Parsing "flask" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.ext" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\ext\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.appctx" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\appctx.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.basic" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\basic.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.blueprints" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\blueprints.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.config" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\config.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.deprecations" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\deprecations.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.examples" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\examples.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.ext" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\ext.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.helpers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\helpers.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.regression" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\regression.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.reqctx" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\reqctx.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.signals" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\signals.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.subclassing" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\subclassing.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.templating" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\templating.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.testing" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\testing.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.views" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\views.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.config_module_app" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\config_module_app.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flask_newext_simple" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flask_newext_simple.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.importerror" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\importerror.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.main_app" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\main_app.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.blueprintapp" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\blueprintapp\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.blueprintapp.apps" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\blueprintapp\apps\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.blueprintapp.apps.admin" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\blueprintapp\apps\admin\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.blueprintapp.apps.frontend" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\blueprintapp\apps\frontend\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.config_package_app" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\config_package_app\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flaskext.oldext_simple" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flaskext\oldext_simple.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flaskext" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flaskext\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flaskext.oldext_package.submodule" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flaskext\oldext_package\submodule.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flaskext.oldext_package" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flaskext\oldext_package\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flask_broken.b" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flask_broken\b.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flask_broken" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flask_broken\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flask_newext_package.submodule" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flask_newext_package\submodule.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.flask_newext_package" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\flask_newext_package\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.moduleapp" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\moduleapp\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.moduleapp.apps" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\moduleapp\apps\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.moduleapp.apps.admin" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\moduleapp\apps\admin\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.moduleapp.apps.frontend" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\moduleapp\apps\frontend\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.path.installed_package" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\path\installed_package\__init__.py")
+2015-11-25T18:27:39: Parsing "flask.testsuite.test_apps.subdomaintestmodule" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask\testsuite\test_apps\subdomaintestmodule\__init__.py")
+2015-11-25T18:27:39: Parsing complete
+2015-11-25T18:27:39: Analyzing "flask.app"
+2015-11-25T18:27:39: Analyzing "flask.blueprints"
+2015-11-25T18:27:39: Analyzing "flask.config"
+2015-11-25T18:27:39: Analyzing "flask.ctx"
+2015-11-25T18:27:39: Analyzing "flask.debughelpers"
+2015-11-25T18:27:39: Analyzing "flask.exthook"
+2015-11-25T18:27:39: Analyzing "flask.globals"
+2015-11-25T18:27:39: Analyzing "flask.helpers"
+2015-11-25T18:27:39: Analyzing "flask.json"
+2015-11-25T18:27:39: Analyzing "flask.logging"
+2015-11-25T18:27:39: Analyzing "flask.module"
+2015-11-25T18:27:39: Analyzing "flask.sessions"
+2015-11-25T18:27:39: Analyzing "flask.signals"
+2015-11-25T18:27:39: Analyzing "flask.templating"
+2015-11-25T18:27:39: Analyzing "flask.testing"
+2015-11-25T18:27:39: Analyzing "flask.views"
+2015-11-25T18:27:39: Analyzing "flask.wrappers"
+2015-11-25T18:27:39: Analyzing "flask._compat"
+2015-11-25T18:27:39: Analyzing "flask"
+2015-11-25T18:27:39: Analyzing "flask.ext"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.appctx"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.basic"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.blueprints"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.config"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.deprecations"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.examples"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.ext"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.helpers"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.regression"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.reqctx"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.signals"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.subclassing"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.templating"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.testing"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.views"
+2015-11-25T18:27:39: Analyzing "flask.testsuite"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.config_module_app"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flask_newext_simple"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.importerror"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.main_app"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.blueprintapp"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.blueprintapp.apps"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.blueprintapp.apps.admin"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.blueprintapp.apps.frontend"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.config_package_app"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flaskext.oldext_simple"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flaskext"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flaskext.oldext_package.submodule"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flaskext.oldext_package"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flask_broken.b"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flask_broken"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flask_newext_package.submodule"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.flask_newext_package"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.moduleapp"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.moduleapp.apps"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.moduleapp.apps.admin"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.moduleapp.apps.frontend"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.path.installed_package"
+2015-11-25T18:27:39: Analyzing "flask.testsuite.test_apps.subdomaintestmodule"
+2015-11-25T18:27:39: Starting analysis of 59 modules
+2015-11-25T18:27:42: Analysis complete
+2015-11-25T18:27:42: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask"
+2015-11-25T18:27:42: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask"
+2015-11-25T18:27:42: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful" with 10 files
+2015-11-25T18:27:42: Parsing "flask_restful.fields" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\fields.py")
+2015-11-25T18:27:42: Parsing "flask_restful.inputs" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\inputs.py")
+2015-11-25T18:27:42: Parsing "flask_restful.paging" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\paging.py")
+2015-11-25T18:27:42: Parsing "flask_restful.reqparse" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\reqparse.py")
+2015-11-25T18:27:42: Parsing "flask_restful" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\__init__.py")
+2015-11-25T18:27:42: Parsing "flask_restful.representations.json" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\representations\json.py")
+2015-11-25T18:27:42: Parsing "flask_restful.representations" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\representations\__init__.py")
+2015-11-25T18:27:42: Parsing "flask_restful.utils.cors" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\utils\cors.py")
+2015-11-25T18:27:42: Parsing "flask_restful.utils.crypto" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\utils\crypto.py")
+2015-11-25T18:27:42: Parsing "flask_restful.utils" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful\utils\__init__.py")
+2015-11-25T18:27:42: Parsing complete
+2015-11-25T18:27:42: Analyzing "flask_restful.fields"
+2015-11-25T18:27:42: Analyzing "flask_restful.inputs"
+2015-11-25T18:27:42: Analyzing "flask_restful.paging"
+2015-11-25T18:27:42: Analyzing "flask_restful.reqparse"
+2015-11-25T18:27:42: Analyzing "flask_restful"
+2015-11-25T18:27:42: Analyzing "flask_restful.representations.json"
+2015-11-25T18:27:42: Analyzing "flask_restful.representations"
+2015-11-25T18:27:42: Analyzing "flask_restful.utils.cors"
+2015-11-25T18:27:42: Analyzing "flask_restful.utils.crypto"
+2015-11-25T18:27:42: Analyzing "flask_restful.utils"
+2015-11-25T18:27:42: Starting analysis of 10 modules
+2015-11-25T18:27:43: Analysis complete
+2015-11-25T18:27:43: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful"
+2015-11-25T18:27:43: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\flask_restful"
+2015-11-25T18:27:43: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2" with 23 files
+2015-11-25T18:27:44: Parsing "jinja2.bccache" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\bccache.py")
+2015-11-25T18:27:44: Parsing "jinja2.compiler" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\compiler.py")
+2015-11-25T18:27:44: Parsing "jinja2.constants" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\constants.py")
+2015-11-25T18:27:44: Parsing "jinja2.debug" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\debug.py")
+2015-11-25T18:27:44: Parsing "jinja2.defaults" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\defaults.py")
+2015-11-25T18:27:44: Parsing "jinja2.environment" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\environment.py")
+2015-11-25T18:27:44: Parsing "jinja2.exceptions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\exceptions.py")
+2015-11-25T18:27:44: Parsing "jinja2.ext" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\ext.py")
+2015-11-25T18:27:44: Parsing "jinja2.filters" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\filters.py")
+2015-11-25T18:27:44: Parsing "jinja2.lexer" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\lexer.py")
+2015-11-25T18:27:44: Parsing "jinja2.loaders" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\loaders.py")
+2015-11-25T18:27:44: Parsing "jinja2.meta" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\meta.py")
+2015-11-25T18:27:44: Parsing "jinja2.nodes" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\nodes.py")
+2015-11-25T18:27:44: Parsing "jinja2.optimizer" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\optimizer.py")
+2015-11-25T18:27:44: Parsing "jinja2.parser" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\parser.py")
+2015-11-25T18:27:44: Parsing "jinja2.runtime" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\runtime.py")
+2015-11-25T18:27:44: Parsing "jinja2.sandbox" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\sandbox.py")
+2015-11-25T18:27:44: Parsing "jinja2.tests" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\tests.py")
+2015-11-25T18:27:44: Parsing "jinja2.utils" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\utils.py")
+2015-11-25T18:27:44: Parsing "jinja2.visitor" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\visitor.py")
+2015-11-25T18:27:44: Parsing "jinja2._compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\_compat.py")
+2015-11-25T18:27:44: Parsing "jinja2._stringdefs" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\_stringdefs.py")
+2015-11-25T18:27:44: Parsing "jinja2" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2\__init__.py")
+2015-11-25T18:27:44: Parsing complete
+2015-11-25T18:27:44: Analyzing "jinja2.bccache"
+2015-11-25T18:27:44: Analyzing "jinja2.compiler"
+2015-11-25T18:27:44: Analyzing "jinja2.constants"
+2015-11-25T18:27:44: Analyzing "jinja2.debug"
+2015-11-25T18:27:44: Analyzing "jinja2.defaults"
+2015-11-25T18:27:44: Analyzing "jinja2.environment"
+2015-11-25T18:27:44: Analyzing "jinja2.exceptions"
+2015-11-25T18:27:44: Analyzing "jinja2.ext"
+2015-11-25T18:27:44: Analyzing "jinja2.filters"
+2015-11-25T18:27:44: Analyzing "jinja2.lexer"
+2015-11-25T18:27:44: Analyzing "jinja2.loaders"
+2015-11-25T18:27:44: Analyzing "jinja2.meta"
+2015-11-25T18:27:44: Analyzing "jinja2.nodes"
+2015-11-25T18:27:44: Analyzing "jinja2.optimizer"
+2015-11-25T18:27:44: Analyzing "jinja2.parser"
+2015-11-25T18:27:44: Analyzing "jinja2.runtime"
+2015-11-25T18:27:44: Analyzing "jinja2.sandbox"
+2015-11-25T18:27:44: Analyzing "jinja2.tests"
+2015-11-25T18:27:44: Analyzing "jinja2.utils"
+2015-11-25T18:27:44: Analyzing "jinja2.visitor"
+2015-11-25T18:27:44: Analyzing "jinja2._compat"
+2015-11-25T18:27:44: Analyzing "jinja2._stringdefs"
+2015-11-25T18:27:44: Analyzing "jinja2"
+2015-11-25T18:27:44: Starting analysis of 23 modules
+2015-11-25T18:27:46: Analysis complete
+2015-11-25T18:27:46: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2"
+2015-11-25T18:27:46: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\jinja2"
+2015-11-25T18:27:46: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\markupsafe" with 5 files
+2015-11-25T18:27:46: Parsing "markupsafe.tests" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\markupsafe\tests.py")
+2015-11-25T18:27:46: Parsing "markupsafe._compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\markupsafe\_compat.py")
+2015-11-25T18:27:46: Parsing "markupsafe._constants" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\markupsafe\_constants.py")
+2015-11-25T18:27:46: Parsing "markupsafe._native" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\markupsafe\_native.py")
+2015-11-25T18:27:46: Parsing "markupsafe" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\markupsafe\__init__.py")
+2015-11-25T18:27:46: Parsing complete
+2015-11-25T18:27:46: Analyzing "markupsafe.tests"
+2015-11-25T18:27:46: Analyzing "markupsafe._compat"
+2015-11-25T18:27:46: Analyzing "markupsafe._constants"
+2015-11-25T18:27:46: Analyzing "markupsafe._native"
+2015-11-25T18:27:46: Analyzing "markupsafe"
+2015-11-25T18:27:46: Starting analysis of 5 modules
+2015-11-25T18:27:47: Analysis complete
+2015-11-25T18:27:47: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\markupsafe"
+2015-11-25T18:27:48: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\markupsafe"
+2015-11-25T18:27:48: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip" with 156 files
+2015-11-25T18:27:48: Parsing "pip.basecommand" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\basecommand.py")
+2015-11-25T18:27:48: Parsing "pip.baseparser" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\baseparser.py")
+2015-11-25T18:27:48: Parsing "pip.cmdoptions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\cmdoptions.py")
+2015-11-25T18:27:48: Parsing "pip.download" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\download.py")
+2015-11-25T18:27:48: Parsing "pip.exceptions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\exceptions.py")
+2015-11-25T18:27:48: Parsing "pip.index" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\index.py")
+2015-11-25T18:27:48: Parsing "pip.locations" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\locations.py")
+2015-11-25T18:27:48: Parsing "pip.pep425tags" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\pep425tags.py")
+2015-11-25T18:27:48: Parsing "pip.status_codes" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\status_codes.py")
+2015-11-25T18:27:48: Parsing "pip.wheel" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\wheel.py")
+2015-11-25T18:27:48: Parsing "pip" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\__init__.py")
+2015-11-25T18:27:48: Parsing "pip.__main__" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\__main__.py")
+2015-11-25T18:27:48: Parsing "pip.commands.completion" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\completion.py")
+2015-11-25T18:27:48: Parsing "pip.commands.freeze" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\freeze.py")
+2015-11-25T18:27:48: Parsing "pip.commands.help" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\help.py")
+2015-11-25T18:27:48: Parsing "pip.commands.install" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\install.py")
+2015-11-25T18:27:48: Parsing "pip.commands.list" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\list.py")
+2015-11-25T18:27:48: Parsing "pip.commands.search" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\search.py")
+2015-11-25T18:27:48: Parsing "pip.commands.show" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\show.py")
+2015-11-25T18:27:48: Parsing "pip.commands.uninstall" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\uninstall.py")
+2015-11-25T18:27:48: Parsing "pip.commands.wheel" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\wheel.py")
+2015-11-25T18:27:48: Parsing "pip.commands" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\commands\__init__.py")
+2015-11-25T18:27:48: Parsing "pip.compat.dictconfig" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\compat\dictconfig.py")
+2015-11-25T18:27:48: Parsing "pip.compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\compat\__init__.py")
+2015-11-25T18:27:48: Parsing "pip.models.index" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\models\index.py")
+2015-11-25T18:27:48: Parsing "pip.models" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\models\__init__.py")
+2015-11-25T18:27:48: Parsing "pip.operations.freeze" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\operations\freeze.py")
+2015-11-25T18:27:48: Parsing "pip.operations" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\operations\__init__.py")
+2015-11-25T18:27:48: Parsing "pip.req.req_file" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\req\req_file.py")
+2015-11-25T18:27:48: Parsing "pip.req.req_install" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\req\req_install.py")
+2015-11-25T18:27:48: Parsing "pip.req.req_set" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\req\req_set.py")
+2015-11-25T18:27:48: Parsing "pip.req.req_uninstall" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\req\req_uninstall.py")
+2015-11-25T18:27:48: Parsing "pip.req" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\req\__init__.py")
+2015-11-25T18:27:48: Parsing "pip.utils.appdirs" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\utils\appdirs.py")
+2015-11-25T18:27:48: Parsing "pip.utils.build" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\utils\build.py")
+2015-11-25T18:27:48: Parsing "pip.utils.deprecation" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\utils\deprecation.py")
+2015-11-25T18:27:48: Parsing "pip.utils.filesystem" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\utils\filesystem.py")
+2015-11-25T18:27:48: Parsing "pip.utils.logging" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\utils\logging.py")
+2015-11-25T18:27:48: Parsing "pip.utils.outdated" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\utils\outdated.py")
+2015-11-25T18:27:48: Parsing "pip.utils.ui" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\utils\ui.py")
+2015-11-25T18:27:48: Parsing "pip.utils" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\utils\__init__.py")
+2015-11-25T18:27:48: Parsing "pip.vcs.bazaar" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\vcs\bazaar.py")
+2015-11-25T18:27:48: Parsing "pip.vcs.git" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\vcs\git.py")
+2015-11-25T18:27:48: Parsing "pip.vcs.mercurial" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\vcs\mercurial.py")
+2015-11-25T18:27:48: Parsing "pip.vcs.subversion" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\vcs\subversion.py")
+2015-11-25T18:27:48: Parsing "pip.vcs" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\vcs\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.ipaddress" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\ipaddress.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.retrying" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\retrying.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.six" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\six.py")
+2015-11-25T18:27:48: Parsing "pip._vendor" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.adapter" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\adapter.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.cache" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\cache.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\compat.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.controller" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\controller.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.filewrapper" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\filewrapper.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.heuristics" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\heuristics.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.serialize" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\serialize.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.wrapper" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\wrapper.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.caches.file_cache" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\caches\file_cache.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.caches.redis_cache" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\caches\redis_cache.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.cachecontrol.caches" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\cachecontrol\caches\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.colorama.ansi" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\colorama\ansi.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.colorama.ansitowin32" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\colorama\ansitowin32.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.colorama.initialise" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\colorama\initialise.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.colorama.win32" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\colorama\win32.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.colorama.winterm" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\colorama\winterm.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.colorama" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\colorama\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\compat.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.database" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\database.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.index" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\index.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.locators" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\locators.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.manifest" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\manifest.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.markers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\markers.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.metadata" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\metadata.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.resources" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\resources.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.scripts" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\scripts.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.util" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\util.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.version" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\version.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib.wheel" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\wheel.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib._backport.misc" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\_backport\misc.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib._backport.shutil" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\_backport\shutil.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib._backport.sysconfig" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\_backport\sysconfig.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib._backport.tarfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\_backport\tarfile.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.distlib._backport" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\distlib\_backport\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.constants" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\constants.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.html5parser" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\html5parser.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.ihatexml" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\ihatexml.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.inputstream" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\inputstream.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.sanitizer" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\sanitizer.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.tokenizer" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\tokenizer.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.utils" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\utils.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.filters.alphabeticalattributes" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\filters\alphabeticalattributes.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.filters.inject_meta_charset" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\filters\inject_meta_charset.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.filters.lint" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\filters\lint.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.filters.optionaltags" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\filters\optionaltags.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.filters.sanitizer" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\filters\sanitizer.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.filters.whitespace" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\filters\whitespace.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.filters._base" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\filters\_base.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.filters" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\filters\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.serializer.htmlserializer" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\serializer\htmlserializer.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.serializer" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\serializer\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treeadapters.sax" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treeadapters\sax.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treeadapters" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treeadapters\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treebuilders.dom" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treebuilders\dom.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treebuilders.etree" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treebuilders\etree.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treebuilders.etree_lxml" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treebuilders\etree_lxml.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treebuilders._base" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treebuilders\_base.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treebuilders" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treebuilders\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treewalkers.dom" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treewalkers\dom.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treewalkers.etree" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treewalkers\etree.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treewalkers.genshistream" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treewalkers\genshistream.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treewalkers.lxmletree" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treewalkers\lxmletree.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treewalkers.pulldom" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treewalkers\pulldom.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treewalkers._base" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treewalkers\_base.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.treewalkers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\treewalkers\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.trie.datrie" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\trie\datrie.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.trie.py" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\trie\py.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.trie._base" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\trie\_base.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.html5lib.trie" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\html5lib\trie\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.lockfile.linklockfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\lockfile\linklockfile.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.lockfile.mkdirlockfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\lockfile\mkdirlockfile.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.lockfile.pidlockfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\lockfile\pidlockfile.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.lockfile.sqlitelockfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\lockfile\sqlitelockfile.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.lockfile.symlinklockfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\lockfile\symlinklockfile.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.lockfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\lockfile\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.packaging.specifiers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\packaging\specifiers.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.packaging.version" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\packaging\version.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.packaging._compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\packaging\_compat.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.packaging._structures" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\packaging\_structures.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.packaging.__about__" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\packaging\__about__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.packaging" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\packaging\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.pkg_resources" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\pkg_resources\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.progress.bar" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\progress\bar.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.progress.counter" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\progress\counter.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.progress.helpers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\progress\helpers.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.progress.spinner" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\progress\spinner.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.progress" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\progress\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.adapters" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\adapters.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.api" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\api.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.auth" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\auth.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.certs" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\certs.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\compat.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.cookies" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\cookies.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.exceptions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\exceptions.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.hooks" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\hooks.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.models" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\models.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.sessions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\sessions.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.status_codes" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\status_codes.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.structures" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\structures.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests.utils" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\utils.py")
+2015-11-25T18:27:48: Parsing "pip._vendor.requests" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\requests\__init__.py")
+2015-11-25T18:27:48: Parsing "pip._vendor._markerlib.markers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\_markerlib\markers.py")
+2015-11-25T18:27:48: Parsing "pip._vendor._markerlib" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip\_vendor\_markerlib\__init__.py")
+2015-11-25T18:27:48: Parsing complete
+2015-11-25T18:27:48: Analyzing "pip.basecommand"
+2015-11-25T18:27:48: Analyzing "pip.baseparser"
+2015-11-25T18:27:48: Analyzing "pip.cmdoptions"
+2015-11-25T18:27:48: Analyzing "pip.download"
+2015-11-25T18:27:48: Analyzing "pip.exceptions"
+2015-11-25T18:27:48: Analyzing "pip.index"
+2015-11-25T18:27:49: Analyzing "pip.locations"
+2015-11-25T18:27:49: Analyzing "pip.pep425tags"
+2015-11-25T18:27:49: Analyzing "pip.status_codes"
+2015-11-25T18:27:49: Analyzing "pip.wheel"
+2015-11-25T18:27:49: Analyzing "pip"
+2015-11-25T18:27:49: Analyzing "pip.__main__"
+2015-11-25T18:27:49: Analyzing "pip.commands.completion"
+2015-11-25T18:27:49: Analyzing "pip.commands.freeze"
+2015-11-25T18:27:49: Analyzing "pip.commands.help"
+2015-11-25T18:27:49: Analyzing "pip.commands.install"
+2015-11-25T18:27:49: Analyzing "pip.commands.list"
+2015-11-25T18:27:49: Analyzing "pip.commands.search"
+2015-11-25T18:27:49: Analyzing "pip.commands.show"
+2015-11-25T18:27:49: Analyzing "pip.commands.uninstall"
+2015-11-25T18:27:49: Analyzing "pip.commands.wheel"
+2015-11-25T18:27:49: Analyzing "pip.commands"
+2015-11-25T18:27:49: Analyzing "pip.compat.dictconfig"
+2015-11-25T18:27:49: Analyzing "pip.compat"
+2015-11-25T18:27:49: Analyzing "pip.models.index"
+2015-11-25T18:27:49: Analyzing "pip.models"
+2015-11-25T18:27:49: Analyzing "pip.operations.freeze"
+2015-11-25T18:27:49: Analyzing "pip.operations"
+2015-11-25T18:27:49: Analyzing "pip.req.req_file"
+2015-11-25T18:27:49: Analyzing "pip.req.req_install"
+2015-11-25T18:27:49: Analyzing "pip.req.req_set"
+2015-11-25T18:27:49: Analyzing "pip.req.req_uninstall"
+2015-11-25T18:27:49: Analyzing "pip.req"
+2015-11-25T18:27:49: Analyzing "pip.utils.appdirs"
+2015-11-25T18:27:49: Analyzing "pip.utils.build"
+2015-11-25T18:27:49: Analyzing "pip.utils.deprecation"
+2015-11-25T18:27:49: Analyzing "pip.utils.filesystem"
+2015-11-25T18:27:49: Analyzing "pip.utils.logging"
+2015-11-25T18:27:49: Analyzing "pip.utils.outdated"
+2015-11-25T18:27:49: Analyzing "pip.utils.ui"
+2015-11-25T18:27:49: Analyzing "pip.utils"
+2015-11-25T18:27:49: Analyzing "pip.vcs.bazaar"
+2015-11-25T18:27:49: Analyzing "pip.vcs.git"
+2015-11-25T18:27:49: Analyzing "pip.vcs.mercurial"
+2015-11-25T18:27:49: Analyzing "pip.vcs.subversion"
+2015-11-25T18:27:49: Analyzing "pip.vcs"
+2015-11-25T18:27:49: Analyzing "pip._vendor.ipaddress"
+2015-11-25T18:27:49: Analyzing "pip._vendor.retrying"
+2015-11-25T18:27:49: Analyzing "pip._vendor.six"
+2015-11-25T18:27:49: Analyzing "pip._vendor"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.adapter"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.cache"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.compat"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.controller"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.filewrapper"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.heuristics"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.serialize"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.wrapper"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.caches.file_cache"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.caches.redis_cache"
+2015-11-25T18:27:49: Analyzing "pip._vendor.cachecontrol.caches"
+2015-11-25T18:27:49: Analyzing "pip._vendor.colorama.ansi"
+2015-11-25T18:27:49: Analyzing "pip._vendor.colorama.ansitowin32"
+2015-11-25T18:27:49: Analyzing "pip._vendor.colorama.initialise"
+2015-11-25T18:27:49: Analyzing "pip._vendor.colorama.win32"
+2015-11-25T18:27:49: Analyzing "pip._vendor.colorama.winterm"
+2015-11-25T18:27:49: Analyzing "pip._vendor.colorama"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.compat"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.database"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.index"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.locators"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.manifest"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.markers"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.metadata"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.resources"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.scripts"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.util"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.version"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib.wheel"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib._backport.misc"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib._backport.shutil"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib._backport.sysconfig"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib._backport.tarfile"
+2015-11-25T18:27:49: Analyzing "pip._vendor.distlib._backport"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.constants"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.html5parser"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.ihatexml"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.inputstream"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.sanitizer"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.tokenizer"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.utils"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.filters.alphabeticalattributes"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.filters.inject_meta_charset"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.filters.lint"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.filters.optionaltags"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.filters.sanitizer"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.filters.whitespace"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.filters._base"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.filters"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.serializer.htmlserializer"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.serializer"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treeadapters.sax"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treeadapters"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treebuilders.dom"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treebuilders.etree"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treebuilders.etree_lxml"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treebuilders._base"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treebuilders"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treewalkers.dom"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treewalkers.etree"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treewalkers.genshistream"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treewalkers.lxmletree"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treewalkers.pulldom"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treewalkers._base"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.treewalkers"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.trie.datrie"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.trie.py"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.trie._base"
+2015-11-25T18:27:49: Analyzing "pip._vendor.html5lib.trie"
+2015-11-25T18:27:49: Analyzing "pip._vendor.lockfile.linklockfile"
+2015-11-25T18:27:49: Analyzing "pip._vendor.lockfile.mkdirlockfile"
+2015-11-25T18:27:49: Analyzing "pip._vendor.lockfile.pidlockfile"
+2015-11-25T18:27:49: Analyzing "pip._vendor.lockfile.sqlitelockfile"
+2015-11-25T18:27:49: Analyzing "pip._vendor.lockfile.symlinklockfile"
+2015-11-25T18:27:49: Analyzing "pip._vendor.lockfile"
+2015-11-25T18:27:49: Analyzing "pip._vendor.packaging.specifiers"
+2015-11-25T18:27:49: Analyzing "pip._vendor.packaging.version"
+2015-11-25T18:27:49: Analyzing "pip._vendor.packaging._compat"
+2015-11-25T18:27:49: Analyzing "pip._vendor.packaging._structures"
+2015-11-25T18:27:49: Analyzing "pip._vendor.packaging.__about__"
+2015-11-25T18:27:49: Analyzing "pip._vendor.packaging"
+2015-11-25T18:27:49: Analyzing "pip._vendor.pkg_resources"
+2015-11-25T18:27:49: Analyzing "pip._vendor.progress.bar"
+2015-11-25T18:27:49: Analyzing "pip._vendor.progress.counter"
+2015-11-25T18:27:49: Analyzing "pip._vendor.progress.helpers"
+2015-11-25T18:27:49: Analyzing "pip._vendor.progress.spinner"
+2015-11-25T18:27:49: Analyzing "pip._vendor.progress"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.adapters"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.api"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.auth"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.certs"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.compat"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.cookies"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.exceptions"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.hooks"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.models"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.sessions"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.status_codes"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.structures"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests.utils"
+2015-11-25T18:27:49: Analyzing "pip._vendor.requests"
+2015-11-25T18:27:49: Analyzing "pip._vendor._markerlib.markers"
+2015-11-25T18:27:49: Analyzing "pip._vendor._markerlib"
+2015-11-25T18:27:49: Starting analysis of 156 modules
+2015-11-25T18:27:53: Analysis complete
+2015-11-25T18:27:53: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip"
+2015-11-25T18:27:55: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pip"
+2015-11-25T18:27:55: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources" with 8 files
+2015-11-25T18:27:55: Parsing "pkg_resources" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources\__init__.py")
+2015-11-25T18:27:55: Parsing "pkg_resources._vendor" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources\_vendor\__init__.py")
+2015-11-25T18:27:55: Parsing "pkg_resources._vendor.packaging.specifiers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources\_vendor\packaging\specifiers.py")
+2015-11-25T18:27:55: Parsing "pkg_resources._vendor.packaging.version" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources\_vendor\packaging\version.py")
+2015-11-25T18:27:55: Parsing "pkg_resources._vendor.packaging._compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources\_vendor\packaging\_compat.py")
+2015-11-25T18:27:55: Parsing "pkg_resources._vendor.packaging._structures" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources\_vendor\packaging\_structures.py")
+2015-11-25T18:27:55: Parsing "pkg_resources._vendor.packaging.__about__" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources\_vendor\packaging\__about__.py")
+2015-11-25T18:27:55: Parsing "pkg_resources._vendor.packaging" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources\_vendor\packaging\__init__.py")
+2015-11-25T18:27:55: Parsing complete
+2015-11-25T18:27:55: Analyzing "pkg_resources"
+2015-11-25T18:27:55: Analyzing "pkg_resources._vendor"
+2015-11-25T18:27:55: Analyzing "pkg_resources._vendor.packaging.specifiers"
+2015-11-25T18:27:55: Analyzing "pkg_resources._vendor.packaging.version"
+2015-11-25T18:27:55: Analyzing "pkg_resources._vendor.packaging._compat"
+2015-11-25T18:27:55: Analyzing "pkg_resources._vendor.packaging._structures"
+2015-11-25T18:27:55: Analyzing "pkg_resources._vendor.packaging.__about__"
+2015-11-25T18:27:55: Analyzing "pkg_resources._vendor.packaging"
+2015-11-25T18:27:55: Starting analysis of 8 modules
+2015-11-25T18:27:56: Analysis complete
+2015-11-25T18:27:56: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources"
+2015-11-25T18:27:56: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pkg_resources"
+2015-11-25T18:27:56: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz" with 6 files
+2015-11-25T18:27:56: Parsing "pytz.exceptions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz\exceptions.py")
+2015-11-25T18:27:56: Parsing "pytz.lazy" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz\lazy.py")
+2015-11-25T18:27:56: Parsing "pytz.reference" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz\reference.py")
+2015-11-25T18:27:56: Parsing "pytz.tzfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz\tzfile.py")
+2015-11-25T18:27:56: Parsing "pytz.tzinfo" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz\tzinfo.py")
+2015-11-25T18:27:56: Parsing "pytz" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz\__init__.py")
+2015-11-25T18:27:56: Parsing complete
+2015-11-25T18:27:56: Analyzing "pytz.exceptions"
+2015-11-25T18:27:56: Analyzing "pytz.lazy"
+2015-11-25T18:27:56: Analyzing "pytz.reference"
+2015-11-25T18:27:56: Analyzing "pytz.tzfile"
+2015-11-25T18:27:56: Analyzing "pytz.tzinfo"
+2015-11-25T18:27:56: Analyzing "pytz"
+2015-11-25T18:27:56: Starting analysis of 6 modules
+2015-11-25T18:27:58: Analysis complete
+2015-11-25T18:27:58: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz"
+2015-11-25T18:27:58: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\pytz"
+2015-11-25T18:27:58: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools" with 39 files
+2015-11-25T18:27:59: Parsing "setuptools.archive_util" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\archive_util.py")
+2015-11-25T18:27:59: Parsing "setuptools.compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\compat.py")
+2015-11-25T18:27:59: Parsing "setuptools.depends" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\depends.py")
+2015-11-25T18:27:59: Parsing "setuptools.dist" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\dist.py")
+2015-11-25T18:27:59: Parsing "setuptools.extension" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\extension.py")
+2015-11-25T18:27:59: Parsing "setuptools.lib2to3_ex" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\lib2to3_ex.py")
+2015-11-25T18:27:59: Parsing "setuptools.msvc9_support" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\msvc9_support.py")
+2015-11-25T18:27:59: Parsing "setuptools.package_index" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\package_index.py")
+2015-11-25T18:27:59: Parsing "setuptools.py26compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\py26compat.py")
+2015-11-25T18:27:59: Parsing "setuptools.py27compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\py27compat.py")
+2015-11-25T18:27:59: Parsing "setuptools.py31compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\py31compat.py")
+2015-11-25T18:27:59: Parsing "setuptools.sandbox" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\sandbox.py")
+2015-11-25T18:27:59: Parsing "setuptools.ssl_support" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\ssl_support.py")
+2015-11-25T18:27:59: Parsing "setuptools.unicode_utils" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\unicode_utils.py")
+2015-11-25T18:27:59: Parsing "setuptools.utils" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\utils.py")
+2015-11-25T18:27:59: Parsing "setuptools.version" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\version.py")
+2015-11-25T18:27:59: Parsing "setuptools.windows_support" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\windows_support.py")
+2015-11-25T18:27:59: Parsing "setuptools" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\__init__.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.alias" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\alias.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.bdist_egg" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\bdist_egg.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.bdist_rpm" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\bdist_rpm.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.bdist_wininst" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\bdist_wininst.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.build_ext" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\build_ext.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.build_py" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\build_py.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.develop" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\develop.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.easy_install" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\easy_install.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.egg_info" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\egg_info.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.install" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\install.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.install_egg_info" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\install_egg_info.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.install_lib" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\install_lib.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.install_scripts" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\install_scripts.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.register" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\register.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.rotate" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\rotate.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.saveopts" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\saveopts.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.sdist" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\sdist.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.setopt" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\setopt.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.test" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\test.py")
+2015-11-25T18:27:59: Parsing "setuptools.command.upload_docs" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\upload_docs.py")
+2015-11-25T18:27:59: Parsing "setuptools.command" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools\command\__init__.py")
+2015-11-25T18:27:59: Parsing complete
+2015-11-25T18:27:59: Analyzing "setuptools.archive_util"
+2015-11-25T18:27:59: Analyzing "setuptools.compat"
+2015-11-25T18:27:59: Analyzing "setuptools.depends"
+2015-11-25T18:27:59: Analyzing "setuptools.dist"
+2015-11-25T18:27:59: Analyzing "setuptools.extension"
+2015-11-25T18:27:59: Analyzing "setuptools.lib2to3_ex"
+2015-11-25T18:27:59: Analyzing "setuptools.msvc9_support"
+2015-11-25T18:27:59: Analyzing "setuptools.package_index"
+2015-11-25T18:27:59: Analyzing "setuptools.py26compat"
+2015-11-25T18:27:59: Analyzing "setuptools.py27compat"
+2015-11-25T18:27:59: Analyzing "setuptools.py31compat"
+2015-11-25T18:27:59: Analyzing "setuptools.sandbox"
+2015-11-25T18:27:59: Analyzing "setuptools.ssl_support"
+2015-11-25T18:27:59: Analyzing "setuptools.unicode_utils"
+2015-11-25T18:27:59: Analyzing "setuptools.utils"
+2015-11-25T18:27:59: Analyzing "setuptools.version"
+2015-11-25T18:27:59: Analyzing "setuptools.windows_support"
+2015-11-25T18:27:59: Analyzing "setuptools"
+2015-11-25T18:27:59: Analyzing "setuptools.command.alias"
+2015-11-25T18:27:59: Analyzing "setuptools.command.bdist_egg"
+2015-11-25T18:27:59: Analyzing "setuptools.command.bdist_rpm"
+2015-11-25T18:27:59: Analyzing "setuptools.command.bdist_wininst"
+2015-11-25T18:27:59: Analyzing "setuptools.command.build_ext"
+2015-11-25T18:27:59: Analyzing "setuptools.command.build_py"
+2015-11-25T18:27:59: Analyzing "setuptools.command.develop"
+2015-11-25T18:27:59: Analyzing "setuptools.command.easy_install"
+2015-11-25T18:27:59: Analyzing "setuptools.command.egg_info"
+2015-11-25T18:27:59: Analyzing "setuptools.command.install"
+2015-11-25T18:27:59: Analyzing "setuptools.command.install_egg_info"
+2015-11-25T18:27:59: Analyzing "setuptools.command.install_lib"
+2015-11-25T18:27:59: Analyzing "setuptools.command.install_scripts"
+2015-11-25T18:27:59: Analyzing "setuptools.command.register"
+2015-11-25T18:27:59: Analyzing "setuptools.command.rotate"
+2015-11-25T18:27:59: Analyzing "setuptools.command.saveopts"
+2015-11-25T18:27:59: Analyzing "setuptools.command.sdist"
+2015-11-25T18:27:59: Analyzing "setuptools.command.setopt"
+2015-11-25T18:27:59: Analyzing "setuptools.command.test"
+2015-11-25T18:27:59: Analyzing "setuptools.command.upload_docs"
+2015-11-25T18:27:59: Analyzing "setuptools.command"
+2015-11-25T18:27:59: Starting analysis of 39 modules
+2015-11-25T18:28:01: Analysis complete
+2015-11-25T18:28:01: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools"
+2015-11-25T18:28:01: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\setuptools"
+2015-11-25T18:28:01: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug" with 35 files
+2015-11-25T18:28:01: Parsing "werkzeug.datastructures" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\datastructures.py")
+2015-11-25T18:28:01: Parsing "werkzeug.exceptions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\exceptions.py")
+2015-11-25T18:28:01: Parsing "werkzeug.filesystem" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\filesystem.py")
+2015-11-25T18:28:02: Parsing "werkzeug.formparser" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\formparser.py")
+2015-11-25T18:28:02: Parsing "werkzeug.http" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\http.py")
+2015-11-25T18:28:02: Parsing "werkzeug.local" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\local.py")
+2015-11-25T18:28:02: Parsing "werkzeug.posixemulation" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\posixemulation.py")
+2015-11-25T18:28:02: Parsing "werkzeug.routing" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\routing.py")
+2015-11-25T18:28:02: Parsing "werkzeug.script" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\script.py")
+2015-11-25T18:28:02: Parsing "werkzeug.security" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\security.py")
+2015-11-25T18:28:02: Parsing "werkzeug.serving" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\serving.py")
+2015-11-25T18:28:02: Parsing "werkzeug.test" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\test.py")
+2015-11-25T18:28:02: Parsing "werkzeug.testapp" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\testapp.py")
+2015-11-25T18:28:02: Parsing "werkzeug.urls" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\urls.py")
+2015-11-25T18:28:02: Parsing "werkzeug.useragents" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\useragents.py")
+2015-11-25T18:28:02: Parsing "werkzeug.utils" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\utils.py")
+2015-11-25T18:28:02: Parsing "werkzeug.wrappers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\wrappers.py")
+2015-11-25T18:28:02: Parsing "werkzeug.wsgi" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\wsgi.py")
+2015-11-25T18:28:02: Parsing "werkzeug._compat" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\_compat.py")
+2015-11-25T18:28:02: Parsing "werkzeug._internal" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\_internal.py")
+2015-11-25T18:28:02: Parsing "werkzeug._reloader" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\_reloader.py")
+2015-11-25T18:28:02: Parsing "werkzeug" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\__init__.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.atom" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\atom.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.cache" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\cache.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.fixers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\fixers.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.iterio" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\iterio.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.jsrouting" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\jsrouting.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.limiter" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\limiter.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.lint" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\lint.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.profiler" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\profiler.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.securecookie" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\securecookie.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.sessions" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\sessions.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.testtools" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\testtools.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib.wrappers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\wrappers.py")
+2015-11-25T18:28:02: Parsing "werkzeug.contrib" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug\contrib\__init__.py")
+2015-11-25T18:28:02: Parsing complete
+2015-11-25T18:28:02: Analyzing "werkzeug.datastructures"
+2015-11-25T18:28:02: Analyzing "werkzeug.exceptions"
+2015-11-25T18:28:02: Analyzing "werkzeug.filesystem"
+2015-11-25T18:28:02: Analyzing "werkzeug.formparser"
+2015-11-25T18:28:02: Analyzing "werkzeug.http"
+2015-11-25T18:28:02: Analyzing "werkzeug.local"
+2015-11-25T18:28:02: Analyzing "werkzeug.posixemulation"
+2015-11-25T18:28:02: Analyzing "werkzeug.routing"
+2015-11-25T18:28:02: Analyzing "werkzeug.script"
+2015-11-25T18:28:02: Analyzing "werkzeug.security"
+2015-11-25T18:28:02: Analyzing "werkzeug.serving"
+2015-11-25T18:28:02: Analyzing "werkzeug.test"
+2015-11-25T18:28:02: Analyzing "werkzeug.testapp"
+2015-11-25T18:28:02: Analyzing "werkzeug.urls"
+2015-11-25T18:28:02: Analyzing "werkzeug.useragents"
+2015-11-25T18:28:02: Analyzing "werkzeug.utils"
+2015-11-25T18:28:02: Analyzing "werkzeug.wrappers"
+2015-11-25T18:28:02: Analyzing "werkzeug.wsgi"
+2015-11-25T18:28:02: Analyzing "werkzeug._compat"
+2015-11-25T18:28:02: Analyzing "werkzeug._internal"
+2015-11-25T18:28:02: Analyzing "werkzeug._reloader"
+2015-11-25T18:28:02: Analyzing "werkzeug"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.atom"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.cache"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.fixers"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.iterio"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.jsrouting"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.limiter"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.lint"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.profiler"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.securecookie"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.sessions"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.testtools"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib.wrappers"
+2015-11-25T18:28:02: Analyzing "werkzeug.contrib"
+2015-11-25T18:28:02: Starting analysis of 35 modules
+2015-11-25T18:28:05: Analysis complete
+2015-11-25T18:28:05: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug"
+2015-11-25T18:28:05: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\werkzeug"
+2015-11-25T18:28:05: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel" with 28 files
+2015-11-25T18:28:05: Parsing "wheel.archive" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\archive.py")
+2015-11-25T18:28:05: Parsing "wheel.bdist_wheel" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\bdist_wheel.py")
+2015-11-25T18:28:05: Parsing "wheel.decorator" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\decorator.py")
+2015-11-25T18:28:05: Parsing "wheel.egg2wheel" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\egg2wheel.py")
+2015-11-25T18:28:05: Parsing "wheel.install" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\install.py")
+2015-11-25T18:28:05: Parsing "wheel.metadata" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\metadata.py")
+2015-11-25T18:28:05: Parsing "wheel.paths" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\paths.py")
+2015-11-25T18:28:05: Parsing "wheel.pep425tags" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\pep425tags.py")
+2015-11-25T18:28:05: Parsing "wheel.pkginfo" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\pkginfo.py")
+2015-11-25T18:28:05: Parsing "wheel.util" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\util.py")
+2015-11-25T18:28:05: Parsing "wheel.wininst2wheel" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\wininst2wheel.py")
+2015-11-25T18:28:05: Parsing "wheel" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\__init__.py")
+2015-11-25T18:28:05: Parsing "wheel.__main__" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\__main__.py")
+2015-11-25T18:28:05: Parsing "wheel.signatures.djbec" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\signatures\djbec.py")
+2015-11-25T18:28:05: Parsing "wheel.signatures.ed25519py" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\signatures\ed25519py.py")
+2015-11-25T18:28:05: Parsing "wheel.signatures.keys" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\signatures\keys.py")
+2015-11-25T18:28:05: Parsing "wheel.signatures" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\signatures\__init__.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_basic" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_basic.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_install" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_install.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_keys" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_keys.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_paths" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_paths.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_ranking" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_ranking.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_signatures" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_signatures.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_tagopt" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_tagopt.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_tool" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_tool.py")
+2015-11-25T18:28:05: Parsing "wheel.test.test_wheelfile" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\test_wheelfile.py")
+2015-11-25T18:28:05: Parsing "wheel.test" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\test\__init__.py")
+2015-11-25T18:28:05: Parsing "wheel.tool" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel\tool\__init__.py")
+2015-11-25T18:28:05: Parsing complete
+2015-11-25T18:28:05: Analyzing "wheel.archive"
+2015-11-25T18:28:05: Analyzing "wheel.bdist_wheel"
+2015-11-25T18:28:05: Analyzing "wheel.decorator"
+2015-11-25T18:28:05: Analyzing "wheel.egg2wheel"
+2015-11-25T18:28:05: Analyzing "wheel.install"
+2015-11-25T18:28:05: Analyzing "wheel.metadata"
+2015-11-25T18:28:05: Analyzing "wheel.paths"
+2015-11-25T18:28:05: Analyzing "wheel.pep425tags"
+2015-11-25T18:28:05: Analyzing "wheel.pkginfo"
+2015-11-25T18:28:05: Analyzing "wheel.util"
+2015-11-25T18:28:05: Analyzing "wheel.wininst2wheel"
+2015-11-25T18:28:05: Analyzing "wheel"
+2015-11-25T18:28:05: Analyzing "wheel.__main__"
+2015-11-25T18:28:05: Analyzing "wheel.signatures.djbec"
+2015-11-25T18:28:05: Analyzing "wheel.signatures.ed25519py"
+2015-11-25T18:28:05: Analyzing "wheel.signatures.keys"
+2015-11-25T18:28:05: Analyzing "wheel.signatures"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_basic"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_install"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_keys"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_paths"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_ranking"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_signatures"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_tagopt"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_tool"
+2015-11-25T18:28:05: Analyzing "wheel.test.test_wheelfile"
+2015-11-25T18:28:05: Analyzing "wheel.test"
+2015-11-25T18:28:05: Analyzing "wheel.tool"
+2015-11-25T18:28:05: Starting analysis of 28 modules
+2015-11-25T18:28:07: Analysis complete
+2015-11-25T18:28:07: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel"
+2015-11-25T18:28:07: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\wheel"
+2015-11-25T18:28:07: Start group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\_markerlib" with 2 files
+2015-11-25T18:28:07: Parsing "_markerlib.markers" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\_markerlib\markers.py")
+2015-11-25T18:28:07: Parsing "_markerlib" ("C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\_markerlib\__init__.py")
+2015-11-25T18:28:07: Parsing complete
+2015-11-25T18:28:07: Analyzing "_markerlib.markers"
+2015-11-25T18:28:07: Analyzing "_markerlib"
+2015-11-25T18:28:07: Starting analysis of 2 modules
+2015-11-25T18:28:09: Analysis complete
+2015-11-25T18:28:09: Saving group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\_markerlib"
+2015-11-25T18:28:09: End of group "C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env\Lib\site-packages\_markerlib"
+2015-11-25T18:28:10: Deleting 0 files
