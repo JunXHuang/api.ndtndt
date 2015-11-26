@@ -121,14 +121,17 @@ class AuctionAll(Resource):
                             p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg,pp.personimg for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
-            print(rows)
             if(rows):
                 row=str(rows)
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
-                r['root']['row']['itemimg'] = str(r['root']['row']['itemimg']).replace("',), ('", "")
-                r['root']['row']['personimg'] = str(r['root']['row']['personimg']).replace("',), ('", "")
-                return([r['root']['row']])
+                for item in r['root']['row']:
+                    item['itemimg'] = str(item['itemimg']).replace("',), ('", "")
+                    item['personimg'] = str(item['personimg']).replace("',), ('", "")
+                if (len(r['root']['row']) == 1):
+                    return([r['root']['row']])
+                else:
+                    return(r['root']['row'])
             else:
                 return jsonify({'id': 'is not found'})
         except Exception as e:
