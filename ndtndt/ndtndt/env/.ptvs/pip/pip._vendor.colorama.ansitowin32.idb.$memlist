@@ -1,11 +1,10 @@
 WinColor
-windll
+AnsiToWin32
 WinTerm
-os
+windll
 Style
 winterm
 sys
-AnsiToWin32
 is_a_tty
 AnsiStyle
 AnsiBack

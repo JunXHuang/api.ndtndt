@@ -3,10 +3,9 @@ escape
 unquote
 KeysView
 ChainMap
-cookie_re
+BaseConfigurator
 queue
 filterfalse
-_dnsname_match
 HTTPRedirectHandler
 httplib
 urlopen
@@ -22,6 +21,7 @@ _fsencoding
 OrderedDict
 os
 re
+_dnsname_to_pat
 Request
 xmlrpclib
 callable
@@ -44,7 +44,7 @@ CertificateError
 BOM_UTF8
 ContentTooShortError
 valid_ident
-BaseConfigurator
+cookie_re
 HTTPHandler
 url2pathname
 _quote

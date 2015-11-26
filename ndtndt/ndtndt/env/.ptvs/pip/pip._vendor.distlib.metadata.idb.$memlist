@@ -14,8 +14,9 @@ MetadataInvalidError
 _426_MARKERS
 _version2fieldlist
 _PREDICATE_FIELDS
+get_scheme
 MetadataConflictError
-_345_FIELDS
+_314_MARKERS
 interpret
 Metadata
 METADATA_FILENAME
@@ -37,11 +38,10 @@ EXTRA_RE
 logging
 _FILESAFE
 _LINE_PREFIX
-_314_MARKERS
-get_scheme
+PEP426_VERSION_RE
+_345_FIELDS
 DistlibException
 PKG_INFO_ENCODING
-PEP440_VERSION_RE
 _241_FIELDS
 get_extras
 __version__

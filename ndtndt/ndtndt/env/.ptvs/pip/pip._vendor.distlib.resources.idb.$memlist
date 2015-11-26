@@ -1,7 +1,6 @@
 sys
 ResourceContainer
 unicode_literals
-ResourceCache
 types
 _dummy_module
 get_cache_base

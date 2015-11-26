@@ -1,13 +1,10 @@
 distutils
 get_abbr_impl
-absolute_import
-get_platform
+supported_tags
 sys
 warnings
-_osx_arch_pat
+sysconfig
 supported_tags_noarch
-supported_tags
 get_supported
 get_impl_ver
-re
-sysconfig
+get_platform

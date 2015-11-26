@@ -3,10 +3,12 @@ moduleFactoryFactory
 weakref
 absolute_import
 unicode_literals
+getDomBuilder
 constants
 division
-getDomModule
+XML_NAMESPACE
 minidom
 _base
-getDomBuilder
+getDomModule
 namespaces
+XMLNS_NAMESPACE

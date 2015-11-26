@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=C:\Users\nazim\Documents\GitHubVisualStudio\api.ndtndt\ndtndt\ndtndt\env"
+set "VIRTUAL_ENV=C:\Users\nazim\Documents\GitHub\api.ndtndt\ndtndt\ndtndt\env"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"

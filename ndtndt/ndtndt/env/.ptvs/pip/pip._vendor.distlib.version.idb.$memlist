@@ -1,7 +1,7 @@
+SemanticMatcher
 LegacyMatcher
 UnsupportedVersionError
-PEP440_VERSION_RE
-_pep_440_key
+_normalized_key
 Version
 _REPLACEMENTS
 _NUMERIC_PREFIX
@@ -15,15 +15,15 @@ _suggest_semantic_version
 _suggest_normalized_version
 NormalizedVersion
 SemanticVersion
-SemanticMatcher
 __all__
 logging
 _match_prefix
-_normalized_key
+PEP426_VERSION_RE
 _VERSION_PART
 _SEMVER_RE
 _SCHEMES
 get_scheme
+_pep426_key
 LegacyVersion
 Matcher
 NormalizedMatcher

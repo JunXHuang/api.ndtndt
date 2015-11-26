@@ -8,8 +8,12 @@ from flask_httpauth import HTTPBasicAuth
 import json, xmltodict
 from binascii import *
 from ndtndt import app, dbconnection
+from flask_cors import CORS
+
 api = Api(app)
 auth = HTTPBasicAuth()
+
+CORS(app)
 
 # dummy, just to see that it works
 @app.route('/')
@@ -69,7 +73,6 @@ class CreateAuction(Resource):
             dbcursor.commit()
             return jsonify({'Status':'Success'})
         except Exception as e:
-            print (e)
             return jsonify({'error': e})
     def get(self):
         try:

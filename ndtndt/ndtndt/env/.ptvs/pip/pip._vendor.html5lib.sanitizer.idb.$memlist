@@ -1,12 +1,10 @@
 HTMLSanitizer
-urlparse
-content_type_rgx
 absolute_import
 unicode_literals
 tokenTypes
-division
+HTMLTokenizer
 unescape
 escape
 HTMLSanitizerMixin
 re
-HTMLTokenizer
+division

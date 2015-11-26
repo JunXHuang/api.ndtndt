@@ -1,10 +1,9 @@
 reinit
 ansitowin32
-__version__
 Back
 Fore
 winterm
-Cursor
+VERSION
 init
 ansi
 Style

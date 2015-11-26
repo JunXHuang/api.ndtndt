@@ -3,8 +3,8 @@ os
 convert_path
 build_py
 assert_relative
+_build_py
 textwrap
 glob
-orig
 sys
 fnmatch

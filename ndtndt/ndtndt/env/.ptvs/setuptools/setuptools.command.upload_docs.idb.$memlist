@@ -6,7 +6,7 @@ httplib
 b
 urlparse
 os
-zipfile
+socket
 upload_docs
 iter_entry_points
 upload
@@ -15,5 +15,5 @@ errors
 log
 shutil
 standard_b64encode
-socket
+zipfile
 DistutilsOptionError

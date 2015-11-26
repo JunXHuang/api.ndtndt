@@ -1,15 +1,15 @@
 sys
 PY_COMPILED
-compat
 PKG_DIRECTORY
 imp
 PY_SOURCE
+LooseVersion
 __all__
-_update_globals
 Require
 extract_constant
 marshal
 StrictVersion
+generators
 _iter_code
 get_module_constant
 find_module
