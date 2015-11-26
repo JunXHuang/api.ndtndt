@@ -427,16 +427,28 @@ class Login(Resource):
             # checking if the user login is an employee
             sqlcommand=('select MagLevel from Employee where EmployeeID=? for xml path')
             dbcursor.execute(sqlcommand,(inputData['ssn'],))
-            # return success if the user is not employee
+            # return userdata
             if dbcursor.rowcount == 0:
-                return jsonify({'status': 'success'})
+                sqlcommand=('''select c.customerid,p.lastname,p.firstname,p.address,p.city, 
+                               p.state,p.zipcode,p.telephone,p.email,p.personimg,c.rating 
+                               from customer c inner join person p on c.customerid=p.ssn 
+                               where customerid=? for xml path''')
+            #return employeedata
+            else:
+                sqlcommand=('''select e.employeeid,e.maglevel,p.lastname,p.firstname, 
+                                p.address,p.city,p.state,p.zipcode,p.telephone, 
+                                p.personimg from employee e inner join person p on e.employeeid=p.ssn 
+                                where e.employeeid=? for xml path''')
+
+            dbcursor.execute(sqlcommand,(inputData['ssn'],))
             rows=dbcursor.fetchall()
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            # returning employee base on maglevel. 1 = manager and 2 = customer rep
+            r['root']['row']['personimg'] = str(r['root']['row']['personimg']).replace("',), ('", "")
             return(r['root']['row'])
         except Exception as e:
+            print (e)
             return jsonify({'failed - error': e})
 
 
