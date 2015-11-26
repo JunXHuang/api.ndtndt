@@ -47,7 +47,6 @@ class TopSellerCategory(Resource):
         pass
 
 # the post request on this item will be called when we need to post an item.
-# get with id will return the item associated with the auction[id]
 
 class CreateAuction(Resource):
     def __init__(self):
@@ -74,26 +73,7 @@ class CreateAuction(Resource):
             return jsonify({'Status':'Success'})
         except Exception as e:
             return jsonify({'error': e})
-    def get(self):
-        try:
-            dbcursor = dbconnection.cursor()
-            sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
-                         'a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, '
-                         'p.expiredates from auction a,item i,post p '
-                         'where i.itemname=a.itemname and p.itemname=i.itemname and a.auctionid=1 for xml path')
-            dbcursor.execute (sqlcommand)
-            rows=dbcursor.fetchall()
-            print(rows)
-            if(rows):
-                row=str(rows)
-                row="<root>"+row[3:-4]+"</root>"
-                r=xmltodict.parse(row)
-                return(r['root']['row'])
-            else:
-                return jsonify({'id': id + ' - is not found'})
-        except Exception as e:
-            print(e)
-            return jsonify({'error': e})
+    
 # Returns information for one item given auctionID
 class Auction(Resource):
     def post():
@@ -101,16 +81,15 @@ class Auction(Resource):
     def get(self, id):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
-                        'a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, '
-                        'p.expiredates,pp.firstname,pp.lastname,i.itemimg, count(b.auctionid) as TotalBidders '
-                        'from auction a inner join item i on i.itemname=a.itemname '
-                        'inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid '
-                        'inner join bid b on b.auctionid=a.auctionid '
-                        'where a.auctionid=? '
-                        'group by a.auctionid,i.itemname,a.openbid,a.bidincrement, '
-                        'a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, '
-                        'p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg for xml path')
+            sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
+                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, 
+                            p.expiredates,pp.firstname,pp.lastname,i.itemimg, count(b.auctionid) as TotalBidders 
+                            from auction a inner join item i on i.itemname=a.itemname 
+                            inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid 
+                            left join bid b on b.auctionid=a.auctionid where a.auctionid=? 
+                            group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
+                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, 
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg for xml path''')
             dbcursor.execute (sqlcommand,(str(id),))
             rows=dbcursor.fetchall()
             #print(rows)
@@ -131,15 +110,18 @@ class Auction(Resource):
             return jsonify({'error': e})
 
 class AuctionAll(Resource):
-    def post():
-        pass
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
-                         'a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, '
-                         'p.expiredates from auction a,item i,post p '
-                         'where i.itemname=a.itemname and p.itemname=i.itemname and a.auctionid=p.auctionid for xml path')
+            sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
+                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, 
+                            p.expiredates,pp.firstname,pp.lastname,i.itemimg, count(b.auctionid) as TotalBidders 
+                            from auction a inner join item i on i.itemname=a.itemname 
+                            inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid 
+                            left join bid b on b.auctionid=a.auctionid
+                            group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
+                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, 
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             print(rows)
@@ -155,30 +137,6 @@ class AuctionAll(Resource):
             return jsonify({'error': e})
 
 
-"""
-returns all the auction
-class Auction(Resource):
-    def get(self):
-        try:
-            dbcursor = dbconnection.cursor()
-            sqlcommand =('select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
-                         'a.sellerid, i.itemname,i.itemtype, i.yearmanufactured, p.postdate, '
-                         'p.expiredates from auction a,item i,post p '
-                         'where i.itemname=a.itemname and p.itemname=i.itemname and a.sold=0 '
-                         'group by a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, '
-                         'a.sellerid, i.itemname,i.itemtype, i.yearmanufactured, p.postdate, '
-                         'p.expiredates '
-                         'order by a.currentBid desc for xml path')
-            dbcursor.execute (sqlcommand)
-            rows=dbcursor.fetchall()
-            row=str(rows)
-            row="<root>"+row[3:-4]+"</root>"
-            
-            r=xmltodict.parse(row)
-            return(r['root']['row'])
-        except Exception as e:
-            print(e)
-"""
 class StaffPicks(Resource):
     def __init__(self):
         pass
