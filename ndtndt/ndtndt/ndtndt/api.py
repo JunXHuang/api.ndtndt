@@ -130,9 +130,9 @@ class AuctionAll(Resource):
                 row=str(rows)
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
-                return(r['root']['row'])
+                return([r['root']['row']])
             else:
-                return jsonify({'id': id + ' - is not found'})
+                return jsonify({'id': 'is not found'})
         except Exception as e:
             print(e)
             return jsonify({'error': e})
