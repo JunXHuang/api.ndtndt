@@ -1,4 +1,4 @@
-"""
+﻿"""
 This script runs the ndtndt application using a development server.
 """
 
