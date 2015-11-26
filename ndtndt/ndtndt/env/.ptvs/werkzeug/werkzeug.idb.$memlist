@@ -29,7 +29,6 @@ contrib
 posixemulation
 new_module
 useragents
-debug
 iteritems
 __version__
 attribute_modules

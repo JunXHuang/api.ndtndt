@@ -98,11 +98,7 @@ class Auction(Resource):
                 row=str(rows)
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
-                #print(r['root']['row']['itemimg'])
-                f = open('ndtndt/temp.jpg','wb')
-                f.write(a2b_base64(r['root']['row']['itemimg']))
-                r['root']['row']['itemimg']='temp.jpg'
-
+                r['root']['row']['itemimg'] = str(r['root']['row']['itemimg']).replace("',), ('", "")
                 return(r['root']['row'])
             else:
                 return jsonify({'id': id + ' - is not found'})
@@ -116,13 +112,13 @@ class AuctionAll(Resource):
             dbcursor = dbconnection.cursor()
             sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
                             a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, 
-                            p.expiredates,pp.firstname,pp.lastname,i.itemimg, count(b.auctionid) as TotalBidders 
+                            p.expiredates,pp.firstname,pp.lastname,i.itemimg,pp.personimg, count(b.auctionid) as TotalBidders 
                             from auction a inner join item i on i.itemname=a.itemname 
                             inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid 
                             left join bid b on b.auctionid=a.auctionid
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
                             a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, 
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg for xml path''')
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg,pp.personimg for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             print(rows)
@@ -130,6 +126,8 @@ class AuctionAll(Resource):
                 row=str(rows)
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
+                r['root']['row']['itemimg'] = str(r['root']['row']['itemimg']).replace("',), ('", "")
+                r['root']['row']['personimg'] = str(r['root']['row']['personimg']).replace("',), ('", "")
                 return([r['root']['row']])
             else:
                 return jsonify({'id': 'is not found'})
@@ -394,13 +392,14 @@ class CreateUser(Resource):
         self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided',location='json')
         self.reqparse.add_argument('creditcardnum', type = str, required=True, help='no Credit Card Number provided',location='json')
         self.reqparse.add_argument('email', type = str, required=True, help='no E-mail provided',location='json')
+        self.reqparse.add_argument('personimg', type = str, required=True, help='no Imagine provided',location='json')
         super(CreateUser, self).__init__()
     def post(self):
         try:
             inputData = self.reqparse.parse_args()
             dbcursor = dbconnection.cursor()
-            sqlcommand1 =('INSERT INTO Person (SSN,LastName,FirstName,Address,City,State,ZipCode,Telephone,Email,UserPassword) VALUES(?,?,?,?,?,?,?,?,?,?)')
-            dbcursor.execute (sqlcommand1,(inputData['ssn'],inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword']))
+            sqlcommand1 =('INSERT INTO Person (SSN,LastName,FirstName,Address,City,State,ZipCode,Telephone,Email,UserPassword,personimg) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
+            dbcursor.execute (sqlcommand1,(inputData['ssn'],inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg']))
             sqlcommand2 =('INSERT INTO Customer (Rating,CreditCardNum,CustomerID) VALUES(1,?,?)')
             dbcursor.execute (sqlcommand2,(inputData['creditcardnum'],inputData['ssn']))
             dbcursor.commit()
@@ -434,6 +433,30 @@ class Login(Resource):
             r=xmltodict.parse(row)
             # returning employee base on maglevel. 1 = manager and 2 = customer rep
             return(r['root']['row'])
+        except Exception as e:
+            return jsonify({'failed - error': e})
+
+
+class Bidding(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('auctionid', type = str, required=True, help='no ID provided', location='json')
+        self.reqparse.add_argument('bidprice', type = str, required=True, help='no Password provided.', location='json')
+        self.reqparse.add_argument('customerid', type = str, required=True, help='no Password provided.', location='json')
+        super(Bidding, self).__init__()
+    def post(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('select currenthighbid,currentbid,bidincrement from auction where auctionid=? for xml path')
+            dbcursor.execute(sqlcommand,(inputData['auctionid'],))
+            rows=dbcursor.fetchall()
+            row=str(rows)
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            r['root']['row']['currenthighbid']
+            r['root']['row']['currentbid']
+            r['root']['row']['bidincrement']
         except Exception as e:
             return jsonify({'failed - error': e})
 
