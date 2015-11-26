@@ -62,14 +62,14 @@ class CreateAuction(Resource):
         try:
             inputData = self.reqparse.parse_args()
             dbcursor = dbconnection.cursor()
-            sqlcommand1 =('INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,?)')
-            dbcursor.execute (sqlcommand1,(inputData['itemname'],inputData['category'],inputData['year'],inputData['instock']))
-            sqlcommand2 =('INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID) VALUES (?,?,?,?,?)')
-            dbcursor.execute (sqlcommand2,(inputData['openbid'],inputData['bidincrement'],inputData['reservePrice'],inputData['itemname'],inputData['sellerid']))
-            sqlcommand3 =('INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName) VALUES (?,GETDATE(),?,?)')
-            dbcursor.execute (sqlcommand3,(inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
+            sqlcommand =('''INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,?)
+                            INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID) VALUES (?,?,?,?,?)
+                            INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID) VALUES (?,GETDATE(),?,?,SCOPE_IDENTITY())''')
+            dbcursor.execute (sqlcommand,(inputData['itemname'],inputData['category'],inputData['year'],inputData['instock'],inputData['openbid'],inputData['bidincrement'],inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
             dbcursor.commit()
+            return jsonify({'Status':'Success'})
         except Exception as e:
+            print (e)
             return jsonify({'error': e})
     def get(self):
         try:
@@ -458,13 +458,13 @@ class Login(Resource):
             sqlcommand =('select * from person where ssn=? and userpassword=?')
             dbcursor.execute(sqlcommand,(inputData['ssn'],inputData['userpassword']))
             if dbcursor.rowcount == 0:
-                return jsonify({'failed': 'failed'})
+                return jsonify({'Status': 'failed'})
             # checking if the user login is an employee
             sqlcommand=('select MagLevel from Employee where EmployeeID=?')
             dbcursor.execute(sqlcommand,(inputData['ssn'],))
             # return success if the user is not employee
             if dbcursor.rowcount == 0:
-                return jsonify({'success': 'ok'})
+                return jsonify({'Status': 'success'})
             rows=dbcursor.fetchall()
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"
