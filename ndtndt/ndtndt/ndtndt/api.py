@@ -469,10 +469,28 @@ class Bidding(Resource):
             row=str(rows)
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            r['root']['row']['currenthighbid']
-            r['root']['row']['currentbid']
-            r['root']['row']['bidincrement']
+
+            currenthighbid=float(r['root']['row']['currenthighbid'])
+            currentbid=float(r['root']['row']['currentbid'])
+            bidincrement=float(r['root']['row']['bidincrement'])
+            bidprice=float(inputData['bidprice'])
+
+            if bidprice > (currenthighbid+bidincrement):
+                currentbid=currenthighbid+bidincrement
+                currenthighbid=bidprice
+            elif bidprice > (currentbid+bidincrement):
+                if (bidprice+bidincrement) > currenthighbid:
+                    currentbid=currenthighbid
+                else:
+                    currentbid=bidprice+bidincrement
+
+            sqlcommand =('insert into bid(customerid,auctionid,bidprice,biddate) values(?,?,?,getdate())')
+            dbcursor.execute(sqlcommand,(inputData['customerid'],inputData['auctionid'],inputData['bidprice']))
+            sqlcommand =('UPDATE auction SET currenthighbid=?,currentbid=? where auctionid=?')
+            dbcursor.execute(sqlcommand,(float(currenthighbid),float(currentbid),float(inputData['auctionid'])))
+            dbcursor.commit()
         except Exception as e:
+            print(e)
             return jsonify({'failed - error': e})
 
 api.add_resource(TopSellerCategory, '/topcategory')
@@ -491,3 +509,4 @@ api.add_resource(ItemSuggestions,'/itemsuggestions/<string:id>')
 api.add_resource(StaffRevenue,'/staffrevenue')
 api.add_resource(CreateUser,'/createuser')
 api.add_resource(Login,'/login')
+api.add_resource(Bidding,'/bidding')
