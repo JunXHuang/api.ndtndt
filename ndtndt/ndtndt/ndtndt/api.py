@@ -60,9 +60,8 @@ class TopSellerCategory(Resource):
                           'order by itemsold desc for xml path')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
-            
             r=xmltodict.parse(row)
             return(r['root']['row'])
         except Exception as e:
@@ -81,6 +80,7 @@ class CreateAuction(Resource):
         self.reqparse.add_argument('year', type = str, required=True, help='no YearManufactured provided', location='json')
         self.reqparse.add_argument('openbid', type = str, required=True, help='no OpenBid amount provided',location='json')
         self.reqparse.add_argument('reservePrice', type = str, required=True, help='no ReservePrice provided',location='json')
+        self.reqparse.add_argument('postdate', type = str, required=True, help='no PostDate provided',location='json')
         self.reqparse.add_argument('expiredate', type = str, required=True, help='no ExpireDates provided',location='json')
         self.reqparse.add_argument('itemimg', type = str, required=True, help='no Image provided',location='json')
         super(CreateAuction, self).__init__()
@@ -98,10 +98,10 @@ class CreateAuction(Resource):
 		                            set amountinstock=amountinstock+1
                                 END
                             INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID,currentbid) VALUES (?,?,?,?,?,?)
-                            INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID) VALUES (?,GETDATE(),?,?,SCOPE_IDENTITY())''')
+                            INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID) VALUES (?,?,?,?,SCOPE_IDENTITY())''')
             
             bidincrement=increment(float(inputData['openbid']))
-            dbcursor.execute (sqlcommand,(inputData['itemname'],inputData['category'],inputData['year'],inputData['itemimg'],inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
+            dbcursor.execute (sqlcommand,(inputData['itemname'],inputData['category'],inputData['year'],inputData['itemimg'],inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['postdate'],inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
             dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
@@ -128,14 +128,13 @@ class Auction(Resource):
             rows=dbcursor.fetchall()
             #print(rows)
             if(rows):
-                row=str(rows)
+                row = str(rows).replace("',), ('", "")
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
                 if float(r['root']['row']['reserveprice'])>0.0:
                     r['root']['row']['reserveprice']=True
                 else:
                     r['root']['row']['reserveprice']=False
-                r['root']['row']['itemimg'] = str(r['root']['row']['itemimg']).replace("',), ('", "")
                 return(r['root']['row'])
             else:
                 return jsonify({'id': id + ' - is not found'})
@@ -159,7 +158,7 @@ class AuctionAll(Resource):
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             if(rows):
-                row=str(rows)
+                row = str(rows).replace("',), ('", "")
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
                 for item in r['root']['row']:
@@ -167,12 +166,8 @@ class AuctionAll(Resource):
                         item['reserveprice']=True
                     else:
                         item['reserveprice']=False
-                    item['itemimg'] = str(item['itemimg']).replace("',), ('", "")
-                    item['personimg'] = str(item['personimg']).replace("',), ('", "")
-                if (len(r['root']['row']) == 1):
-                    return([r['root']['row']])
-                else:
-                    return(r['root']['row'])
+
+                return(r['root']['row'])
             else:
                 return jsonify({'id': 'is not found'})
         except Exception as e:
@@ -223,10 +218,9 @@ class StaffPicks(Resource):
                          for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            r['root']['row']['itemimg'] = str(r['root']['row']['itemimg']).replace("',), ('", "")
             return(r['root']['row'])
         except Exception as e:
             print(e)
@@ -245,7 +239,7 @@ class SalesReport(Resource):
                          for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
@@ -264,7 +258,7 @@ class BestItemList(Resource):
                          for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
@@ -279,9 +273,9 @@ class AuctionHistory(Resource):
         try:
             dbcursor = dbconnection.cursor()
             sqlcommand =('''select * from 
-                        (select i.itemname,i.itemtype,i.yearmanufactured,i.itemimg,pp.ssn 
+                        (select i.itemname,i.itemtype,i.yearmanufactured,pp.ssn 
                         as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname, 
-                        a.auctionid,a.openbid,a.currentbid,p.postdate,p.expiredates 
+                        a.auctionid,a.openbid,a.currentbid,p.postdate,p.expiredates, i.itemimg
                         from item i inner join auction a on i.itemname=a.itemname
                         inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid 
                         where a.auctionid=? and a.sold=1) as res1, 
@@ -291,9 +285,10 @@ class AuctionHistory(Resource):
                         for xml path''')
             dbcursor.execute (sqlcommand,(str(id),str(id)))
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
+            
             return(r['root']['row'])
         except Exception as e:
             print(e)
@@ -311,7 +306,7 @@ class RevenueByItem(Resource):
                         for xml path''')
             dbcursor.execute (sqlcommand,(id,))
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
@@ -331,7 +326,7 @@ class RevenueByType(Resource):
                         for xml path''')
             dbcursor.execute (sqlcommand,(id,))
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
@@ -351,7 +346,7 @@ class RevenueBySellerID(Resource):
                         for xml path''')
             dbcursor.execute (sqlcommand,(id,))
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
@@ -377,7 +372,7 @@ class CustomerAuctionHistory(Resource):
                         for xml path''')
             dbcursor.execute (sqlcommand,(id,id))
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
@@ -398,7 +393,7 @@ class ItemSuggestions(Resource):
                         for xml path''')
             dbcursor.execute (sqlcommand,(id,))
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
@@ -420,7 +415,7 @@ class StaffRevenue(Resource):
                         for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
@@ -489,10 +484,9 @@ class Login(Resource):
 
             dbcursor.execute(sqlcommand,(inputData['ssn'],))
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            r['root']['row']['personimg'] = str(r['root']['row']['personimg']).replace("',), ('", "")
             return(r['root']['row'])
         except Exception as e:
             print (e)
@@ -513,7 +507,7 @@ class Bidding(Resource):
             sqlcommand =('select currenthighbid,currentbid,bidincrement from auction where auctionid=? for xml path')
             dbcursor.execute(sqlcommand,(inputData['auctionid'],))
             rows=dbcursor.fetchall()
-            row=str(rows)
+            row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
 
@@ -523,7 +517,7 @@ class Bidding(Resource):
             bidprice=float(inputData['bidprice'])
             
             if currenthighbid>0.0:
-                whilenotran=True
+               
                 while bidprice >= (currentbid+bidincrement) and currenthighbid >= (currentbid+bidincrement):        
                     
                     if bidprice >= (currentbid+bidincrement):
@@ -537,14 +531,13 @@ class Bidding(Resource):
                         currentbid=currentbid+bidincrement
                         #update bidincrement
                         bidincrement=increment(currentbid)
-                    whilenotran=False
-
-                if whilenotran:
-                    if bidprice >= (currentbid+bidincrement) or currenthighbid >= (currentbid+bidincrement):
-                        #update currentbid
-                        currentbid=currentbid+bidincrement
-                        #update bidincrement
-                        bidincrement=increment(currentbid)
+                   
+                
+                if bidprice >= (currentbid+bidincrement) or currenthighbid >= (currentbid+bidincrement):
+                    #update currentbid
+                    currentbid=currentbid+bidincrement
+                    #update bidincrement
+                    bidincrement=increment(currentbid)
 
             else:
                 #update currentbid
@@ -575,7 +568,7 @@ api.add_resource(TopSellerCategory, '/topcategory')
 api.add_resource(Auction, '/getitem/<string:id>', endpoint="auction")
 # return a list of auctionid,itemname,openbid,bidincrement,currentbid,sellerid,itemtype,yearmanufactured,postdate,expiredates,firstname,lastname,itemimg,totalbidders
 api.add_resource(AuctionAll, '/getitem', endpoint="auctionAll")
-# requires sellerid,itemname,category,year,openbid,bidincrement,reserveprice,expiredate,itemimg
+# requires sellerid,itemname,category,year,openbid,bidincrement,reserveprice,postdate,expiredate,itemimg
 api.add_resource(CreateAuction, '/createitem')
 # returns a list of auctionid,openbid,currentbid,itemname,sellerid,itemname,itemtype,yearmanufactured,postdate,expiredates,itemimg,totalbidders
 api.add_resource(StaffPicks,'/staffpicks')
