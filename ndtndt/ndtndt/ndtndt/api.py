@@ -23,6 +23,30 @@ def default():
     except Exception as e:
         print(e)
 
+def increment(currentbid):
+    if currentbid==0.0:
+        return 0.01
+    if currentbid>=0.01 and currentbid<=0.99:
+        return 0.05
+    if currentbid>=1.0 and currentbid<=4.99:
+        return 0.25
+    if currentbid>=5.0 and currentbid<=24.99:
+        return 0.5
+    if currentbid>=25.0 and currentbid<=99.99:
+        return 1.0
+    if currentbid>=100.0 and currentbid<=249.99:
+        return 2.5
+    if currentbid>=250.0 and currentbid<=499.99:
+        return 5.0
+    if currentbid>=500.0 and currentbid<=999.99:
+        return 10.0
+    if currentbid>=1000.0 and currentbid<=2499.99:
+        return 25.0
+    if currentbid>=2500.0 and currentbid<=4999.99:
+        return 50.0
+    if currentbid>=5000.0:
+        return 100.0
+
 # there is no post on this
 # get returns top seller category
 class TopSellerCategory(Resource):
@@ -55,9 +79,7 @@ class CreateAuction(Resource):
         self.reqparse.add_argument('itemname', type = str, required=True, help='no item name provided.', location='json')
         self.reqparse.add_argument('category', type = str, required=True, help='no category type provided.', location='json')
         self.reqparse.add_argument('year', type = str, required=True, help='no YearManufactured provided', location='json')
-        self.reqparse.add_argument('instock', type = str, required=True, help='no AmountInStock provided',location='json')
         self.reqparse.add_argument('openbid', type = str, required=True, help='no OpenBid amount provided',location='json')
-        self.reqparse.add_argument('bidincrement', type = str, required=True, help='no BidIncrement provided',location='json')
         self.reqparse.add_argument('reservePrice', type = str, required=True, help='no ReservePrice provided',location='json')
         self.reqparse.add_argument('expiredate', type = str, required=True, help='no ExpireDates provided',location='json')
         self.reqparse.add_argument('itemimg', type = str, required=True, help='no Image provided',location='json')
@@ -66,13 +88,24 @@ class CreateAuction(Resource):
         try:
             inputData = self.reqparse.parse_args()
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock,ItemImg) VALUES(?,?,?,?,?)
-                            INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID) VALUES (?,?,?,?,?)
+            sqlcommand =('''  IF NOT EXISTS(SELECT itemname,amountinstock FROM item WHERE itemname='special hardcore moneyshot gay porn')
+                                BEGIN
+                                    INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock,ItemImg) VALUES(?,?,?,1,?)
+                                END
+                                ELSE
+                                BEGIN
+                                    UPDATE item
+		                            set amountinstock=amountinstock+1
+                                END
+                            INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID,currentbid) VALUES (?,?,?,?,?,?)
                             INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID) VALUES (?,GETDATE(),?,?,SCOPE_IDENTITY())''')
-            dbcursor.execute (sqlcommand,(inputData['itemname'],inputData['category'],inputData['year'],inputData['instock'],inputData['itemimg'],inputData['openbid'],inputData['bidincrement'],inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
+            
+            bidincrement=increment(float(inputData['openbid']))
+            dbcursor.execute (sqlcommand,(inputData['itemname'],inputData['category'],inputData['year'],inputData['itemimg'],inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
             dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
+            print(e)
             return jsonify({'error': e})
     
 # Returns information for one item given auctionID
@@ -84,13 +117,13 @@ class Auction(Resource):
             dbcursor = dbconnection.cursor()
             sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
                             a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, 
-                            p.expiredates,pp.firstname,pp.lastname,i.itemimg, count(b.auctionid) as totalbidders 
+                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,i.itemimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
-                            inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid 
+                            inner join post p on p.AuctionID=a.AuctionID inner join person pp on pp.ssn=a.sellerid 
                             left join bid b on b.auctionid=a.auctionid where a.auctionid=? 
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
                             a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, 
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg for xml path''')
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,i.itemimg for xml path''')
             dbcursor.execute (sqlcommand,(str(id),))
             rows=dbcursor.fetchall()
             #print(rows)
@@ -98,6 +131,10 @@ class Auction(Resource):
                 row=str(rows)
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
+                if float(r['root']['row']['reserveprice'])>0.0:
+                    r['root']['row']['reserveprice']=True
+                else:
+                    r['root']['row']['reserveprice']=False
                 r['root']['row']['itemimg'] = str(r['root']['row']['itemimg']).replace("',), ('", "")
                 return(r['root']['row'])
             else:
@@ -112,13 +149,13 @@ class AuctionAll(Resource):
             dbcursor = dbconnection.cursor()
             sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
                             a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, 
-                            p.expiredates,pp.firstname,pp.lastname,i.itemimg,pp.personimg, count(b.auctionid) as totalbidders 
+                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,i.itemimg,pp.personimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
                             inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid 
                             left join bid b on b.auctionid=a.auctionid
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
                             a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, 
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,i.itemimg,pp.personimg for xml path''')
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,i.itemimg,pp.personimg for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             if(rows):
@@ -126,6 +163,10 @@ class AuctionAll(Resource):
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
                 for item in r['root']['row']:
+                    if float(item['reserveprice'])>0.0:
+                        item['reserveprice']=True
+                    else:
+                        item['reserveprice']=False
                     item['itemimg'] = str(item['itemimg']).replace("',), ('", "")
                     item['personimg'] = str(item['personimg']).replace("',), ('", "")
                 if (len(r['root']['row']) == 1):
@@ -480,20 +521,49 @@ class Bidding(Resource):
             currentbid=float(r['root']['row']['currentbid'])
             bidincrement=float(r['root']['row']['bidincrement'])
             bidprice=float(inputData['bidprice'])
+            
+            if currenthighbid>0.0:
+                whilenotran=True
+                while bidprice >= (currentbid+bidincrement) and currenthighbid >= (currentbid+bidincrement):        
+                    
+                    if bidprice >= (currentbid+bidincrement):
+                        #update currentbid
+                        currentbid=currentbid+bidincrement
+                        #update bidincrement
+                        bidincrement=increment(currentbid)
 
-            if bidprice > (currenthighbid+bidincrement):
-                currentbid=currenthighbid+bidincrement
+                    if currenthighbid >= (currentbid+bidincrement):
+                        #update currentbid
+                        currentbid=currentbid+bidincrement
+                        #update bidincrement
+                        bidincrement=increment(currentbid)
+                    whilenotran=False
+
+                if whilenotran:
+                    if bidprice >= (currentbid+bidincrement) or currenthighbid >= (currentbid+bidincrement):
+                        #update currentbid
+                        currentbid=currentbid+bidincrement
+                        #update bidincrement
+                        bidincrement=increment(currentbid)
+
+            else:
+                #update currentbid
+                currentbid=currentbid+bidincrement
+                #update bidincrement
+                bidincrement=increment(currentbid)
+
+            if bidprice>currenthighbid:
+                #new bidder out bidded the auction
                 currenthighbid=bidprice
-            elif bidprice > (currentbid+bidincrement):
-                if (bidprice+bidincrement) > currenthighbid:
-                    currentbid=currenthighbid
-                else:
-                    currentbid=bidprice+bidincrement
+            if bidprice==currenthighbid:
+                #original bidder keeps the maximum bid
+                currenthighbid=currenthighbid
+ 
 
             sqlcommand =('insert into bid(customerid,auctionid,bidprice,biddate) values(?,?,?,getdate())')
             dbcursor.execute(sqlcommand,(inputData['customerid'],inputData['auctionid'],inputData['bidprice']))
-            sqlcommand =('UPDATE auction SET currenthighbid=?,currentbid=? where auctionid=?')
-            dbcursor.execute(sqlcommand,(float(currenthighbid),float(currentbid),float(inputData['auctionid'])))
+            sqlcommand =('UPDATE auction SET currenthighbid=?,currentbid=?,bidincrement=? where auctionid=?')
+            dbcursor.execute(sqlcommand,(float(currenthighbid),float(currentbid),float(bidincrement),inputData['auctionid']))
             dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
@@ -505,9 +575,9 @@ api.add_resource(TopSellerCategory, '/topcategory')
 api.add_resource(Auction, '/getitem/<string:id>', endpoint="auction")
 # return a list of auctionid,itemname,openbid,bidincrement,currentbid,sellerid,itemtype,yearmanufactured,postdate,expiredates,firstname,lastname,itemimg,totalbidders
 api.add_resource(AuctionAll, '/getitem', endpoint="auctionAll")
-# requires sellerid,itemname,category,year,instock,openbid,bidincrement,reserveprice,expiredate,itemimg
+# requires sellerid,itemname,category,year,openbid,bidincrement,reserveprice,expiredate,itemimg
 api.add_resource(CreateAuction, '/createitem')
-# returns a list of auctionid,openbid,bidincrement,currentbid,itemname,sellerid,itemname,itemtype,yearmanufactured,postdate,expiredates,itemimg,totalbidders
+# returns a list of auctionid,openbid,currentbid,itemname,sellerid,itemname,itemtype,yearmanufactured,postdate,expiredates,itemimg,totalbidders
 api.add_resource(StaffPicks,'/staffpicks')
 # return a list of salesyear,salesmonth,totalsales
 api.add_resource(SalesReport,'/salesreport')
