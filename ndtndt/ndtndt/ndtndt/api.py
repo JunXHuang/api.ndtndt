@@ -2,18 +2,49 @@
 Routes for the flask application.
 """
 import logging
-from flask import Flask, jsonify, abort, make_response
+import os
+from flask import Flask, jsonify, abort, make_response, request
 from flask_restful import Api, Resource, reqparse, fields, marshal
 from flask_httpauth import HTTPBasicAuth
 import json, xmltodict
 from binascii import *
 from ndtndt import app, dbconnection
 from flask_cors import CORS
+from flask import url_for
+from flask import send_from_directory
+from werkzeug import secure_filename
 
 api = Api(app)
 auth = HTTPBasicAuth()
 
 CORS(app)
+
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'static/uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+# example taken from http://flask.pocoo.org/docs/0.10/patterns/fileuploads/
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return url_for('uploaded_file',filename=filename)
+
+@app.route('/uploads/<filename>', methods=['GET'])
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 
 # dummy, just to see that it works
 @app.route('/')
