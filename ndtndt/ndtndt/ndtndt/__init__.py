@@ -6,9 +6,11 @@ from flask import Flask
 import pypyodbc
 app = Flask(__name__)
 # this is the db connection string. import it in api.py
-dbconnection = pypyodbc.connect('DRIVER={SQL Server};'
+dbconnection = pypyodbc.connect('DRIVER={SQL Server Native Client 11.0};'
 								'Server=tcp:z6mcia7rsl.database.windows.net;'
-								'DATABASE=thisguyfucks;'
-                                'UID=ndtndt@z6mcia7rsl;PWD=fuckFuckjun12#;')
+								'DATABASE=ndtndt-cse305-auction;'
+                                'UID=ndtndt@z6mcia7rsl;PWD=CSE_N@zimAmin_Azure_JUn;'
+                                'Encrypt=yes;TrustServerCertificate=no;'
+                                'Connection Timeout=30;')
 
 import ndtndt.api
