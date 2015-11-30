@@ -1,4 +1,4 @@
-"""
+﻿"""
 Routes for the flask application.
 """
 import logging
@@ -84,11 +84,11 @@ class TopSellerCategory(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand = ('select top 10 i.itemname,i.itemtype,i.yearmanufactured,count(*) as itemsold '
-                          'from auction a inner join item i '
-                          'on a.itemname=i.itemname where a.sold=1 '
-                          'group by i.itemname,i.itemtype,i.yearmanufactured '
-                          'order by itemsold desc for xml path')
+            sqlcommand = ('''select top 10 i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,count(*) as itemsold 
+                          from auction a inner join item i 
+                          on a.itemname=i.itemname where a.sold=1 
+                          group by i.itemname,i.itemtype,i.yearmanufactured,a.itemimg
+                          order by itemsold desc for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             row = str(rows).replace("',), ('", "")
@@ -114,25 +114,28 @@ class CreateAuction(Resource):
         self.reqparse.add_argument('postdate', type = str, required=True, help='no PostDate provided',location='json')
         self.reqparse.add_argument('expiredate', type = str, required=True, help='no ExpireDates provided',location='json')
         self.reqparse.add_argument('itemimg', type = str, required=True, help='no Image provided',location='json')
+        self.reqparse.add_argument('descriptions', type = str, required=True, help='no descriptions provided',location='json')
         super(CreateAuction, self).__init__()
     def post(self):
         try:
             inputData = self.reqparse.parse_args()
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''  IF NOT EXISTS(SELECT itemname,amountinstock FROM item WHERE itemname='special hardcore moneyshot gay porn')
+            sqlcommand1=('''IF NOT EXISTS(SELECT itemname,amountinstock FROM item WHERE itemname=?)
                                 BEGIN
-                                    INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock,ItemImg) VALUES(?,?,?,1,?)
+                                    INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,1)
                                 END
                                 ELSE
                                 BEGIN
                                     UPDATE item
 		                            set amountinstock=amountinstock+1
-                                END
-                            INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID,currentbid) VALUES (?,?,?,?,?,?)
+                                END''')
+            dbcursor.execute (sqlcommand1,(inputData['itemname'],inputData['itemname'],inputData['category'],inputData['year']))
+            dbcursor.commit()
+            sqlcommand =('''INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID,currentbid,itemimg,descriptions) VALUES (?,?,?,?,?,?,?,?)
                             INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID) VALUES (?,?,?,?,SCOPE_IDENTITY())''')
             
             bidincrement=increment(float(inputData['openbid']))
-            dbcursor.execute (sqlcommand,(inputData['itemname'],inputData['category'],inputData['year'],inputData['itemimg'],inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['postdate'],inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
+            dbcursor.execute (sqlcommand,(inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['itemimg'],inputData['descriptions'],inputData['postdate'],inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
             dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
@@ -147,14 +150,14 @@ class Auction(Resource):
         try:
             dbcursor = dbconnection.cursor()
             sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
-                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, 
-                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,i.itemimg, count(b.auctionid) as totalbidders 
+                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating,a.descriptions,
+                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
-                            inner join post p on p.AuctionID=a.AuctionID inner join person pp on pp.ssn=a.sellerid 
-                            left join bid b on b.auctionid=a.auctionid where a.auctionid=? 
+                            inner join post p on p.AuctionID=a.AuctionID inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
+                            left join bid b on b.auctionid=a.auctionid where a.sold=0 and a.auctionid=?
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
-                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, 
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,i.itemimg for xml path''')
+                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating,a.descriptions,
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg for xml path''')
             dbcursor.execute (sqlcommand,(str(id),))
             rows=dbcursor.fetchall()
             #print(rows)
@@ -166,6 +169,7 @@ class Auction(Resource):
                     r['root']['row']['reserveprice']=True
                 else:
                     r['root']['row']['reserveprice']=False
+                r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
                 return(r['root']['row'])
             else:
                 return jsonify({'id': id + ' - is not found'})
@@ -178,14 +182,14 @@ class AuctionAll(Resource):
         try:
             dbcursor = dbconnection.cursor()
             sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
-                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, 
-                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,i.itemimg,pp.personimg, count(b.auctionid) as totalbidders 
+                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating, a.descriptions,
+                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg,pp.personimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
-                            inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid 
-                            left join bid b on b.auctionid=a.auctionid
+                            inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
+                            left join bid b on b.auctionid=a.auctionid where a.sold=0
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
-                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, 
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,i.itemimg,pp.personimg for xml path''')
+                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating, a.descriptions,
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg,pp.personimg for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             if(rows):
@@ -197,6 +201,7 @@ class AuctionAll(Resource):
                         item['reserveprice']=True
                     else:
                         item['reserveprice']=False
+                    item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
 
                 return(r['root']['row'])
             else:
@@ -211,8 +216,20 @@ class StaffPicks(Resource):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('auctionid', type = str, required=True, help='no AuctionID provided', location='json')
         super(StaffPicks, self).__init__()
+    def post(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('insert into staffpicks (auctionid) values (?)')
+            dbcursor.execute (sqlcommand,(inputData['auctionid'],))
+            dbcursor.commit()
+            return jsonify({'status':'success'})
+        except Exception as e:
+            print(e)
+            return jsonify({'error': e})
     def delete(self):
         try:
+            inputData = self.reqparse.parse_args()
             dbcursor = dbconnection.cursor()
             sqlcommand =('delete from staffpicks where auctionid=?')
             dbcursor.execute (sqlcommand,(inputData['auctionid'],))
@@ -221,37 +238,24 @@ class StaffPicks(Resource):
         except Exception as e:
             print(e)
 
-    def post(self):
-        try:
-            dbcursor = dbconnection.cursor()
-            sqlcommand =('insert into staffpicks (auctionid) values (?)')
-            dbcursor.execute (sqlcommand,(inputData['auctionid'],))
-            dbcursor.commit()
-            return jsonify({'status':'success'})
-        except Exception as e:
-            print(e)
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''select a.auctionid,a.openbid,a.bidincrement, 
-                            a.currentbid,a.sellerid,i.itemname, 
-                            i.itemtype,i.yearmanufactured,p.postdate, 
-                            p.expiredates,count(b.auctionid) as totalbidders, 
-                            i.itemimg from staffpicks s inner join  
-                            auction a on s.auctionid=a.auctionid 
-                            inner join item i on a.itemname=i.itemname 
-                            inner join post p on i.itemname=p.itemname 
-                            left join bid b on b.auctionid=a.auctionid
-                            group by a.auctionid,a.openbid,a.bidincrement, 
-                            a.currentbid,a.sellerid,i.itemname, 
-                            i.itemtype,i.yearmanufactured,p.postdate, 
-                            p.expiredates, i.itemimg
-                         for xml path''')
+            sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
+                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating,a.descriptions,
+                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg, count(b.auctionid) as totalbidders 
+                            from auction a inner join item i on i.itemname=a.itemname inner join post p on p.AuctionID=a.AuctionID 
+							inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid inner join staffpicks s on s.auctionid=a.auctionid 
+                            left join bid b on b.auctionid=a.auctionid 
+                            group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
+                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating,a.descriptions,
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
+            r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
             return(r['root']['row'])
         except Exception as e:
             print(e)
@@ -308,7 +312,7 @@ class AuctionHistory(Resource):
                             where a.auctionid=? and a.currentbid<=b.bidprice)
                             BEGIN
                             select * from
-                            (select i.itemname,i.itemtype,i.yearmanufactured,i.itemimg,pp.ssn as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname,
+                            (select i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,pp.ssn as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname,
                             a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates
                             from item i inner join auction a on i.itemname=a.itemname
                             inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid
@@ -319,7 +323,7 @@ class AuctionHistory(Resource):
                             END
                             ELSE
                             BEGIN
-                            select i.itemname,i.itemtype,i.yearmanufactured,i.itemimg,pp.ssn as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname,
+                            select i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,pp.ssn as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname,
                             a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates
                             from item i inner join auction a on i.itemname=a.itemname
                             inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid
@@ -401,11 +405,11 @@ class CustomerBidHistory(Resource):
     def get(self,id):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =(''' select DISTINCT i.itemname,i.itemtype,i.yearmanufactured,i.itemimg,pp.ssn as sellerid,
+            sqlcommand =('''select DISTINCT i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,pp.ssn as sellerid,
                             a.auctionid,a.openbid,a.currentbid,p.postdate,p.expiredates,a.sold 
                             from item i inner join auction a on i.itemname=a.itemname inner join bid b on b.auctionid=a.auctionid
                             inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid
-                            where pp.ssn=? 
+                            where pp.ssn=?
                             for xml path''')
             dbcursor.execute (sqlcommand,(id,))
             rows=dbcursor.fetchall()
@@ -426,7 +430,7 @@ class CustomerSellHistory(Resource):
             sqlcommand =('''select * from 
                             (select i.itemname,i.itemtype,i.yearmanufactured,pp.ssn 
                             as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname, 
-                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.expiredates, i.itemimg
+                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.expiredates, a.itemimg
                             from item i inner join auction a on i.itemname=a.itemname
                             inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid 
                             where p.customerid=? and a.sold=1) as res1, 
@@ -472,12 +476,74 @@ class StaffRevenue(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''select p.firstname,p.lastname,sum(a.currentbid) as generatedrevenue
+            sqlcommand =('''select top 1 p.firstname,p.lastname,sum(a.currentbid)*.1 as revenuegenerated
                         from person p inner join auction a on p.ssn=a.monitor
                         where a.sold=1
                         group by p.firstname,p.lastname
                         order by sum(a.currentbid) desc
                         for xml path''')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            row = str(rows).replace("',), ('", "")
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            return(r['root']['row'])
+        except Exception as e:
+            print(e)
+
+# Determine which customer generated most total revenue
+class CustomerRevenue(Resource):
+    def __init__(self):
+        pass
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''SELECT top 1 p.firstname,p.lastname,SUM(a.currentbid)*.9 as totalsales 
+                            FROM Auction a,person p WHERE a.sold=1 and a.sellerid=p.ssn
+                            group by p.firstname,p.lastname order by SUM(a.currentbid) desc
+                        for xml path''')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            row = str(rows).replace("',), ('", "")
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            return(r['root']['row'])
+        except Exception as e:
+            print(e)
+
+# Produce customer mailing lists
+class EmailList(Resource):
+    def __init__(self):
+        pass
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''select p.ssn,p.firstname,p.lastname,p.email 
+                            from customer c inner join person p on c.customerid=p.ssn
+                            for xml path''')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            row = str(rows).replace("',), ('", "")
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            return(r['root']['row'])
+        except Exception as e:
+            print(e)
+
+
+# Best-Seller list
+class BestSellerList(Resource):
+    def __init__(self):
+        pass
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''select p.firstname,p.lastname,count(a.auctionid) as itemsold
+                            from person p inner join auction a on p.ssn=a.sellerid
+                            where a.sold=1
+                            group by p.firstname,p.lastname
+                            order by count(a.auctionid) desc
+                            for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
             row = str(rows).replace("',), ('", "")
@@ -655,8 +721,10 @@ api.add_resource(CustomerBidHistory,'/customerbidhistory/<string:id>')
 api.add_resource(CustomerSellHistory,'/customersellhistory/<string:id>')
 # require ssn will return itemname
 api.add_resource(ItemSuggestions,'/itemsuggestions/<string:id>')
-# returns firstname,lastname,generatedrevenue
+# returns firstname,lastname,revenuegenerated
 api.add_resource(StaffRevenue,'/staffrevenue')
+# returns firstname,lastname,totalsales
+api.add_resource(CustomerRevenue,'/customerrevenue')
 # requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,creditcardnum,email,personimg
 api.add_resource(CreateUser,'/createuser')
 # requires ssn,userpassword 
@@ -665,3 +733,7 @@ api.add_resource(CreateUser,'/createuser')
 api.add_resource(Login,'/login')
 # requires auctionid,bidprice,customerid
 api.add_resource(Bidding,'/bidding')
+# returns firstname,lastname,itemsold
+api.add_resource(BestSellerList,'/bestsellerlist')
+# returns ssn,firstname,lastname,email
+api.add_resource(EmailList,'/emaillist')
