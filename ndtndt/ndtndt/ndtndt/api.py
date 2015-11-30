@@ -694,7 +694,7 @@ class Login(Resource):
                                where customerid=? for xml path''')
             #return employeedata
             else:
-                sqlcommand=('''select e.employeeid,e.maglevel,p.lastname,p.firstname, 
+                sqlcommand=('''select e.employeeid as customerid,e.maglevel,p.lastname,p.firstname, 
                                 p.address,p.city,p.state,p.zipcode,p.telephone, 
                                 p.personimg from employee e inner join person p on e.employeeid=p.ssn 
                                 where e.employeeid=? for xml path''')
