@@ -313,18 +313,18 @@ class AuctionHistory(Resource):
                             BEGIN
                             select * from
                             (select i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,pp.ssn as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname,
-                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates
+                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates, i.descriptions 
                             from item i inner join auction a on i.itemname=a.itemname
                             inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid
                             where a.auctionid=?) as res1,
-                            (select pp.ssn as buyerid,b.biddate, pp.firstname as buyerfirstname, pp.lastname as buyerlastname
+                            (select pp.ssn as buyerid,b.biddate, pp.firstname as buyerfirstname, pp.lastname as buyerlastname, pp.personimg as buyerimg 
                             from person pp inner join bid b on b.customerid=pp.ssn inner join auction a on b.auctionid=a.auctionid
                             where a.auctionid=? and a.currentbid<=b.bidprice) as res2 for xml path
                             END
                             ELSE
                             BEGIN
                             select i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,pp.ssn as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname,
-                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates
+                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates, i.descriptions
                             from item i inner join auction a on i.itemname=a.itemname
                             inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid
                             where a.auctionid=? for xml path
@@ -583,6 +583,92 @@ class CreateUser(Resource):
         except Exception as e:
             return jsonify({'failed - error': e})
 
+    def delete(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''delete from Customer where customerid=? 
+                            delete from Person where ssn=? ''')
+            dbcursor.execute (sqlcommand,(inputData['ssn'],inputData['ssn']))
+            dbcursor.commit()
+            return jsonify({'status':'success'})
+        except Exception as e:
+            print(e)
+            return jsonify({'failed - error': e})
+
+    def put(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand1 =('UPDATE person set LastName=?,FirstName=?,Address=?,City=?,State=?,ZipCode=?,Telephone=?,Email=?,UserPassword=?,personimg=? where ssn=?')
+            dbcursor.execute (sqlcommand1,(inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg'],inputData['ssn']))
+            sqlcommand2 =('Update Customer set CreditCardNum=? where CustomerID=?')
+            dbcursor.execute (sqlcommand2,(inputData['creditcardnum'],inputData['ssn']))
+            dbcursor.commit()
+            return jsonify({'status':'success'})
+        except Exception as e:
+            return jsonify({'failed - error': e})
+
+
+
+# Creating a new employee
+class CreateEmployee(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('ssn', type = str, required=True, help='no CustomerID provided', location='json')
+        self.reqparse.add_argument('lastname', type = str, required=True, help='no Last name provided.', location='json')
+        self.reqparse.add_argument('firstname', type = str, required=True, help='no First name provided.', location='json')
+        self.reqparse.add_argument('address', type = str, required=True, help='no Address provided', location='json')
+        self.reqparse.add_argument('city', type = str, required=True, help='no City provided',location='json')
+        self.reqparse.add_argument('state', type = str, required=True, help='no State provided',location='json')
+        self.reqparse.add_argument('zipcode', type = str, required=True, help='no Zip Code provided',location='json')
+        self.reqparse.add_argument('telephone', type = str, required=True, help='no Telephone number provided',location='json')
+        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided',location='json')
+        self.reqparse.add_argument('startdate', type = str, required=True, help='no Start Date provided',location='json')
+        self.reqparse.add_argument('hourlyrate', type = str, required=True, help='no Hourly Rate provided',location='json')
+        self.reqparse.add_argument('personimg', type = str, required=True, help='no Imagine provided',location='json')
+        self.reqparse.add_argument('email', type = str, required=True, help='no Email provided',location='json')
+        super(CreateEmployee, self).__init__()
+    def post(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand1 =('INSERT INTO Person (SSN,LastName,FirstName,Address,City,State,ZipCode,Telephone,Email,UserPassword,personimg) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
+            dbcursor.execute (sqlcommand1,(inputData['ssn'],inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg']))
+            sqlcommand2 =('INSERT INTO Employee (maglevel,startdate,HourlyRate,EmployeeID) VALUES(1,?,?,?)')
+            dbcursor.execute (sqlcommand2,(inputData['startdate'],inputData['hourlyrate'],inputData['ssn']))
+            dbcursor.commit()
+            return jsonify({'status':'success'})
+        except Exception as e:
+            print (e)
+            return jsonify({'failed - error': e})
+
+    def put(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand1 =('UPDATE person set LastName=?,FirstName=?,Address=?,City=?,State=?,ZipCode=?,Telephone=?,Email=?,UserPassword=?,personimg=? where ssn=?')
+            dbcursor.execute (sqlcommand1,(inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg'],inputData['ssn']))
+            sqlcommand2 =('update Employee set startdate=?,HourlyRate=? where EmployeeID=?) VALUES(?,?,?)')
+            dbcursor.execute (sqlcommand2,(inputData['startdate'],inputData['hourlyrate'],inputData['ssn']))
+            dbcursor.commit()
+            return jsonify({'status':'success'})
+        except Exception as e:
+            return jsonify({'failed - error': e})
+
+    def delete(self):
+        try:
+            inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''delete from Employee where employeeid=? 
+                            delete from Person where ssn=? ''')
+            dbcursor.execute (sqlcommand,(inputData['ssn'],inputData['ssn']))
+            dbcursor.commit()
+            return jsonify({'status':'success'})
+        except Exception as e:
+            print(e)
+            return jsonify({'failed - error': e})
+
 class Login(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
@@ -707,7 +793,8 @@ api.add_resource(StaffPicks,'/staffpicks')
 api.add_resource(SalesReport,'/salesreport')
 # return itemname,amountsold
 api.add_resource(BestItemList,'/bestitemlist')
-# require auctionid will return a list of itemname,itemtype,yearmanufactured,itemimg,sellerid,sellerfirstname,sellerlastname,auctionid,openbid,currentbid,postdate,expiredates,buyerid,biddate,bidprice,buyerfirstname,buyerlastname
+# require auctionid will return a list of itemname,itemtype,yearmanufactured,itemimg,sellerid,sellerfirstname,sellerlastname
+# auctionid,openbid,currentbid,postdate,expiredates,buyerid,biddate,bidprice,buyerfirstname,buyerlastname
 api.add_resource(AuctionHistory,'/auctionhistory/<string:id>')
 # require item name will returns itemname,totalsales
 api.add_resource(RevenueByItem,'/revenuebyitem/<string:id>')
@@ -737,3 +824,6 @@ api.add_resource(Bidding,'/bidding')
 api.add_resource(BestSellerList,'/bestsellerlist')
 # returns ssn,firstname,lastname,email
 api.add_resource(EmailList,'/emaillist')
+# requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,startdate,hourlyrate,personimg
+api.add_resource(CreateEmployee,'/createemployee')
+
