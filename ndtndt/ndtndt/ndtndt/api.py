@@ -119,13 +119,12 @@ class CreateAuction(Resource):
     def post(self):
         try:
             inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand1=('''IF NOT EXISTS(SELECT itemname,amountinstock FROM item WHERE itemname=?)
                                 BEGIN
                                     INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock) VALUES(?,?,?,1)
-                                END
-                                ELSE
-                                BEGIN
+                                END ELSE BEGIN
                                     UPDATE item
 		                            set amountinstock=amountinstock+1
                                 END''')
@@ -135,7 +134,7 @@ class CreateAuction(Resource):
                             INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID) VALUES (?,?,?,?,SCOPE_IDENTITY())''')
             
             bidincrement=increment(float(inputData['openbid']))
-            dbcursor.execute (sqlcommand,(inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['itemimg'],inputData['descriptions'],inputData['postdate'],inputData['expiredate'],inputData['sellerid'],inputData['itemname']))
+            dbcursor.execute (sqlcommand,(inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['itemimg'],inputData['descriptions'],inputData['expiredate'],inputData['postdate'],inputData['sellerid'],inputData['itemname']))
             dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
@@ -149,16 +148,35 @@ class Auction(Resource):
     def get(self, id):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
+            sqlcommand =('''if exists(select p.ssn as bidderid,p.firstname as bidderfirstname,p.lastname as bidderlastname 
+                            from auction a inner join bid b on a.auctionid=b.auctionid 
+                            inner join person p on p.ssn=b.customerid where a.currenthighbid=b.bidprice and a.auctionid=?)
+                            begin
+                            select * from (select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
                             a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating,a.descriptions,
                             p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
                             inner join post p on p.AuctionID=a.AuctionID inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
-                            left join bid b on b.auctionid=a.auctionid where a.sold=0 and a.auctionid=?
+                            left join bid b on b.auctionid=a.auctionid where a.sold=0 and getdate()<p.expiredates and a.auctionid=?
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
                             a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating,a.descriptions,
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg for xml path''')
-            dbcursor.execute (sqlcommand,(str(id),))
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg) as res1,
+                            (select top 1 p.ssn as bidderid,p.firstname as bidderfirstname,p.lastname as bidderlastname 
+                            from auction a inner join bid b on a.auctionid=b.auctionid 
+                            inner join person p on p.ssn=b.customerid where a.currenthighbid=b.bidprice and a.auctionid=? 
+                            order by b.biddate) as res2 for xml path
+                            end else begin
+                            select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
+                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating,a.descriptions,
+                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg, count(b.auctionid) as totalbidders 
+                            from auction a inner join item i on i.itemname=a.itemname 
+                            inner join post p on p.AuctionID=a.AuctionID inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
+                            left join bid b on b.auctionid=a.auctionid where a.sold=0 and getdate()<p.expiredates and a.auctionid=?
+                            group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
+                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating,a.descriptions,
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg for xml path
+                            end''')
+            dbcursor.execute (sqlcommand,(str(id),str(id),str(id),str(id)))
             rows=dbcursor.fetchall()
             #print(rows)
             if(rows):
@@ -186,7 +204,7 @@ class AuctionAll(Resource):
                             p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg,pp.personimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
                             inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
-                            left join bid b on b.auctionid=a.auctionid where a.sold=0
+                            left join bid b on b.auctionid=a.auctionid where a.sold=0 and getdate()<p.expiredates 
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
                             a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating, a.descriptions,
                             p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg,pp.personimg for xml path''')
@@ -309,25 +327,22 @@ class AuctionHistory(Resource):
             dbcursor = dbconnection.cursor()
             sqlcommand =('''IF EXISTS (select pp.ssn as buyerid,b.biddate, pp.firstname as buyerfirstname, pp.lastname as buyerlastname
                             from person pp inner join bid b on b.customerid=pp.ssn inner join auction a on b.auctionid=a.auctionid
-                            where a.auctionid=? and a.currentbid<=b.bidprice)
-                            BEGIN
-                            select * from
+                            where a.auctionid=? and a.currenthighbid=b.bidprice)
+                            BEGIN select * from
                             (select i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,pp.ssn as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname,
-                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates, i.descriptions 
+                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates, a.descriptions 
                             from item i inner join auction a on i.itemname=a.itemname
                             inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid
                             where a.auctionid=?) as res1,
-                            (select pp.ssn as buyerid,b.biddate, pp.firstname as buyerfirstname, pp.lastname as buyerlastname, pp.personimg as buyerimg 
+                            (select top 1 pp.ssn as buyerid,b.biddate, pp.firstname as buyerfirstname, pp.lastname as buyerlastname, pp.personimg as buyerimg 
                             from person pp inner join bid b on b.customerid=pp.ssn inner join auction a on b.auctionid=a.auctionid
-                            where a.auctionid=? and a.currentbid<=b.bidprice) as res2 for xml path
-                            END
-                            ELSE
-                            BEGIN
+                            where a.auctionid=? and a.currenthighbid=b.bidprice order by b.biddate) as res2 
+                            END ELSE BEGIN
                             select i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,pp.ssn as sellerid,pp.firstname as sellerfirstname, pp.lastname as sellerlastname,
-                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates, i.descriptions
+                            a.auctionid,a.openbid,a.currentbid,p.postdate,p.ExpireDates, a.descriptions
                             from item i inner join auction a on i.itemname=a.itemname
                             inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid
-                            where a.auctionid=? for xml path
+                            where a.auctionid=? 
                             END''')
             dbcursor.execute (sqlcommand,(str(id),str(id),str(id),str(id)))
             rows=dbcursor.fetchall()
@@ -596,7 +611,25 @@ class CreateUser(Resource):
             print(e)
             return jsonify({'failed - error': e})
 
-    def put(self):
+
+# Updating a new user
+class UpdateUser(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('ssn', type = str, required=True, help='no CustomerID provided', location='json')
+        self.reqparse.add_argument('lastname', type = str, required=True, help='no Last name provided.', location='json')
+        self.reqparse.add_argument('firstname', type = str, required=True, help='no First name provided.', location='json')
+        self.reqparse.add_argument('address', type = str, required=True, help='no Address provided', location='json')
+        self.reqparse.add_argument('city', type = str, required=True, help='no City provided',location='json')
+        self.reqparse.add_argument('state', type = str, required=True, help='no State provided',location='json')
+        self.reqparse.add_argument('zipcode', type = str, required=True, help='no Zip Code provided',location='json')
+        self.reqparse.add_argument('telephone', type = str, required=True, help='no Telephone number provided',location='json')
+        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided',location='json')
+        self.reqparse.add_argument('creditcardnum', type = str, required=True, help='no Credit Card Number provided',location='json')
+        self.reqparse.add_argument('email', type = str, required=True, help='no E-mail provided',location='json')
+        self.reqparse.add_argument('personimg', type = str, required=True, help='no Imagine provided',location='json')
+        super(UpdateUser, self).__init__()
+    def post(self):
         try:
             inputData = self.reqparse.parse_args()
             dbcursor = dbconnection.cursor()
@@ -608,8 +641,6 @@ class CreateUser(Resource):
             return jsonify({'status':'success'})
         except Exception as e:
             return jsonify({'failed - error': e})
-
-
 
 # Creating a new employee
 class CreateEmployee(Resource):
@@ -643,19 +674,6 @@ class CreateEmployee(Resource):
             print (e)
             return jsonify({'failed - error': e})
 
-    def put(self):
-        try:
-            inputData = self.reqparse.parse_args()
-            dbcursor = dbconnection.cursor()
-            sqlcommand1 =('UPDATE person set LastName=?,FirstName=?,Address=?,City=?,State=?,ZipCode=?,Telephone=?,Email=?,UserPassword=?,personimg=? where ssn=?')
-            dbcursor.execute (sqlcommand1,(inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg'],inputData['ssn']))
-            sqlcommand2 =('update Employee set startdate=?,HourlyRate=? where EmployeeID=?) VALUES(?,?,?)')
-            dbcursor.execute (sqlcommand2,(inputData['startdate'],inputData['hourlyrate'],inputData['ssn']))
-            dbcursor.commit()
-            return jsonify({'status':'success'})
-        except Exception as e:
-            return jsonify({'failed - error': e})
-
     def delete(self):
         try:
             inputData = self.reqparse.parse_args()
@@ -669,15 +687,53 @@ class CreateEmployee(Resource):
             print(e)
             return jsonify({'failed - error': e})
 
-class Login(Resource):
+# Creating a new employee
+class UpdateEmployee(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('ssn', type = str, required=True, help='no ID provided', location='json')
-        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided.', location='json')
-        super(Login, self).__init__()
+        self.reqparse.add_argument('ssn', type = str, required=True, help='no CustomerID provided', location='json')
+        self.reqparse.add_argument('lastname', type = str, required=True, help='no Last name provided.', location='json')
+        self.reqparse.add_argument('firstname', type = str, required=True, help='no First name provided.', location='json')
+        self.reqparse.add_argument('address', type = str, required=True, help='no Address provided', location='json')
+        self.reqparse.add_argument('city', type = str, required=True, help='no City provided',location='json')
+        self.reqparse.add_argument('state', type = str, required=True, help='no State provided',location='json')
+        self.reqparse.add_argument('zipcode', type = str, required=True, help='no Zip Code provided',location='json')
+        self.reqparse.add_argument('telephone', type = str, required=True, help='no Telephone number provided',location='json')
+        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided',location='json')
+        self.reqparse.add_argument('startdate', type = str, required=True, help='no Start Date provided',location='json')
+        self.reqparse.add_argument('hourlyrate', type = str, required=True, help='no Hourly Rate provided',location='json')
+        self.reqparse.add_argument('personimg', type = str, required=True, help='no Imagine provided',location='json')
+        self.reqparse.add_argument('email', type = str, required=True, help='no Email provided',location='json')
+        super(UpdateEmployee, self).__init__()
+
     def post(self):
         try:
             inputData = self.reqparse.parse_args()
+            dbcursor = dbconnection.cursor()
+            print('b')
+            sqlcommand1 =('UPDATE person set LastName=?,FirstName=?,Address=?,City=?,State=?,ZipCode=?,Telephone=?,Email=?,UserPassword=?,personimg=? where ssn=?')
+            print('b')
+            dbcursor.execute (sqlcommand1,(inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg'],inputData['ssn']))
+            print('b')
+            sqlcommand2 =('update Employee set startdate=?,HourlyRate=? where EmployeeID=?')
+            dbcursor.execute (sqlcommand2,(inputData['startdate'],inputData['hourlyrate'],inputData['ssn']))
+            print('b')
+            dbcursor.commit()
+            return jsonify({'status':'success'})
+        except Exception as e:
+            return jsonify({'failed - error': e})
+
+
+class Login(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('ssn', type = str, required=True, help='no ID provided')
+        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided.')
+        super(Login, self).__init__()
+    def post(self):
+        try:
+            #inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand =('select * from person where ssn=? and userpassword=?')
             dbcursor.execute(sqlcommand,(inputData['ssn'],inputData['userpassword']))
@@ -733,29 +789,19 @@ class Bidding(Resource):
             bidincrement=float(r['root']['row']['bidincrement'])
             bidprice=float(inputData['bidprice'])
             
-            if currenthighbid>0.0:
-               
+            if currenthighbid>0.0:  
                 while bidprice >= (currentbid+bidincrement) and currenthighbid >= (currentbid+bidincrement):        
-                    
                     if bidprice >= (currentbid+bidincrement):
                         #update currentbid
                         currentbid=currentbid+bidincrement
                         #update bidincrement
                         bidincrement=increment(currentbid)
-
-                    if currenthighbid >= (currentbid+bidincrement):
-                        #update currentbid
-                        currentbid=currentbid+bidincrement
-                        #update bidincrement
-                        bidincrement=increment(currentbid)
-                   
                 
                 if bidprice >= (currentbid+bidincrement) or currenthighbid >= (currentbid+bidincrement):
                     #update currentbid
                     currentbid=currentbid+bidincrement
                     #update bidincrement
                     bidincrement=increment(currentbid)
-
             else:
                 #update currentbid
                 currentbid=currentbid+bidincrement
@@ -765,10 +811,7 @@ class Bidding(Resource):
             if bidprice>currenthighbid:
                 #new bidder out bidded the auction
                 currenthighbid=bidprice
-            if bidprice==currenthighbid:
-                #original bidder keeps the maximum bid
-                currenthighbid=currenthighbid
- 
+            # if bidprice is equal to currenthighbid original bidder keeps the maximum bid
 
             sqlcommand =('insert into bid(customerid,auctionid,bidprice,biddate) values(?,?,?,getdate())')
             dbcursor.execute(sqlcommand,(inputData['customerid'],inputData['auctionid'],inputData['bidprice']))
@@ -779,6 +822,7 @@ class Bidding(Resource):
         except Exception as e:
             print(e)
             return jsonify({'failed - error': e})
+
 # returns a list of itemname,itemtype,yearmanufactured,itemsold
 api.add_resource(TopSellerCategory, '/topcategory')
 # returns 1 item of auctionid,itemname,openbid,bidincrement,currentbid,sellerid,itemtype,yearmanufactured,postdate,expiredates,firstname,lastname,itemimg,totalbidders
@@ -814,6 +858,8 @@ api.add_resource(StaffRevenue,'/staffrevenue')
 api.add_resource(CustomerRevenue,'/customerrevenue')
 # requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,creditcardnum,email,personimg
 api.add_resource(CreateUser,'/createuser')
+# requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,creditcardnum,email,personimg
+api.add_resource(UpdateUser,'/updateuser')
 # requires ssn,userpassword 
 # when logged as a customer returns customerid,lastname,firstname,address,city,state,zipcode,telephone,email,personimg,rating 
 # when logged as an employee returns employeeid,maglevel,lastname,firstname,address,city,state,zipcode,telephone,personimg
@@ -824,6 +870,8 @@ api.add_resource(Bidding,'/bidding')
 api.add_resource(BestSellerList,'/bestsellerlist')
 # returns ssn,firstname,lastname,email
 api.add_resource(EmailList,'/emaillist')
-# requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,startdate,hourlyrate,personimg
+# requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,startdate,hourlyrate,personimg,email
 api.add_resource(CreateEmployee,'/createemployee')
+# requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,startdate,hourlyrate,personimg,email
+api.add_resource(UpdateEmployee,'/updateemployee')
 
