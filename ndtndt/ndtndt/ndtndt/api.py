@@ -115,6 +115,7 @@ class CreateAuction(Resource):
         self.reqparse.add_argument('expiredate', type = str, required=True, help='no ExpireDates provided',location='json')
         self.reqparse.add_argument('itemimg', type = str, required=True, help='no Image provided',location='json')
         self.reqparse.add_argument('descriptions', type = str, required=True, help='no descriptions provided',location='json')
+        self.reqparse.add_argument('monitor', type = str, required=True, help='no monitor provided',location='json')
         super(CreateAuction, self).__init__()
     def post(self):
         try:
@@ -130,11 +131,11 @@ class CreateAuction(Resource):
                                 END''')
             dbcursor.execute (sqlcommand1,(inputData['itemname'],inputData['itemname'],inputData['category'],inputData['year']))
             dbcursor.commit()
-            sqlcommand =('''INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID,currentbid,itemimg,descriptions) VALUES (?,?,?,?,?,?,?,?)
+            sqlcommand =('''INSERT INTO Auction (OpenBid,BidIncrement,ReservePrice,ItemName,SellerID,currentbid,itemimg,descriptions,monitor) VALUES (?,?,?,?,?,?,?,?,?)
                             INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID) VALUES (?,?,?,?,SCOPE_IDENTITY())''')
             
             bidincrement=increment(float(inputData['openbid']))
-            dbcursor.execute (sqlcommand,(inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['itemimg'],inputData['descriptions'],inputData['expiredate'],inputData['postdate'],inputData['sellerid'],inputData['itemname']))
+            dbcursor.execute (sqlcommand,(inputData['openbid'],bidincrement,inputData['reservePrice'],inputData['itemname'],inputData['sellerid'],inputData['openbid'],inputData['itemimg'],inputData['descriptions'],inputData['monitor'],inputData['expiredate'],inputData['postdate'],inputData['sellerid'],inputData['itemname']))
             dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
@@ -203,7 +204,7 @@ class AuctionAll(Resource):
                             a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating, a.descriptions,
                             p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg,pp.personimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
-                            inner join post p on p.itemname=i.itemname inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
+                            inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
                             left join bid b on b.auctionid=a.auctionid where a.sold=0 and getdate()<p.expiredates 
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
                             a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating, a.descriptions,
@@ -224,6 +225,21 @@ class AuctionAll(Resource):
                 return(r['root']['row'])
             else:
                 return jsonify({'id': 'is not found'})
+        except Exception as e:
+            print(e)
+            return jsonify({'error': e})
+class Monitors(Resource):
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''select p.ssn as monitorssn,p.firstname as monitorfirstname, p.lastname as monitorlastname 
+                            from employee e inner join person p on e.employeeid=p.ssn where e.maglevel=1 for xml path''')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            row = str(rows).replace("',), ('", "")
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            return(r['root']['row'])
         except Exception as e:
             print(e)
             return jsonify({'error': e})
@@ -777,40 +793,83 @@ class Bidding(Resource):
         try:
             inputData = self.reqparse.parse_args()
             dbcursor = dbconnection.cursor()
-            sqlcommand =('select currenthighbid,currentbid,bidincrement from auction where auctionid=? for xml path')
-            dbcursor.execute(sqlcommand,(inputData['auctionid'],))
+            sqlcommand =('''if exists(select top 1 a.currenthighbid,a.currentbid,a.bidincrement,b.customerid from auction a  
+                            inner join bid b on a.auctionid=b.auctionid where a.auctionid=? and a.currenthighbid=b.bidprice
+                            order by b.biddate)
+                            begin
+                            select top 1 a.currenthighbid,a.currentbid,a.bidincrement,b.customerid from auction a  
+                            inner join bid b on a.auctionid=b.auctionid where a.auctionid=? and a.currenthighbid=b.bidprice
+                            order by b.biddate for xml path end else begin
+                            select a.currenthighbid,a.currentbid,a.bidincrement from auction a  
+                            where a.auctionid=? for xml path end''')
+            dbcursor.execute(sqlcommand,(inputData['auctionid'],inputData['auctionid'],inputData['auctionid']))
             rows=dbcursor.fetchall()
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-
+            try:
+                currentwinner=r['root']['row']['customerid']
+            except:
+                currentwinner=inputData['customerid']
+            
             currenthighbid=float(r['root']['row']['currenthighbid'])
             currentbid=float(r['root']['row']['currentbid'])
             bidincrement=float(r['root']['row']['bidincrement'])
             bidprice=float(inputData['bidprice'])
             
             if currenthighbid>0.0:  
-                while bidprice >= (currentbid+bidincrement) and currenthighbid >= (currentbid+bidincrement):        
+                while bidprice >= (currentbid+bidincrement) and currenthighbid >= (currentbid+bidincrement):
+                    sqlcommand =('''if not exists(select * from biddinghistory where auctionid=? and currentbid=?)
+                            begin insert into biddinghistory(auctionid,currentwinner,currentbid,currenthighbid,bidincrement) values(?,?,?,?,?) end''')
+                    dbcursor.execute(sqlcommand,(inputData['auctionid'],currentbid,inputData['auctionid'],currentwinner,currentbid,currenthighbid,bidincrement))
+                    dbcursor.commit()      
                     if bidprice >= (currentbid+bidincrement):
                         #update currentbid
                         currentbid=currentbid+bidincrement
                         #update bidincrement
                         bidincrement=increment(currentbid)
-                
-                if bidprice >= (currentbid+bidincrement) or currenthighbid >= (currentbid+bidincrement):
+                        
+                sqlcommand =('''if not exists(select * from biddinghistory where auctionid=? and currentbid=?)
+                            begin insert into biddinghistory(auctionid,currentwinner,currentbid,currenthighbid,bidincrement) values(?,?,?,?,?) end''')
+                dbcursor.execute(sqlcommand,(inputData['auctionid'],currentbid,inputData['auctionid'],currentwinner,currentbid,currenthighbid,bidincrement))
+                dbcursor.commit()
+                if bidprice >= (currentbid+bidincrement): 
                     #update currentbid
                     currentbid=currentbid+bidincrement
                     #update bidincrement
                     bidincrement=increment(currentbid)
+                    sqlcommand =('''if not exists(select * from biddinghistory where auctionid=? and currentbid=?)
+                            begin insert into biddinghistory(auctionid,currentwinner,currentbid,currenthighbid,bidincrement) values(?,?,?,?,?) end''')
+                    dbcursor.execute(sqlcommand,(inputData['auctionid'],currentbid,inputData['auctionid'],inputData['customerid'],currentbid,bidprice,bidincrement))
+                    dbcursor.commit()
+                elif currenthighbid >= (currentbid+bidincrement):
+                    #update currentbid
+                    currentbid=currentbid+bidincrement
+                    #update bidincrement
+                    bidincrement=increment(currentbid)
+                    sqlcommand =('''if not exists(select * from biddinghistory where auctionid=? and currentbid=?)
+                            begin insert into biddinghistory(auctionid,currentwinner,currentbid,currenthighbid,bidincrement) values(?,?,?,?,?) end''')
+                    dbcursor.execute(sqlcommand,(inputData['auctionid'],currentbid,inputData['auctionid'],currentwinner,currentbid,currenthighbid,bidincrement))
+                    dbcursor.commit()
+
             else:
                 #update currentbid
                 currentbid=currentbid+bidincrement
                 #update bidincrement
                 bidincrement=increment(currentbid)
+                sqlcommand =('''if not exists(select * from biddinghistory where auctionid=? and currentbid=?)
+                            begin insert into biddinghistory(auctionid,currentwinner,currentbid,currenthighbid,bidincrement) values(?,?,?,?,?) end''')
+                dbcursor.execute(sqlcommand,(inputData['auctionid'],currentbid,inputData['auctionid'],inputData['customerid'],currentbid,inputData['bidprice'],bidincrement))
+                dbcursor.commit()
 
             if bidprice>currenthighbid:
                 #new bidder out bidded the auction
                 currenthighbid=bidprice
+                bidincrement=increment(currentbid)
+                sqlcommand =('''if not exists(select * from biddinghistory where auctionid=? and currentbid=?)
+                            begin insert into biddinghistory(auctionid,currentwinner,currentbid,currenthighbid,bidincrement) values(?,?,?,?,?) end''')
+                dbcursor.execute(sqlcommand,(inputData['auctionid'],currentbid,inputData['auctionid'],inputData['customerid'],currentbid,currenthighbid,bidincrement))
+                dbcursor.commit()
             # if bidprice is equal to currenthighbid original bidder keeps the maximum bid
 
             sqlcommand =('insert into bid(customerid,auctionid,bidprice,biddate) values(?,?,?,getdate())')
@@ -874,4 +933,6 @@ api.add_resource(EmailList,'/emaillist')
 api.add_resource(CreateEmployee,'/createemployee')
 # requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,startdate,hourlyrate,personimg,email
 api.add_resource(UpdateEmployee,'/updateemployee')
+# returns monitorssn, monitorfirstname, monitorlastname
+api.add_resource(Monitors,'/monitors')
 
