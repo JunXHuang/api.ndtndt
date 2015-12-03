@@ -156,27 +156,27 @@ class Auction(Resource):
                             begin
                             select * from (select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
                             a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating,a.descriptions,
-                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg, count(b.auctionid) as totalbidders 
+                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg,pp.personimg as sellerimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
                             inner join post p on p.AuctionID=a.AuctionID inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
                             left join bid b on b.auctionid=a.auctionid where a.sold=0 and getdate()<p.expiredates and a.auctionid=?
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
                             a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating,a.descriptions,
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg) as res1,
-                            (select top 1 p.ssn as bidderid,p.firstname as bidderfirstname,p.lastname as bidderlastname 
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg,pp.personimg) as res1,
+                            (select top 1 p.ssn as bidderid,p.firstname as bidderfirstname,p.lastname as bidderlastname, p.personimg as bidderimg 
                             from auction a inner join bid b on a.auctionid=b.auctionid 
                             inner join person p on p.ssn=b.customerid where a.currenthighbid=b.bidprice and a.auctionid=? 
                             order by b.biddate) as res2 for xml path
                             end else begin
                             select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
-                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating,a.descriptions,
+                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating,a.descriptions, pp.personimg as sellerimg, 
                             p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg, count(b.auctionid) as totalbidders 
                             from auction a inner join item i on i.itemname=a.itemname 
                             inner join post p on p.AuctionID=a.AuctionID inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid 
                             left join bid b on b.auctionid=a.auctionid where a.sold=0 and getdate()<p.expiredates and a.auctionid=?
                             group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
                             a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating,a.descriptions,
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg for xml path
+                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg,pp.personimg for xml path
                             end''')
             dbcursor.execute (sqlcommand,(str(id),str(id),str(id),str(id)))
             rows=dbcursor.fetchall()
@@ -295,6 +295,7 @@ class AuctionAll(Resource):
                 row = str(rows).replace("',), ('", "")
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
+
                 try:
                     for item in r['root']['row']:
                         if float(item['reserveprice'])>0.0:
@@ -302,7 +303,7 @@ class AuctionAll(Resource):
                         else:
                             item['reserveprice']=False
                         item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
-                        return(r['root']['row'])
+                    return(r['root']['row'])
                 except:
                     if float(r['root']['row']['reserveprice'])>0.0:
                             r['root']['row']['reserveprice']=True
@@ -444,8 +445,8 @@ class BestItemList(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''SELECT a.itemname,a.itemimg,count(a.itemname) as amountsold 
-                         from auction a where a.sold=1 group by a.itemname,a.itemimg order by count(a.itemname) desc 
+            sqlcommand =('''SELECT i.itemname, i.copiessold 
+                         from item i where i.copiessold >= 1 order by i.copiessold desc 
                          for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
@@ -730,14 +731,15 @@ class RecordSale(Resource):
     def get(self,id):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''select * from auction where sold=1 and auctionid=?''')
-            dbcursor.execute (sqlcommand,(str(id),))
-            sqlcommand =('''update auction set sold=1 where auctionid=?''')
-            dbcursor.execute (sqlcommand,(str(id),))
-            dbcursor.commit()
-            sqlcommand =('''update item set amountinstock=amountinstock-1 
-                            from auction a inner join item i on a.itemname=i.itemname where auctionid=?''')
-            dbcursor.execute (sqlcommand,(str(id),))
+            sqlcommand =('''if not exists(select * from auction where sold=1 and auctionid=?)
+                            begin
+                            update auction set sold=1 where auctionid=?
+                            update item set amountinstock=amountinstock-1, copiessold=copiessold+1 
+                            from auction a inner join item i on a.itemname=i.itemname where auctionid=?
+                            update customer set rating=rating+1 from customer c inner join auction a on 
+                            c.customerid=a.sellerid where a.auctionid=? 
+                            end''')
+            dbcursor.execute (sqlcommand,(str(id),str(id),str(id),str(id)))
             dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
@@ -1046,8 +1048,8 @@ class EmployeeDataList(Resource):
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             print(len(r['root']))
-            if len(r['root'])>1:
-                    return(r['root']['row'])
+            if len(r['root']['row'])>1:
+                return(r['root']['row'])
             else:
                 return([r['root']['row']])
         except Exception as e:
