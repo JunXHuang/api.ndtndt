@@ -119,7 +119,7 @@ class CreateAuction(Resource):
         super(CreateAuction, self).__init__()
     def post(self):
         try:
-            inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand1=('''IF NOT EXISTS(SELECT itemname,amountinstock FROM item WHERE itemname=?)
@@ -212,13 +212,19 @@ class ListofSalesByItemName(Resource):
                 row = str(rows).replace("',), ('", "")
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
-                for item in r['root']['row']:
-                    if float(item['reserveprice'])>0.0:
-                        item['reserveprice']=True
+                try:
+                    for item in r['root']['row']:
+                        if float(item['reserveprice'])>0.0:
+                            item['reserveprice']=True
+                        else:
+                            item['reserveprice']=False
+                        item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
+                except:
+                    if float(r['root']['row']['reserveprice'])>0.0:
+                            r['root']['row']['reserveprice']=True
                     else:
-                        item['reserveprice']=False
-                    item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
-
+                        r['root']['row']['reserveprice']=False
+                    r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
                 return(r['root']['row'])
             else:
                 return jsonify({'itemname': 'is not found'})
@@ -245,13 +251,19 @@ class ListofSalesByCustomerID(Resource):
                 row = str(rows).replace("',), ('", "")
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
-                for item in r['root']['row']:
-                    if float(item['reserveprice'])>0.0:
-                        item['reserveprice']=True
+                try:
+                    for item in r['root']['row']:
+                        if float(item['reserveprice'])>0.0:
+                            item['reserveprice']=True
+                        else:
+                            item['reserveprice']=False
+                        item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
+                except:
+                    if float(r['root']['row']['reserveprice'])>0.0:
+                            r['root']['row']['reserveprice']=True
                     else:
-                        item['reserveprice']=False
-                    item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
-
+                        r['root']['row']['reserveprice']=False
+                    r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
                 return(r['root']['row'])
             else:
                 return jsonify({'customerid': 'is not found'})
@@ -278,13 +290,19 @@ class AuctionAll(Resource):
                 row = str(rows).replace("',), ('", "")
                 row="<root>"+row[3:-4]+"</root>"
                 r=xmltodict.parse(row)
-                for item in r['root']['row']:
-                    if float(item['reserveprice'])>0.0:
-                        item['reserveprice']=True
+                try:
+                    for item in r['root']['row']:
+                        if float(item['reserveprice'])>0.0:
+                            item['reserveprice']=True
+                        else:
+                            item['reserveprice']=False
+                        item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
+                except:
+                    if float(r['root']['row']['reserveprice'])>0.0:
+                            r['root']['row']['reserveprice']=True
                     else:
-                        item['reserveprice']=False
-                    item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
-
+                        r['root']['row']['reserveprice']=False
+                    r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
                 return(r['root']['row'])
             else:
                 return jsonify({'id': 'is not found'})
@@ -315,7 +333,7 @@ class StaffPicks(Resource):
         super(StaffPicks, self).__init__()
     def post(self):
         try:
-            inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand =('insert into staffpicks (auctionid) values (?)')
             dbcursor.execute (sqlcommand,(inputData['auctionid'],))
@@ -326,7 +344,7 @@ class StaffPicks(Resource):
             return jsonify({'error': e})
     def delete(self):
         try:
-            inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand =('delete from staffpicks where auctionid=?')
             dbcursor.execute (sqlcommand,(inputData['auctionid'],))
@@ -356,57 +374,6 @@ class StaffPicks(Resource):
             return(r['root']['row'])
         except Exception as e:
             print(e)
-
-class UserPicks(Resource):
-    def __init__(self):
-        self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('auctionid', type = str, required=True, help='no AuctionID provided', location='json')
-        self.reqparse.add_argument('customerid', type = str, required=True, help='no AuctionID provided', location='json')
-        super(UserPicks, self).__init__()
-    def post(self):
-        try:
-            inputData = self.reqparse.parse_args()
-            dbcursor = dbconnection.cursor()
-            sqlcommand =('insert into userpicks (auctionid,userid) values (?,?)')
-            dbcursor.execute (sqlcommand,(inputData['auctionid'],inputData['customerid']))
-            dbcursor.commit()
-            return jsonify({'status':'success'})
-        except Exception as e:
-            print(e)
-            return jsonify({'error': e})
-    def delete(self):
-        try:
-            inputData = self.reqparse.parse_args()
-            dbcursor = dbconnection.cursor()
-            sqlcommand =('delete from userpicks where auctionid=? and userid=?')
-            dbcursor.execute (sqlcommand,(inputData['auctionid'],inputData['customerid']))
-            dbcursor.commit()
-            return jsonify({'status':'success'})
-        except Exception as e:
-            print(e)
-
-    def get(self):
-        try:
-            dbcursor = dbconnection.cursor()
-            sqlcommand =('''select a.auctionid,i.itemname,a.openbid,a.bidincrement, a.currentbid, 
-                            a.sellerid,i.itemtype, i.yearmanufactured, p.postdate, c.rating,a.descriptions,
-                            p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg, count(b.auctionid) as totalbidders 
-                            from auction a inner join item i on i.itemname=a.itemname inner join post p on p.AuctionID=a.AuctionID 
-							inner join person pp on pp.ssn=a.sellerid inner join customer c on pp.ssn=c.customerid inner join userpicks s on s.auctionid=a.auctionid 
-                            left join bid b on b.auctionid=a.auctionid where s.userid=? 
-                            group by a.auctionid,i.itemname,a.openbid,a.bidincrement, 
-                            a.currentbid, a.sellerid,i.itemtype, i.yearmanufactured, c.rating,a.descriptions,
-                            p.postdate, p.expiredates,pp.firstname,pp.lastname,a.reserveprice,a.itemimg for xml path''')
-            dbcursor.execute (sqlcommand,(inputData['customerid'],))
-            rows=dbcursor.fetchall()
-            row = str(rows).replace("',), ('", "")
-            row="<root>"+row[3:-4]+"</root>"
-            r=xmltodict.parse(row)
-            r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
-            return(r['root']['row'])
-        except Exception as e:
-            print(e)
-
 
 class GetUserPicks(Resource):
     def get(self,id):
@@ -706,11 +673,11 @@ class BestSellerList(Resource):
 
 # Record a sale
 class RecordSale(Resource):
-    def __init__(self):
-        pass
     def get(self,id):
         try:
             dbcursor = dbconnection.cursor()
+            sqlcommand =('''select * from auction where sold=1 and auctionid=?''')
+            dbcursor.execute (sqlcommand,(str(id),))
             sqlcommand =('''update auction set sold=1 where auctionid=?''')
             dbcursor.execute (sqlcommand,(str(id),))
             dbcursor.commit()
@@ -742,30 +709,96 @@ class CreateUser(Resource):
         super(CreateUser, self).__init__()
     def post(self):
         try:
-            inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand1 =('INSERT INTO Person (SSN,LastName,FirstName,Address,City,State,ZipCode,Telephone,Email,UserPassword,personimg) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
             dbcursor.execute (sqlcommand1,(inputData['ssn'],inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg']))
             sqlcommand2 =('INSERT INTO Customer (Rating,CreditCardNum,CustomerID) VALUES(1,?,?)')
             dbcursor.execute (sqlcommand2,(inputData['creditcardnum'],inputData['ssn']))
             dbcursor.commit()
-            return jsonify({'status':'success'})
-        except Exception as e:
-            return jsonify({'failed - error': e})
-
-    def delete(self):
-        try:
-            inputData = self.reqparse.parse_args()
-            dbcursor = dbconnection.cursor()
-            sqlcommand =('''delete from Customer where customerid=? 
-                            delete from Person where ssn=? ''')
-            dbcursor.execute (sqlcommand,(inputData['ssn'],inputData['ssn']))
-            dbcursor.commit()
+            
+            sqlcommand =('SELECT TOP 6 auctionid FROM auction ORDER BY NEWID() for xml path')
+            dbcursor.execute (sqlcommand)
+            rows=dbcursor.fetchall()
+            row = str(rows).replace("',), ('", "")
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            for item in r['root']['row']:
+                sqlcommand =('INSERT INTO userpicks (UserID,auctionid) VALUES(?,?)')
+                dbcursor.execute (sqlcommand,(inputData['ssn'],item['auctionid']))
+                dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
             print(e)
             return jsonify({'failed - error': e})
 
+
+# Creating a new user
+class UserPicking(Resource):
+    def post(self,id):
+        try:
+            sqlcommand =('SELECT * from userpicks where userid=?')
+            dbcursor.execute (sqlcommand,(str(id),))
+            rows=dbcursor.fetchall()
+            if not rows:
+                sqlcommand =('SELECT TOP 6 auctionid FROM auction ORDER BY NEWID() for xml path')
+                dbcursor.execute (sqlcommand)
+                rows=dbcursor.fetchall()
+                row = str(rows).replace("',), ('", "")
+                row="<root>"+row[3:-4]+"</root>"
+                r=xmltodict.parse(row)
+                for item in r['root']['row']:
+                    print('item '+str(item['auctionid']))
+                    sqlcommand =('INSERT INTO userpicks (UserID,auctionid) VALUES(?,?)')
+                    dbcursor.execute (sqlcommand,(str(id),item['auctionid']))
+                    dbcursor.commit()
+
+            return jsonify({'status':'success'})
+        except Exception as e:
+            print(e)
+            return jsonify({'failed - error': e})
+
+   
+# Creating a new user
+class DeleteUser(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('ssn', type = str, required=True, help='no CustomerID provided', location='json')
+        self.reqparse.add_argument('lastname', type = str, required=True, help='no Last name provided.', location='json')
+        self.reqparse.add_argument('firstname', type = str, required=True, help='no First name provided.', location='json')
+        self.reqparse.add_argument('address', type = str, required=True, help='no Address provided', location='json')
+        self.reqparse.add_argument('city', type = str, required=True, help='no City provided',location='json')
+        self.reqparse.add_argument('state', type = str, required=True, help='no State provided',location='json')
+        self.reqparse.add_argument('zipcode', type = str, required=True, help='no Zip Code provided',location='json')
+        self.reqparse.add_argument('telephone', type = str, required=True, help='no Telephone number provided',location='json')
+        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided',location='json')
+        self.reqparse.add_argument('creditcardnum', type = str, required=True, help='no Credit Card Number provided',location='json')
+        self.reqparse.add_argument('email', type = str, required=True, help='no E-mail provided',location='json')
+        self.reqparse.add_argument('personimg', type = str, required=True, help='no Imagine provided',location='json')
+        super(DeleteUser, self).__init__()
+
+    def post(self):
+        try:
+            inputData = request.get_json(force=True)
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''select * from auction a inner join bid b on a.auctionid=b.auctionid where b.customerid=? and a.sold=0''')
+            dbcursor.execute (sqlcommand,(inputData['ssn'],))
+            rows=dbcursor.fetchall()
+            if not rows:
+                sqlcommand =('''select * from auction a inner join post b on a.auctionid=b.auctionid where b.customerid=? and a.sold=0''')
+                dbcursor.execute (sqlcommand,(inputData['ssn'],))
+                row=dbcursor.fetchall()
+                if not row:
+                    sqlcommand =('''delete from Customer where customerid=?''')
+                    dbcursor.execute (sqlcommand,(inputData['ssn'],))
+                    sqlcommand =('''delete from Person where ssn=?''')
+                    dbcursor.execute (sqlcommand,(inputData['ssn'],))                 
+                    dbcursor.commit()
+                    return jsonify({'status':'success'})
+            return jsonify({'status':'failed'})
+        except Exception as e:
+            print(e)
+            return jsonify({'failed - error': e})
 
 # Updating a new user
 class UpdateUser(Resource):
@@ -786,15 +819,19 @@ class UpdateUser(Resource):
         super(UpdateUser, self).__init__()
     def post(self):
         try:
-            inputData = self.reqparse.parse_args()
+
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand1 =('UPDATE person set LastName=?,FirstName=?,Address=?,City=?,State=?,ZipCode=?,Telephone=?,Email=?,UserPassword=?,personimg=? where ssn=?')
             dbcursor.execute (sqlcommand1,(inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg'],inputData['ssn']))
-            sqlcommand2 =('Update Customer set CreditCardNum=? where CustomerID=?')
-            dbcursor.execute (sqlcommand2,(inputData['creditcardnum'],inputData['ssn']))
             dbcursor.commit()
+            if inputData['creditcardnum']!='p':
+                sqlcommand2 =('Update Customer set CreditCardNum=? where CustomerID=?')
+                dbcursor.execute (sqlcommand2,(inputData['creditcardnum'],inputData['ssn']))
+                dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
+            print(e)
             return jsonify({'failed - error': e})
 
 # Creating a new employee
@@ -817,7 +854,7 @@ class CreateEmployee(Resource):
         super(CreateEmployee, self).__init__()
     def post(self):
         try:
-            inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand1 =('INSERT INTO Person (SSN,LastName,FirstName,Address,City,State,ZipCode,Telephone,Email,UserPassword,personimg) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
             dbcursor.execute (sqlcommand1,(inputData['ssn'],inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg']))
@@ -831,8 +868,43 @@ class CreateEmployee(Resource):
 
     def delete(self):
         try:
-            inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
+            sqlcommand =('''delete from Employee where employeeid=? 
+                            delete from Person where ssn=? ''')
+            dbcursor.execute (sqlcommand,(inputData['ssn'],inputData['ssn']))
+            dbcursor.commit()
+            return jsonify({'status':'success'})
+        except Exception as e:
+            print(e)
+            return jsonify({'failed - error': e})
+
+# Creating a new employee
+class DeleteEmployee(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('ssn', type = str, required=True, help='no CustomerID provided', location='json')
+        self.reqparse.add_argument('lastname', type = str, required=True, help='no Last name provided.', location='json')
+        self.reqparse.add_argument('firstname', type = str, required=True, help='no First name provided.', location='json')
+        self.reqparse.add_argument('address', type = str, required=True, help='no Address provided', location='json')
+        self.reqparse.add_argument('city', type = str, required=True, help='no City provided',location='json')
+        self.reqparse.add_argument('state', type = str, required=True, help='no State provided',location='json')
+        self.reqparse.add_argument('zipcode', type = str, required=True, help='no Zip Code provided',location='json')
+        self.reqparse.add_argument('telephone', type = str, required=True, help='no Telephone number provided',location='json')
+        self.reqparse.add_argument('userpassword', type = str, required=True, help='no Password provided',location='json')
+        self.reqparse.add_argument('startdate', type = str, required=True, help='no Start Date provided',location='json')
+        self.reqparse.add_argument('hourlyrate', type = str, required=True, help='no Hourly Rate provided',location='json')
+        self.reqparse.add_argument('personimg', type = str, required=True, help='no Imagine provided',location='json')
+        self.reqparse.add_argument('email', type = str, required=True, help='no Email provided',location='json')
+        super(CreateEmployee, self).__init__()
+
+    def post(self):
+        try:
+            inputData = request.get_json(force=True)
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''update auction set monitor = (select top 1 employeeid from employee where maglevel=1 and employeeid <> ?) where monitor=?''')
+            dbcursor.execute (sqlcommand,(inputData['ssn'],inputData['ssn']))
+            dbcursor.commit()
             sqlcommand =('''delete from Employee where employeeid=? 
                             delete from Person where ssn=? ''')
             dbcursor.execute (sqlcommand,(inputData['ssn'],inputData['ssn']))
@@ -863,16 +935,12 @@ class UpdateEmployee(Resource):
 
     def post(self):
         try:
-            inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
-            print('b')
             sqlcommand1 =('UPDATE person set LastName=?,FirstName=?,Address=?,City=?,State=?,ZipCode=?,Telephone=?,Email=?,UserPassword=?,personimg=? where ssn=?')
-            print('b')
             dbcursor.execute (sqlcommand1,(inputData['lastname'],inputData['firstname'],inputData['address'],inputData['city'],inputData['state'],inputData['zipcode'],inputData['telephone'],inputData['email'],inputData['userpassword'],inputData['personimg'],inputData['ssn']))
-            print('b')
             sqlcommand2 =('update Employee set startdate=?,HourlyRate=? where EmployeeID=?')
             dbcursor.execute (sqlcommand2,(inputData['startdate'],inputData['hourlyrate'],inputData['ssn']))
-            print('b')
             dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
@@ -887,7 +955,7 @@ class Login(Resource):
         super(Login, self).__init__()
     def post(self):
         try:
-            #inputData = self.reqparse.parse_args()
+            #inputData = request.get_json(force=True)
             inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand =('select * from person where ssn=? and userpassword=?')
@@ -930,7 +998,7 @@ class Bidding(Resource):
         super(Bidding, self).__init__()
     def post(self):
         try:
-            inputData = self.reqparse.parse_args()
+            inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
             sqlcommand =('''if exists(select top 1 a.currenthighbid,a.currentbid,a.bidincrement,b.customerid from auction a  
                             inner join bid b on a.auctionid=b.auctionid where a.auctionid=? and a.currenthighbid=b.bidprice
@@ -1035,8 +1103,7 @@ api.add_resource(CreateAuction, '/createitem')
 api.add_resource(StaffPicks,'/staffpicks')
 # returns a list of auctionid,openbid,currentbid,itemname,sellerid,itemname,itemtype,yearmanufactured,postdate,expiredates,itemimg,totalbidders
 api.add_resource(GetUserPicks,'/getuserpicks/<string:id>')
-# requires customerid,auctionid
-api.add_resource(UserPicks,'/userpicks')
+api.add_resource(UserPicking,'/userpicks/<string:id>')
 # return a list of salesyear,salesmonth,totalsales
 api.add_resource(SalesReport,'/salesreport')
 # return itemname,amountsold
@@ -1064,6 +1131,8 @@ api.add_resource(CustomerRevenue,'/customerrevenue')
 api.add_resource(CreateUser,'/createuser')
 # requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,creditcardnum,email,personimg
 api.add_resource(UpdateUser,'/updateuser')
+# requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,creditcardnum,email,personimg
+api.add_resource(DeleteUser,'/deleteuser')
 # requires ssn,userpassword 
 # when logged as a customer returns customerid,lastname,firstname,address,city,state,zipcode,telephone,email,personimg,rating 
 # when logged as an employee returns employeeid,maglevel,lastname,firstname,address,city,state,zipcode,telephone,personimg
@@ -1080,6 +1149,7 @@ api.add_resource(EmailList,'/emaillist')
 api.add_resource(CreateEmployee,'/createemployee')
 # requires ssn,lastname,firstname,address,city,state,zipcode,telephone,userpassword,startdate,hourlyrate,personimg,email
 api.add_resource(UpdateEmployee,'/updateemployee')
+api.add_resource(DeleteEmployee,'/deleteemployee')
 # returns monitorssn, monitorfirstname, monitorlastname
 api.add_resource(Monitors,'/monitors')
 # require  itemname return a list of auctionid,itemname,openbid,bidincrement,currentbid,sellerid,itemtype,yearmanufactured,postdate,expiredates,firstname,lastname,itemimg,totalbidders
