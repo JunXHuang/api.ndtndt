@@ -380,7 +380,6 @@ class StaffPicks(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
             if len(r['root'])>1:
                     return(r['root']['row'])
             else:
@@ -406,7 +405,6 @@ class GetUserPicks(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
             if len(r['root'])>1:
                     return(r['root']['row'])
             else:
