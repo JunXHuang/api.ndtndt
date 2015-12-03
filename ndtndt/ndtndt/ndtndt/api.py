@@ -560,7 +560,7 @@ class CustomerBidHistory(Resource):
             sqlcommand =('''select DISTINCT i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,pp.ssn as sellerid,
                             a.auctionid,a.openbid,a.currentbid,p.postdate,p.expiredates,a.sold,pp.personimg 
                             from item i inner join auction a on i.itemname=a.itemname inner join bid b on b.auctionid=a.auctionid
-                            inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=p.customerid
+                            inner join post p on p.auctionid=a.auctionid inner join person pp on pp.ssn=b.customerid
                             where pp.ssn=?
                             for xml path''')
             dbcursor.execute (sqlcommand,(id,))
@@ -655,6 +655,28 @@ class StaffRevenue(Resource):
         except Exception as e:
             print(e)
 
+class AuctionListByMonitor(Resource):
+    def __init__(self):
+        pass
+    def get(self,id):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand =('''select auctionid,openbid,bidincrement, 
+                            reserveprice,currenthighbid,currentbid, 
+                            itemname,itemimg,descriptions from auction 
+                            where monitor=? and sold=0
+                            for xml path''')
+            dbcursor.execute (sqlcommand,(str(id),))
+            rows=dbcursor.fetchall()
+            row = str(rows).replace("',), ('", "")
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
+                return([r['root']['row']])
+        except Exception as e:
+            print(e)
 # Determine which customer generated most total revenue
 class CustomerRevenue(Resource):
     def __init__(self):
@@ -685,8 +707,9 @@ class EmailList(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''select p.ssn,p.firstname,p.lastname,p.email,p.personimg   
-                            from customer c inner join person p on c.customerid=p.ssn
+            sqlcommand =('''select e.customerid,p.lastname,p.firstname, 
+                            p.address,p.city,p.state,p.zipcode,p.telephone,e.creditcardnum,p.email, 
+                            p.userpassword, p.personimg from customer e inner join person p on e.customerid=p.ssn 
                             for xml path''')
             dbcursor.execute (sqlcommand)
             rows=dbcursor.fetchall()
@@ -839,7 +862,7 @@ class DeleteUser(Resource):
                     dbcursor.execute (sqlcommand,(inputData['ssn'],))                 
                     dbcursor.commit()
                     return jsonify({'status':'success'})
-            return jsonify({'status':'failed'})
+            return jsonify({'status':'Has an item on Auction or Currently bidding on an item.'})
         except Exception as e:
             print(e)
             return jsonify({'failed - error': e})
@@ -946,7 +969,7 @@ class DeleteEmployee(Resource):
         try:
             inputData = request.get_json(force=True)
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''update auction set monitor = (select top 1 employeeid from employee where maglevel=1 and employeeid <> ?) where monitor=?''')
+            sqlcommand =('''update auction set monitor = (select top 1 employeeid from employee where maglevel=1 and employeeid <> ? order by NEWID()) where monitor=?''')
             dbcursor.execute (sqlcommand,(inputData['ssn'],inputData['ssn']))
             dbcursor.commit()
             sqlcommand =('''delete from Employee where employeeid=? 
@@ -1225,4 +1248,4 @@ api.add_resource(ListofSalesByItemName,'/listofsalesbyitemname/<string:id>')
 # requires customerid return a list of auctionid,itemname,openbid,bidincrement,currentbid,sellerid,itemtype,yearmanufactured,postdate,expiredates,firstname,lastname,itemimg,totalbidders
 api.add_resource(ListofSalesByCustomerID,'/listofsalesbycustomerid/<string:id>')
 api.add_resource(EmployeeDataList,'/employeedatalist')
-
+api.add_resource(AuctionListByMonitor,'/auctionlistbymonitor/<string:id>')
