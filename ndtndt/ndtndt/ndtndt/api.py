@@ -94,10 +94,9 @@ class TopSellerCategory(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -327,12 +326,10 @@ class Monitors(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
-
         except Exception as e:
             print(e)
             return jsonify({'error': e})
@@ -383,10 +380,9 @@ class StaffPicks(Resource):
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -410,10 +406,9 @@ class GetUserPicks(Resource):
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -435,10 +430,9 @@ class SalesReport(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -458,10 +452,9 @@ class BestItemList(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -481,10 +474,9 @@ class AuctionHistory(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -504,10 +496,9 @@ class RevenueByItem(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -528,10 +519,9 @@ class RevenueByType(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -552,10 +542,9 @@ class RevenueBySellerID(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -578,10 +567,9 @@ class CustomerBidHistory(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -610,10 +598,9 @@ class CustomerSellHistory(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -635,10 +622,9 @@ class ItemSuggestions(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -661,10 +647,9 @@ class StaffRevenue(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -685,10 +670,9 @@ class CustomerRevenue(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -708,10 +692,9 @@ class EmailList(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -735,10 +718,9 @@ class BestSellerList(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print(e)
@@ -956,7 +938,7 @@ class DeleteEmployee(Resource):
         self.reqparse.add_argument('hourlyrate', type = str, required=True, help='no Hourly Rate provided',location='json')
         self.reqparse.add_argument('personimg', type = str, required=True, help='no Imagine provided',location='json')
         self.reqparse.add_argument('email', type = str, required=True, help='no Email provided',location='json')
-        super(CreateEmployee, self).__init__()
+        super(DeleteEmployee, self).__init__()
 
     def post(self):
         try:
@@ -1063,10 +1045,10 @@ class EmployeeDataList(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            try:
-                r['root']['row']
-                return(r['root']['row'])
-            except:
+            print(len(r['root']))
+            if len(r['root'])>1:
+                    return(r['root']['row'])
+            else:
                 return([r['root']['row']])
         except Exception as e:
             print (e)
