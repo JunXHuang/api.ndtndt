@@ -39,11 +39,57 @@
     <Folder Include="Metadata\" />
     <Folder Include="Metadata\deploymentTemplates\" />
     <Folder Include="ndtndt\" />
+    <Folder Include="ndtndt\static\" />
+    <Folder Include="ndtndt\static\uploads\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="api.ndtndt%28default-storage-southcentralus%29.pubxml" />
     <Content Include="apiapp.json" />
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
+    <Content Include="ndtndt\static\uploads\11.jpg" />
+    <Content Include="ndtndt\static\uploads\12.jpg" />
+    <Content Include="ndtndt\static\uploads\21.jpg" />
+    <Content Include="ndtndt\static\uploads\23.jpg" />
+    <Content Include="ndtndt\static\uploads\30.jpg" />
+    <Content Include="ndtndt\static\uploads\36.jpg" />
+    <Content Include="ndtndt\static\uploads\39.jpg" />
+    <Content Include="ndtndt\static\uploads\4.jpg" />
+    <Content Include="ndtndt\static\uploads\41.jpg" />
+    <Content Include="ndtndt\static\uploads\42.jpg" />
+    <Content Include="ndtndt\static\uploads\45.jpg" />
+    <Content Include="ndtndt\static\uploads\46.jpg" />
+    <Content Include="ndtndt\static\uploads\47.jpg" />
+    <Content Include="ndtndt\static\uploads\53.jpg" />
+    <Content Include="ndtndt\static\uploads\57.jpg" />
+    <Content Include="ndtndt\static\uploads\77.jpg" />
+    <Content Include="ndtndt\static\uploads\baby.jpg" />
+    <Content Include="ndtndt\static\uploads\baby1.jpg" />
+    <Content Include="ndtndt\static\uploads\baby2.jpg" />
+    <Content Include="ndtndt\static\uploads\bike.png" />
+    <Content Include="ndtndt\static\uploads\book.jpg" />
+    <Content Include="ndtndt\static\uploads\book1.jpg" />
+    <Content Include="ndtndt\static\uploads\book2.jpg" />
+    <Content Include="ndtndt\static\uploads\camera.jpg" />
+    <Content Include="ndtndt\static\uploads\car.jpg" />
+    <Content Include="ndtndt\static\uploads\car1.jpg" />
+    <Content Include="ndtndt\static\uploads\car2.jpg" />
+    <Content Include="ndtndt\static\uploads\clean.jpg" />
+    <Content Include="ndtndt\static\uploads\clean1.jpg" />
+    <Content Include="ndtndt\static\uploads\clean2.jpg" />
+    <Content Include="ndtndt\static\uploads\clothing.jpg" />
+    <Content Include="ndtndt\static\uploads\clothing1.jpg" />
+    <Content Include="ndtndt\static\uploads\clothing2.jpg" />
+    <Content Include="ndtndt\static\uploads\dvd.jpg" />
+    <Content Include="ndtndt\static\uploads\dvd2.jpg" />
+    <Content Include="ndtndt\static\uploads\itemnamean2liub0ara4i.jpg" />
+    <Content Include="ndtndt\static\uploads\itemnamean6itjn6rbe29.jpg" />
+    <Content Include="ndtndt\static\uploads\itemnameandtuqxe0zfr.jpg" />
+    <Content Include="ndtndt\static\uploads\itemnameanii72zyc766r.jpg" />
+    <Content Include="ndtndt\static\uploads\itemnameanr2obie5qaor.jpg" />
+    <Content Include="ndtndt\static\uploads\login-icon.png" />
+    <Content Include="ndtndt\static\uploads\NissanSentra.jpg" />
+    <Content Include="ndtndt\static\uploads\placeholder.png" />
+    <Content Include="ndtndt\static\uploads\titanic.jpg" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>

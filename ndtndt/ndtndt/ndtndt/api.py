@@ -94,7 +94,11 @@ class TopSellerCategory(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
     def post(self, id):
@@ -219,13 +223,14 @@ class ListofSalesByItemName(Resource):
                         else:
                             item['reserveprice']=False
                         item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
+                        return(r['root']['row'])
                 except:
                     if float(r['root']['row']['reserveprice'])>0.0:
                             r['root']['row']['reserveprice']=True
                     else:
                         r['root']['row']['reserveprice']=False
                     r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
-                return(r['root']['row'])
+                    return([r['root']['row']])
             else:
                 return jsonify({'itemname': 'is not found'})
         except Exception as e:
@@ -258,13 +263,14 @@ class ListofSalesByCustomerID(Resource):
                         else:
                             item['reserveprice']=False
                         item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
+                        return(r['root']['row'])
                 except:
                     if float(r['root']['row']['reserveprice'])>0.0:
                             r['root']['row']['reserveprice']=True
                     else:
                         r['root']['row']['reserveprice']=False
                     r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
-                return(r['root']['row'])
+                    return([r['root']['row']])
             else:
                 return jsonify({'customerid': 'is not found'})
         except Exception as e:
@@ -297,13 +303,14 @@ class AuctionAll(Resource):
                         else:
                             item['reserveprice']=False
                         item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
+                        return(r['root']['row'])
                 except:
                     if float(r['root']['row']['reserveprice'])>0.0:
                             r['root']['row']['reserveprice']=True
                     else:
                         r['root']['row']['reserveprice']=False
                     r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
-                return(r['root']['row'])
+                    return([r['root']['row']])
             else:
                 return jsonify({'id': 'is not found'})
         except Exception as e:
@@ -320,7 +327,12 @@ class Monitors(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
+
         except Exception as e:
             print(e)
             return jsonify({'error': e})
@@ -371,7 +383,11 @@ class StaffPicks(Resource):
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -394,7 +410,11 @@ class GetUserPicks(Resource):
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -415,7 +435,11 @@ class SalesReport(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -434,7 +458,11 @@ class BestItemList(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -453,7 +481,11 @@ class AuctionHistory(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 # returns the revenue generated by an item
@@ -472,7 +504,11 @@ class RevenueByItem(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -492,7 +528,11 @@ class RevenueByType(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -512,7 +552,11 @@ class RevenueBySellerID(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -534,7 +578,11 @@ class CustomerBidHistory(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -562,7 +610,11 @@ class CustomerSellHistory(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -583,7 +635,11 @@ class ItemSuggestions(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -605,7 +661,11 @@ class StaffRevenue(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -625,7 +685,11 @@ class CustomerRevenue(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -644,7 +708,11 @@ class EmailList(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -667,7 +735,11 @@ class BestSellerList(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            return(r['root']['row'])
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print(e)
 
@@ -716,17 +788,6 @@ class CreateUser(Resource):
             sqlcommand2 =('INSERT INTO Customer (Rating,CreditCardNum,CustomerID) VALUES(1,?,?)')
             dbcursor.execute (sqlcommand2,(inputData['creditcardnum'],inputData['ssn']))
             dbcursor.commit()
-            
-            sqlcommand =('SELECT TOP 6 auctionid FROM auction ORDER BY NEWID() for xml path')
-            dbcursor.execute (sqlcommand)
-            rows=dbcursor.fetchall()
-            row = str(rows).replace("',), ('", "")
-            row="<root>"+row[3:-4]+"</root>"
-            r=xmltodict.parse(row)
-            for item in r['root']['row']:
-                sqlcommand =('INSERT INTO userpicks (UserID,auctionid) VALUES(?,?)')
-                dbcursor.execute (sqlcommand,(inputData['ssn'],item['auctionid']))
-                dbcursor.commit()
             return jsonify({'status':'success'})
         except Exception as e:
             print(e)
@@ -757,8 +818,7 @@ class UserPicking(Resource):
         except Exception as e:
             print(e)
             return jsonify({'failed - error': e})
-
-   
+ 
 # Creating a new user
 class DeleteUser(Resource):
     def __init__(self):
@@ -968,13 +1028,13 @@ class Login(Resource):
             # return userdata
             if dbcursor.rowcount == 0:
                 sqlcommand=('''select c.customerid,p.lastname,p.firstname,p.address,p.city, 
-                               p.state,p.zipcode,p.telephone,p.email,p.personimg,c.rating 
+                               p.state,p.zipcode,p.telephone,p.email,p.personimg,c.rating, c.creditcardnum 
                                from customer c inner join person p on c.customerid=p.ssn 
                                where customerid=? for xml path''')
             #return employeedata
             else:
                 sqlcommand=('''select e.employeeid as customerid,e.maglevel,p.lastname,p.firstname, 
-                                p.address,p.city,p.state,p.zipcode,p.telephone, 
+                                p.address,p.city,p.state,p.zipcode,p.telephone, p.email,e.startdate,e.hourlyrate,
                                 p.personimg from employee e inner join person p on e.employeeid=p.ssn 
                                 where e.employeeid=? for xml path''')
 
@@ -984,6 +1044,30 @@ class Login(Resource):
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
             return(r['root']['row'])
+        except Exception as e:
+            print (e)
+            return jsonify({'failed - error': e})
+
+
+class EmployeeDataList(Resource):
+    def get(self):
+        try:
+            dbcursor = dbconnection.cursor()
+            sqlcommand=('''select e.employeeid as customerid,e.maglevel,p.lastname,p.firstname, 
+                            p.address,p.city,p.state,p.zipcode,p.telephone,e.startdate,e.hourlyrate,p.email, 
+                            p.userpassword, p.personimg from employee e inner join person p on e.employeeid=p.ssn 
+                            where e.maglevel=1 for xml path''')
+
+            dbcursor.execute(sqlcommand)
+            rows=dbcursor.fetchall()
+            row = str(rows).replace("',), ('", "")
+            row="<root>"+row[3:-4]+"</root>"
+            r=xmltodict.parse(row)
+            try:
+                r['root']['row']
+                return(r['root']['row'])
+            except:
+                return([r['root']['row']])
         except Exception as e:
             print (e)
             return jsonify({'failed - error': e})
@@ -1156,4 +1240,5 @@ api.add_resource(Monitors,'/monitors')
 api.add_resource(ListofSalesByItemName,'/listofsalesbyitemname/<string:id>')
 # requires customerid return a list of auctionid,itemname,openbid,bidincrement,currentbid,sellerid,itemtype,yearmanufactured,postdate,expiredates,firstname,lastname,itemimg,totalbidders
 api.add_resource(ListofSalesByCustomerID,'/listofsalesbycustomerid/<string:id>')
+api.add_resource(EmployeeDataList,'/employeedatalist')
 
