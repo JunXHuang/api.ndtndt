@@ -84,7 +84,7 @@ class TopSellerCategory(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand = ('''select top 10 i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,count(*) as itemsold 
+            sqlcommand = ('''select top 6 i.itemname,i.itemtype,i.yearmanufactured,a.itemimg,count(*) as itemsold 
                           from auction a inner join item i 
                           on a.itemname=i.itemname where a.sold=1 
                           group by i.itemname,i.itemtype,i.yearmanufactured,a.itemimg
@@ -635,7 +635,7 @@ class StaffRevenue(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''select top 1 p.firstname,p.lastname,sum(a.currentbid)*.1 as revenuegenerated
+            sqlcommand =('''select top 5 p.firstname,p.lastname,sum(a.currentbid)*.1 as revenuegenerated
                         from person p inner join auction a on p.ssn=a.monitor
                         where a.sold=1
                         group by p.firstname,p.lastname
@@ -682,7 +682,7 @@ class CustomerRevenue(Resource):
     def get(self):
         try:
             dbcursor = dbconnection.cursor()
-            sqlcommand =('''SELECT top 1 p.firstname,p.lastname,SUM(a.currentbid)*.9 as totalsales 
+            sqlcommand =('''SELECT top 5 p.firstname,p.lastname,SUM(a.currentbid)*.9 as totalsales 
                             FROM Auction a,person p WHERE a.sold=1 and a.sellerid=p.ssn
                             group by p.firstname,p.lastname order by SUM(a.currentbid) desc
                         for xml path''')
@@ -801,7 +801,7 @@ class CreateUser(Resource):
 
 # Creating a new user
 class UserPicking(Resource):
-    def post(self,id):
+    def get(self,id):
         try:
             sqlcommand =('SELECT * from userpicks where userid=?')
             dbcursor.execute (sqlcommand,(str(id),))
