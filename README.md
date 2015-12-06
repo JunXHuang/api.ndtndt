@@ -12,7 +12,7 @@
 Technology used:
  - Front-end - AngularJS
  - [Backend REST  - Python](https://github.com/NazimAmin/api.ndtndt)  
- - DB - SQL
+ - DB - SQL Server
 
 ## Build & development & Dependencies front-end
 
@@ -26,11 +26,16 @@ Run `grunt ` for building and `grunt serve` for preview.
 
 ## Build & development & Dependencies backend
 
-Clone `git clone https://github.com/NazimAmin/api.ndtndt` - 
+Clone `git clone https://github.com/JunXHuang/api.ndtndt` - 
 
 Run `pip install -r requirement.txt`
 
 Run `Python api.py`
+
+Change database connection string to whichever connection you have in https://github.com/JunXHuang/api.ndtndt/blob/master/ndtndt/ndtndt/ndtndt/__init__.py
+
+Run tablequery.sql, insertquery.sql, and trigger.sql to populate the database
+https://github.com/JunXHuang/api.ndtndt/tree/master/ndtndt/db
 
 ## Contributors
 
