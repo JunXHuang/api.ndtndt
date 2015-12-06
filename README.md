@@ -4,7 +4,7 @@
 
 ###### Rest API backend for NDTNDT project. 
 
-###### Frontend is at (https://github.com/NazimAmin/notduetodaynotdotoday)
+###### Frontend is at (https://github.com/NazimAmin/ndtndt)
 
   - Includes multiple system level service roles.
   - Options such as add/edit/delete, search, filter, bid, report etc. with an intuitive look.
@@ -16,7 +16,7 @@ Technology used:
 
 ## Build & development & Dependencies front-end
 
-Clone `git clone https://github.com/NazimAmin/notduetodaynotdotoday` - 
+Clone `git clone https://github.com/NazimAmin/ndtndt` - 
 
 Run `npm install` to install node_modules
 
