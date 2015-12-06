@@ -380,9 +380,20 @@ class StaffPicks(Resource):
             row = str(rows).replace("',), ('", "")
             row="<root>"+row[3:-4]+"</root>"
             r=xmltodict.parse(row)
-            if len(r['root'])>1:
-                    return(r['root']['row'])
-            else:
+            try:
+                for item in r['root']['row']:
+                    if float(item['reserveprice'])>0.0:
+                        item['reserveprice']=True
+                    else:
+                        item['reserveprice']=False
+                    item['bidincrement']=float(item['bidincrement'])+float(item['currentbid'])
+                return(r['root']['row'])
+            except:
+                if float(r['root']['row']['reserveprice'])>0.0:
+                        r['root']['row']['reserveprice']=True
+                else:
+                    r['root']['row']['reserveprice']=False
+                r['root']['row']['bidincrement']=float(r['root']['row']['bidincrement'])+float(r['root']['row']['currentbid'])
                 return([r['root']['row']])
         except Exception as e:
             print(e)

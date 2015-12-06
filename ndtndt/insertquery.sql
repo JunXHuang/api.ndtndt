@@ -153,7 +153,7 @@ begin
 INSERT INTO Item (ItemName,ItemType,YearManufactured,AmountInStock)
 VALUES('Computer Science','Book','2015',1)
 INSERT INTO Auction (OpenBid,currentbid,BidIncrement,ReservePrice,Monitor,ItemName,SellerID,descriptions,itemimg)
-VALUES (12,12,0.5,13,'123-45-6789','Computer Science','wwweb','Computer Science wow best major every.','https://microsoft-apiapp7b31e05f68a549329859bed2bfaa83a7.azurewebsites.net/uploads/book2.jpg')
+VALUES (12,12,0.5,13,'123-45-6789','Computer Science','wwweb','Computer Science wow best major ever.','https://microsoft-apiapp7b31e05f68a549329859bed2bfaa83a7.azurewebsites.net/uploads/book2.jpg')
 INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID)
 VALUES ('12/16/15 1:00PM',GETDATE(),'wwweb','Computer Science',SCOPE_IDENTITY())
 end
@@ -249,4 +249,12 @@ INSERT INTO Auction (OpenBid,currentbid,BidIncrement,ReservePrice,Monitor,ItemNa
 VALUES (0,0,.01,0,'junxhuang','Star Wars 7','velvel','BEST MOVIE OF ALL TIMES','https://microsoft-apiapp7b31e05f68a549329859bed2bfaa83a7.azurewebsites.net/uploads/dvd2.jpg')
 INSERT INTO Post (ExpireDates,PostDate,CustomerID,ItemName,AuctionID)
 VALUES ('12/16/15 1:00PM',GETDATE(),'velvel','Star Wars 7',SCOPE_IDENTITY())
+end
+
+begin
+insert into staffpicks values(1)
+insert into staffpicks values(2)
+insert into staffpicks values(3)
+insert into staffpicks values(4)
+insert into staffpicks values(5)
 end
