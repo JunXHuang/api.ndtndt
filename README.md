@@ -35,6 +35,7 @@ Run `pip install -r requirement.txt`
 Change database connection string in `ndtndt/ndtndt/ndtndt/__init__.py`
 
 Run tablequery.sql, insertquery.sql, and trigger.sql to populate the database `ndtndt/db` 
+
 Run `Python api.py`
 
 
